@@ -53,7 +53,7 @@ namespace Mines.ViewModels
             FieldClickCommand = new RelayCommand<Field>(FieldClickCommand_Execute, FieldClickCommand_CanExecute);
 
             FieldSize = 10;
-            MapModel = new MapModel(FieldSize, FieldSize, 20);
+            MapModel = new MapModel(FieldSize, FieldSize, 20, 20);
         }
 
     }

@@ -12,6 +12,7 @@ namespace Mines.Models
         private int _fieldSize;
         private int _mapWidth;
         private int _mapHeight;
+        private int _bombCount;
         private List<Field> _fields;
         public int FieldSize
         {
@@ -29,31 +30,69 @@ namespace Mines.Models
             get { return _mapHeight; }
             private set { _mapHeight = value; }
         }
+        public int BombCount
+        {
+            get { return _bombCount; }
+            private set { _bombCount = value; }
+        }
         public List<Field> Fields
         {
             get { return _fields; }
             private set { _fields = value; }
         }
 
-        public MapModel(int mapWidth, int mapHeight, int fieldSize)
+        public MapModel(int mapWidth, int mapHeight, int fieldSize, int bombCount)
         {
             MapWidth = mapWidth;
             MapHeight = mapHeight;
             FieldSize = fieldSize;
+            BombCount = bombCount;
             UpdateFields();
         }
 
         private void UpdateFields()
         {
-            _fields = new List<Field>();
+            Fields = new List<Field>();
+
+            var mapSize = MapWidth * MapHeight;
+            var bombsRemain = BombCount;
+            var fieldsRemain = MapWidth * MapHeight;
+
+            var rnd = new Random();
+
             for (int i = 0; i < MapWidth; i++)
             {
                 for (int j = 0; j < MapHeight; j++)
                 {
-                    var field = new Field(i, j, FieldSize);
+
+                    double chance = (double)bombsRemain / fieldsRemain;
+
+                    var isBomb = bombsRemain == fieldsRemain ? true : rnd.Next(0, 100) <= chance * 100;
+
+                    var field = new Field(i, j, FieldSize, isBomb);
                     Fields.Add(field);
+
+                    if (isBomb) bombsRemain--;
+
+                    fieldsRemain--;
                 }
             }
+
+            OnPropertyChanged("Fields");
+        }
+
+        public void Click(Field clickedfield)
+        {
+            var countAround = 0;
+            foreach (var field in Fields)
+            {
+         //       if (field.)
+            }
+        }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

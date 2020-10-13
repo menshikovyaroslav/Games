@@ -30,19 +30,26 @@ namespace Mines.Models
             get { return _fieldSize; }
             private set { _fieldSize = value; }
         }
+        public bool IsBomb
+        {
+            get { return _isBomb; }
+            private set { _isBomb = value; }
+        }
         public string FieldValue
         {
             get
             {
-                return "X";
+                if (IsBomb) return "*";
+                return "";
             }
         }
 
-        public Field(int xCoor, int yCoor, int fieldSize)
+        public Field(int xCoor, int yCoor, int fieldSize, bool isBomb)
         {
             XCoor = xCoor;
             YCoor = yCoor;
             FieldSize = fieldSize;
+            IsBomb = isBomb;
         }
     }
 }
