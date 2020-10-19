@@ -9,15 +9,16 @@ namespace Mines.Models
 {
     public class MapModel : INotifyPropertyChanged
     {
-        private int _fieldSize;
+        private int _fieldPixelSize;
         private int _mapWidth;
         private int _mapHeight;
         private int _bombCount;
         private List<Field> _fields;
-        public int FieldSize
+
+        private int[,] _bombInfo;
+        public int FieldPixelSize
         {
-            get { return _fieldSize; }
-            private set { _fieldSize = value; }
+            get { return 10; }
         }
 
         public int MapWidth
@@ -38,57 +39,53 @@ namespace Mines.Models
         public List<Field> Fields
         {
             get { return _fields; }
-            private set { _fields = value; }
+            set { _fields = value; }
         }
 
-        public MapModel(int mapWidth, int mapHeight, int fieldSize, int bombCount)
+        public void CalculateBombs()
         {
-            MapWidth = mapWidth;
-            MapHeight = mapHeight;
-            FieldSize = fieldSize;
-            BombCount = bombCount;
-            UpdateFields();
-        }
-
-        private void UpdateFields()
-        {
-            Fields = new List<Field>();
-
-            var mapSize = MapWidth * MapHeight;
-            var bombsRemain = BombCount;
-            var fieldsRemain = MapWidth * MapHeight;
-
-            var rnd = new Random();
-
-            for (int i = 0; i < MapWidth; i++)
+            foreach (var field in Fields)
             {
-                for (int j = 0; j < MapHeight; j++)
+                if (field.IsBomb)
                 {
-
-                    double chance = (double)bombsRemain / fieldsRemain;
-
-                    var isBomb = bombsRemain == fieldsRemain ? true : rnd.Next(0, 100) <= chance * 100;
-
-                    var field = new Field(i, j, FieldSize, isBomb);
-                    Fields.Add(field);
-
-                    if (isBomb) bombsRemain--;
-
-                    fieldsRemain--;
+                    for (int i = -1; i <= 1; i++)
+                    {
+                        for (int j = -1; j <= 1; j++)
+                        {
+                            if (field.YCoor + j < 0 || field.YCoor + j > MapHeight - 1 || field.XCoor + i < 0 || field.XCoor + i > MapWidth - 1) continue;
+                            _bombInfo[field.XCoor + i, field.YCoor + j]++;
+                        }
+                    }
                 }
             }
 
-            OnPropertyChanged("Fields");
-        }
-
-        public void Click(Field clickedfield)
-        {
-            var countAround = 0;
             foreach (var field in Fields)
             {
-         //       if (field.)
+                field.FieldValue = _bombInfo[field.XCoor, field.YCoor].ToString();
             }
         }
+
+        public void AddBomb(Field field)
+        {
+            Fields.Add(field);
+
+        }
+
+        public MapModel()
+        {
+
+        }
+
+        public void Init(int mapWidth, int mapHeight, int bombCount)
+        {
+            MapWidth = mapWidth;
+            MapHeight = mapHeight;
+            BombCount = bombCount;
+            Fields = new List<Field>();
+            _bombInfo = new int[mapWidth, mapHeight];
+        }
+
+        
 
         protected virtual void OnPropertyChanged(string propertyName)
         {

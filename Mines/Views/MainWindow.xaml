@@ -5,10 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mines"
         mc:Ignorable="d" x:Name="mainWindow"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" SizeToContent="WidthAndHeight" MinWidth="400" MinHeight="400">
 
     <Grid>
-        <ItemsControl ItemsSource="{Binding MapModel.Fields}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Menu Grid.Row="0">
+            <MenuItem Header="Start" Command="{Binding StartGameCommand}" />
+            <MenuItem Header="Options" />
+        </Menu>
+        
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding MapModel.Fields}" Margin="10">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas />
@@ -16,13 +26,13 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemContainerStyle>
                 <Style TargetType="ContentPresenter">
-                    <Setter Property="Canvas.Left" Value="{Binding Path=XCoor}" />
-                    <Setter Property="Canvas.Top" Value="{Binding Path=YCoor}" />
+                    <Setter Property="Canvas.Left" Value="{Binding Path=XPixelCoor}" />
+                    <Setter Property="Canvas.Top" Value="{Binding Path=YPixelCoor}" />
                 </Style>
             </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Width="{Binding Path=FieldSize}" Content="{Binding FieldValue}" Height="{Binding Path=FieldSize}" Command="{Binding ElementName=mainWindow, Path=DataContext.FieldClickCommand}" CommandParameter="{Binding}" />
+                    <Button Width="{Binding Path=FieldPixelSize}" Content="{Binding FieldValue}" Height="{Binding Path=FieldPixelSize}" Command="{Binding ElementName=mainWindow, Path=DataContext.FieldClickCommand}" CommandParameter="{Binding}" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
