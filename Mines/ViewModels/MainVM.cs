@@ -1,6 +1,7 @@
 ﻿using Mines.Classes;
 using Mines.Commands;
 using Mines.Models;
+using Mines.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,6 +31,7 @@ namespace Mines.ViewModels
 
         public ICommand FieldClickCommand { get; set; }
         public ICommand StartGameCommand { get; set; }
+        public ICommand OptionsCommand { get; set; }
 
         public void FieldClickCommand_Execute(Field field)
         {
@@ -51,6 +53,17 @@ namespace Mines.ViewModels
             return true;
         }
 
+        public void OptionsCommand_Execute()
+        {
+            var optionsWindow = new OptionsWindow();
+            optionsWindow.ShowDialog();
+        }
+
+        public bool OptionsCommand_CanExecute()
+        {
+            return true;
+        }
+
         public MapModel MapModel
         {
             get { return _mapModel; }
@@ -66,6 +79,7 @@ namespace Mines.ViewModels
         {
             FieldClickCommand = new RelayCommand<Field>(FieldClickCommand_Execute, FieldClickCommand_CanExecute);
             StartGameCommand = new DelegateCommand(StartGameCommand_Execute, StartGameCommand_CanExecute);
+            OptionsCommand = new DelegateCommand(OptionsCommand_Execute, OptionsCommand_CanExecute);
 
             FieldSize = 20;
 

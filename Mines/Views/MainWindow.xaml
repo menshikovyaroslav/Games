@@ -15,7 +15,7 @@
         
         <Menu Grid.Row="0">
             <MenuItem Header="Start" Command="{Binding StartGameCommand}" />
-            <MenuItem Header="Options" />
+            <MenuItem Header="Options" Command="{Binding OptionsCommand}" />
         </Menu>
         
         <ItemsControl Grid.Row="1" ItemsSource="{Binding MapModel.Fields}" Margin="10">
