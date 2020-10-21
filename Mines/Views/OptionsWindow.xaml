@@ -4,8 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mines.Views"
+        xmlns:converters="clr-namespace:Mines.Converters"
         mc:Ignorable="d"
-        Title="OptionsWindow" Height="300" Width="300">
+        Title="OptionsWindow" Height="300" Width="360">
+
+    <Window.Resources>
+        <converters:StringToIntConverter x:Key="stringToIntConverter" />
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -15,14 +21,14 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="4">
             <Label Content="Map Width" Margin="10,0,10,0" />
-            <TextBox Name="MapWidthTb" Height="20" Width="100" Margin="10,0,10,0" />
-            <Button Content="Save" Width="50" Margin="10,0,10,0" />
+            <TextBox Name="MapWidthTb" Height="20" Width="100" Margin="10,0,10,0" Text="{Binding MapWidth, Mode=OneWay}" />
+            <Button Content="Save" Width="50" Margin="10,0,10,0" Command="{Binding WidthClickCommand}" CommandParameter="{Binding ElementName=MapWidthTb, Path=Text, Converter={StaticResource stringToIntConverter}}" />
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="4">
             <Label Content="Map Heigth" Margin="10,0,10,0" />
-            <TextBox Name="MapHeigthTb" Height="20" Width="100" Margin="10,0,10,0" />
-            <Button Content="Save" Width="50" Margin="10,0,10,0" />
+            <TextBox Name="MapHeigthTb" Height="20" Width="100" Margin="10,0,10,0" Text="{Binding MapHeigth, Mode=OneWay}" />
+            <Button Content="Save" Width="50" Margin="10,0,10,0" Command="{Binding HeigthClickCommand}" CommandParameter="{Binding ElementName=MapHeigthTb, Path=Text, Converter={StaticResource stringToIntConverter}}" />
         </StackPanel>
     </Grid>
 </Window>

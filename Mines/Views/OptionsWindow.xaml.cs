@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mines.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,8 @@ namespace Mines.Views
         public OptionsWindow()
         {
             InitializeComponent();
+
+            DataContext = new OptionsViewModel();
         }
     }
 }
