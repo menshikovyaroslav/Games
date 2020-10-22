@@ -88,7 +88,7 @@ namespace Mines.ViewModels
 
         private void StartGame()
         {
-            MapModel.Init(Options.MapWidth, Options.MapHeight, 20);
+            MapModel.Init(Options.MapWidth, Options.MapHeight, Options.Bombs);
 
          //   var mapSize = MapWidth * MapHeight;
             var bombsRemain = MapModel.BombCount;

@@ -8,13 +8,8 @@ namespace Mines.Classes
 {
     public static class Options
     {
-        public static int MapWidth { get; set; }
-        public static int MapHeight { get; set; }
-
-        static Options()
-        {
-            MapWidth = 10;
-            MapHeight = 10;
-        }
+        public static int MapWidth { get { return RegistryMethods.Width; } set { RegistryMethods.Width = value; } }
+        public static int MapHeight { get { return RegistryMethods.Heigth; } set { RegistryMethods.Heigth = value; } }
+        public static int Bombs { get { return RegistryMethods.Bombs; } set { RegistryMethods.Bombs = value; } }
     }
 }

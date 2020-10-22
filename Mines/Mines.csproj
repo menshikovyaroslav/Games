@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\RegistryMethods.cs" />
     <Compile Include="Converters\StringToIntConverter.cs" />
     <Compile Include="ViewModels\OptionsViewModel.cs" />
     <Compile Include="Views\OptionsWindow.xaml.cs">

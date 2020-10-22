@@ -14,6 +14,8 @@ namespace Mines.ViewModels
     {
         public ICommand WidthClickCommand { get; set; }
         public ICommand HeigthClickCommand { get; set; }
+        public ICommand BombClickCommand { get; set; }
+
 
         public void WidthClickCommand_Execute(int width)
         {
@@ -35,6 +37,16 @@ namespace Mines.ViewModels
             return Options.MapHeight != heigth;
         }
 
+        public void BombClickCommand_Execute(int bombs)
+        {
+            Options.Bombs = bombs;
+        }
+
+        public bool BombClickCommand_CanExecute(int bombs)
+        {
+            return Options.Bombs != bombs;
+        }
+
         public int MapWidth
         {
             get { return Options.MapWidth; }
@@ -47,12 +59,19 @@ namespace Mines.ViewModels
             set { Options.MapHeight = value; }
         }
 
+        public int Bombs
+        {
+            get { return Options.Bombs; }
+            set { Options.Bombs = value; }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public OptionsViewModel()
         {
             WidthClickCommand = new RelayCommand<int>(WidthClickCommand_Execute, WidthClickCommand_CanExecute);
             HeigthClickCommand = new RelayCommand<int>(HeigthClickCommand_Execute, HeigthClickCommand_CanExecute);
+            BombClickCommand = new RelayCommand<int>(BombClickCommand_Execute, BombClickCommand_CanExecute);
         }
 
         protected virtual void OnPropertyChanged(string propertyName)
