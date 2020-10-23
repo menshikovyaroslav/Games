@@ -28,11 +28,12 @@ namespace Mines.ViewModels
             }
         }
 
-        public ICommand FieldClickCommand { get; set; }
+        public ICommand FieldLeftClickCommand { get; set; }
+        public ICommand FieldRightClickCommand { get; set; }
         public ICommand StartGameCommand { get; set; }
         public ICommand OptionsCommand { get; set; }
 
-        public void FieldClickCommand_Execute(Field field)
+        public void FieldLeftClickCommand_Execute(Field field)
         {
             field.IsShow = true;
 
@@ -41,12 +42,22 @@ namespace Mines.ViewModels
                 var nearlyFields = from t in MapModel.Fields where !t.IsShow && Math.Abs(t.XCoor - field.XCoor) <= 1 && Math.Abs(t.YCoor - field.YCoor) <= 1 select t;
                 foreach (var nearlyField in nearlyFields)
                 {
-                    FieldClickCommand_Execute(nearlyField);
+                    FieldLeftClickCommand_Execute(nearlyField);
                 }
             }
         }
 
-        public bool FieldClickCommand_CanExecute(Field field)
+        public bool FieldLeftClickCommand_CanExecute(Field field)
+        {
+            return true;
+        }
+
+        public void FieldRightClickCommand_Execute(Field field)
+        {
+            field.IsSuspicion = !field.IsSuspicion;
+        }
+
+        public bool FieldRightClickCommand_CanExecute(Field field)
         {
             return true;
         }
@@ -85,9 +96,10 @@ namespace Mines.ViewModels
 
         public MainVM()
         {
-            FieldClickCommand = new RelayCommand<Field>(FieldClickCommand_Execute, FieldClickCommand_CanExecute);
+            FieldLeftClickCommand = new RelayCommand<Field>(FieldLeftClickCommand_Execute, FieldLeftClickCommand_CanExecute);
             StartGameCommand = new DelegateCommand(StartGameCommand_Execute, StartGameCommand_CanExecute);
             OptionsCommand = new DelegateCommand(OptionsCommand_Execute, OptionsCommand_CanExecute);
+            FieldRightClickCommand = new RelayCommand<Field>(FieldRightClickCommand_Execute, FieldRightClickCommand_CanExecute);
 
             FieldSize = 20;
 

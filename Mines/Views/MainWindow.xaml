@@ -32,7 +32,12 @@
             </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Width="{Binding Path=FieldPixelSize}" Content="{Binding FieldValue}" Height="{Binding Path=FieldPixelSize}" Command="{Binding ElementName=mainWindow, Path=DataContext.FieldClickCommand}" CommandParameter="{Binding}" />
+                    <Button Width="{Binding Path=FieldPixelSize}" Content="{Binding FieldValue}" Height="{Binding Path=FieldPixelSize}">
+                        <Button.InputBindings>
+                            <MouseBinding Gesture="LeftClick" Command="{Binding ElementName=mainWindow, Path=DataContext.FieldLeftClickCommand}" CommandParameter="{Binding}" />
+                            <MouseBinding Gesture="RightClick" Command="{Binding ElementName=mainWindow, Path=DataContext.FieldRightClickCommand}" CommandParameter="{Binding}" />
+                        </Button.InputBindings>
+                    </Button>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

@@ -15,6 +15,7 @@ namespace Mines.Models
         private string _fieldValue;
 
         private bool _isBomb;
+        private bool _isSuspicion;
         private bool _isShow;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -54,12 +55,17 @@ namespace Mines.Models
             get { return _isShow; }
             set { _isShow = value; OnPropertyChanged("FieldValue"); }
         }
+        public bool IsSuspicion
+        {
+            get { return _isSuspicion; }
+            set { _isSuspicion = value; OnPropertyChanged("FieldValue"); }
+        }
         public string FieldValue
         {
             get
             {
+                if (IsSuspicion) return "x";
                 if (!IsShow) return "";
-
                 if (IsBomb) return "*";
 
                 return _fieldValue;
