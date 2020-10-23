@@ -42,6 +42,11 @@ namespace Mines.Models
             set { _fields = value; }
         }
 
+        public int[,] BombInfo
+        {
+            get { return _bombInfo; }
+        }
+
         public void CalculateBombs()
         {
             foreach (var field in Fields)
@@ -68,7 +73,6 @@ namespace Mines.Models
         public void AddBomb(Field field)
         {
             Fields.Add(field);
-
         }
 
         public MapModel()

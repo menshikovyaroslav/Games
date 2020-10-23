@@ -25,7 +25,6 @@ namespace Mines.ViewModels
             private set
             {
                 _fieldSize = value;
-            //    OnPropertyChanged("");
             }
         }
 
@@ -36,6 +35,15 @@ namespace Mines.ViewModels
         public void FieldClickCommand_Execute(Field field)
         {
             field.IsShow = true;
+
+            if (field.FieldValue == "0")
+            {
+                var nearlyFields = from t in MapModel.Fields where !t.IsShow && Math.Abs(t.XCoor - field.XCoor) <= 1 && Math.Abs(t.YCoor - field.YCoor) <= 1 select t;
+                foreach (var nearlyField in nearlyFields)
+                {
+                    FieldClickCommand_Execute(nearlyField);
+                }
+            }
         }
 
         public bool FieldClickCommand_CanExecute(Field field)
