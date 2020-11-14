@@ -24,9 +24,11 @@ namespace Mines
     {
         public MainWindow()
         {
+            DataContext = new MainVM();
+
             InitializeComponent();
 
-            DataContext = new MainVM();
+
         }
     }
 }

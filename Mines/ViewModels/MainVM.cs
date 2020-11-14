@@ -14,19 +14,19 @@ namespace Mines.ViewModels
 {
     internal class MainVM : INotifyPropertyChanged
     {
-        private int _fieldSize;
+      //  private int _fieldSize;
         private MapModel _mapModel;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public int FieldSize
-        {
-            get { return _fieldSize; }
-            private set
-            {
-                _fieldSize = value;
-            }
-        }
+        //public int FieldSize
+        //{
+        //    get { return _fieldSize; }
+        //    private set
+        //    {
+        //        _fieldSize = value;
+        //    }
+        //}
 
         public ICommand FieldLeftClickCommand { get; set; }
         public ICommand FieldRightClickCommand { get; set; }
@@ -90,9 +90,10 @@ namespace Mines.ViewModels
             {
                 _mapModel = value;
                 OnPropertyChanged("MapModel");
+                OnPropertyChanged("MapEntireWidth");
+                OnPropertyChanged("MapEntireHeight");
             }
         }
-
 
         public MainVM()
         {
@@ -101,7 +102,7 @@ namespace Mines.ViewModels
             OptionsCommand = new DelegateCommand(OptionsCommand_Execute, OptionsCommand_CanExecute);
             FieldRightClickCommand = new RelayCommand<Field>(FieldRightClickCommand_Execute, FieldRightClickCommand_CanExecute);
 
-            FieldSize = 20;
+          //  FieldSize = 30;
 
             MapModel = new MapModel();
         }
@@ -110,7 +111,6 @@ namespace Mines.ViewModels
         {
             MapModel.Init(Options.MapWidth, Options.MapHeight, Options.Bombs);
 
-         //   var mapSize = MapWidth * MapHeight;
             var bombsRemain = MapModel.BombCount;
             var fieldsRemain = Options.MapWidth * Options.MapHeight;
 
@@ -123,7 +123,7 @@ namespace Mines.ViewModels
                     double chance = (double)bombsRemain / fieldsRemain;
                     var isBomb = bombsRemain == fieldsRemain ? true : rnd.Next(0, 100) <= chance * 100;
 
-                    var field = new Field(i, j, FieldSize, isBomb);
+                    var field = new Field(i, j, MapModel.FieldPixelSize, isBomb);
                     MapModel.AddBomb(field);
 
                     if (isBomb) bombsRemain--;
@@ -135,6 +135,8 @@ namespace Mines.ViewModels
             MapModel.CalculateBombs();
 
             OnPropertyChanged("MapModel");
+            OnPropertyChanged("MapEntireWidth");
+            OnPropertyChanged("MapEntireHeight");
         }
 
         protected virtual void OnPropertyChanged(string propertyName)

@@ -18,9 +18,27 @@ namespace Mines.Models
         private int[,] _bombInfo;
         public int FieldPixelSize
         {
-            get { return 10; }
+            get { return 20; }
+        }
+        public int MapEntireWidth
+        {
+            get
+            {
+                var width = MapWidth * FieldPixelSize + 40;
+                if (width < 200) return 200;
+                else return width;
+            }
         }
 
+        public int MapEntireHeight
+        {
+            get
+            {
+                var height = MapHeight * FieldPixelSize + 80;
+                if (height < 200) return 200;
+                else return height;
+            }
+        }
         public int MapWidth
         {
             get { return _mapWidth; }
