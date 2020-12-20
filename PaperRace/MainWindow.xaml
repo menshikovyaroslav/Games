@@ -4,9 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PaperRace"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="800" Width="800" ResizeMode="NoResize">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Name="GenerateMapMenuItem" Header="Генерация карты" Click="GenerateMapMenuItem_Click"></MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom" Height="30">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Скорость:" Margin="2" VerticalAlignment="Center" />
+                    <TextBlock Name="SpeedTb" FontWeight="Bold" FontSize="18" VerticalAlignment="Center" Text="0" Margin="2" />
+                </StackPanel>
+            </StackPanel>
+        </StatusBar>
+        <Canvas Name="Map" DockPanel.Dock="Top" ClipToBounds="True">
+            
+        </Canvas>
+    </DockPanel>
 </Window>
