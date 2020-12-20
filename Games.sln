@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mines", "Mines\Mines.csproj", "{3FB9CAF9-A596-4B7C-AA21-A85569194F75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperRace", "PaperRace\PaperRace.csproj", "{6C972D9B-2FBF-4E45-AD80-3D01FB2441E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{3FB9CAF9-A596-4B7C-AA21-A85569194F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FB9CAF9-A596-4B7C-AA21-A85569194F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FB9CAF9-A596-4B7C-AA21-A85569194F75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C972D9B-2FBF-4E45-AD80-3D01FB2441E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C972D9B-2FBF-4E45-AD80-3D01FB2441E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C972D9B-2FBF-4E45-AD80-3D01FB2441E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C972D9B-2FBF-4E45-AD80-3D01FB2441E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {88BF4FD9-AF0A-435B-B737-9615ABA7E769}
 	EndGlobalSection
 EndGlobal
