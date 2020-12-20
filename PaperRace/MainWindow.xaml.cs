@@ -28,6 +28,7 @@ namespace PaperRace
         int _currentSpeedY = 0;
 
         List<PathElement> _pathList = new List<PathElement>();
+        List<Button> _mapPoints = new List<Button>();
 
         public MainWindow()
         {
@@ -61,50 +62,84 @@ namespace PaperRace
 
         private void GenerateWeb()
         {
-            for (int i = 5; i < 780; i += 20)
+            if (_mapPoints.Count == 0)
             {
-                Rectangle rect = new Rectangle
+                for (int i = 5; i < 780; i += 20)
                 {
-                    Width = 1,
-                    Height = 700,
-                    Fill = Brushes.Red
-                };
-
-                Map.Children.Add(rect);
-                Canvas.SetTop(rect, 0);
-                Canvas.SetLeft(rect, i);
-            }
-
-            for (int i = 5; i < 760; i += 20)
-            {
-                Rectangle rect = new Rectangle
-                {
-                    Width = 760,
-                    Height = 1,
-                    Fill = Brushes.Red
-                };
-
-                Map.Children.Add(rect);
-                Canvas.SetTop(rect, i);
-                Canvas.SetLeft(rect, 0);
-            }
-
-            for (int i = 0; i < 780; i += 20)
-            {
-                for (int j = 0; j < 780; j += 20)
-                {
-                    var button = new Button
+                    Rectangle rect = new Rectangle
                     {
-                        Width = 10,
-                        Height = 10,
-
+                        Width = 1,
+                        Height = 700,
+                        Fill = Brushes.Red
                     };
 
-                    if (Math.Abs(_currentX + _currentSpeedX * 20 - i) <= 20 && Math.Abs(_currentY + _currentSpeedY * 20 - j) <= 20)
+                    Map.Children.Add(rect);
+                    Canvas.SetTop(rect, 0);
+                    Canvas.SetLeft(rect, i);
+                }
+
+                for (int i = 5; i < 760; i += 20)
+                {
+                    Rectangle rect = new Rectangle
+                    {
+                        Width = 760,
+                        Height = 1,
+                        Fill = Brushes.Red
+                    };
+
+                    Map.Children.Add(rect);
+                    Canvas.SetTop(rect, i);
+                    Canvas.SetLeft(rect, 0);
+                }
+
+                for (int i = 0; i < 780; i += 20)
+                {
+                    for (int j = 0; j < 780; j += 20)
+                    {
+                        var button = new Button
+                        {
+                            Width = 10,
+                            Height = 10,
+                        };
+                        button.Click += DoStep;
+
+                        if (Math.Abs(_currentX + _currentSpeedX * 20 - i) <= 20 && Math.Abs(_currentY + _currentSpeedY * 20 - j) <= 20)
+                        {
+                            button.Background = Brushes.LightGreen;
+                            button.IsEnabled = true;
+                        }
+                        else
+                        {
+                            button.Background = Brushes.White;
+                            button.IsEnabled = false;
+                        }
+
+                        if (i == _currentX && j == _currentY)
+                        {
+                            button.Background = Brushes.Black;
+                            button.IsEnabled = false;
+                        }
+
+                        _mapPoints.Add(button);
+
+                        Panel.SetZIndex(button, 10);
+                        Map.Children.Add(button);
+                        Canvas.SetTop(button, j);
+                        Canvas.SetLeft(button, i);
+                    }
+                }
+            }
+            else
+            {
+                foreach (var button in _mapPoints)
+                {
+                    var x = Canvas.GetLeft(button);
+                    var y = Canvas.GetTop(button);
+
+                    if (Math.Abs(_currentX + _currentSpeedX * 20 - x) <= 20 && Math.Abs(_currentY + _currentSpeedY * 20 - y) <= 20)
                     {
                         button.Background = Brushes.LightGreen;
                         button.IsEnabled = true;
-                        button.Click += DoStep;
                     }
                     else
                     {
@@ -112,16 +147,11 @@ namespace PaperRace
                         button.IsEnabled = false;
                     }
 
-                    if (i == _currentX && j == _currentY)
+                    if (x == _currentX && y == _currentY)
                     {
                         button.Background = Brushes.Black;
                         button.IsEnabled = false;
                     }
-
-                    Panel.SetZIndex(button, 10);
-                    Map.Children.Add(button);
-                    Canvas.SetTop(button, j);
-                    Canvas.SetLeft(button, i);
                 }
             }
         }
@@ -146,8 +176,6 @@ namespace PaperRace
 
             _currentSpeedX = Convert.ToInt32((x - _currentX) / 20);
             _currentSpeedY = Convert.ToInt32((y - _currentY) / 20);
-
-
 
             var path = new PathElement
             {
@@ -174,6 +202,15 @@ namespace PaperRace
 
         private void Test()
         {
+            var rect = GetRoadElement();
+
+            Map.Children.Add(rect);
+            Canvas.SetTop(rect, _currentY - rect.Height + 45);
+            Canvas.SetLeft(rect, _currentX - _roadWidth / 2 + 5);
+        }
+
+        private Rectangle GetRoadElement()
+        {
             var random = new Random();
 
             Rectangle rect = new Rectangle
@@ -186,9 +223,8 @@ namespace PaperRace
                 //   Fill = Brushes.Gray
             };
 
-            Map.Children.Add(rect);
-            Canvas.SetTop(rect, _currentY - rect.Height + 45);
-            Canvas.SetLeft(rect, _currentX - _roadWidth / 2 + 5);
+            return rect;
         }
+
     }
 }
