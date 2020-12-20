@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PaperRace.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,10 @@ namespace PaperRace
         int _currentX = 400;
         int _currentY = 660;
         int _roadWidth = 300;
-        int _currentSpeed = 0;
+        int _currentSpeedX = 0;
+        int _currentSpeedY = 0;
+
+        List<PathElement> _pathList = new List<PathElement>();
 
         public MainWindow()
         {
@@ -31,16 +35,38 @@ namespace PaperRace
 
             GenerateWeb();
             Test();
+
+
+        }
+
+        private void ShowPaths()
+        {
+            foreach (var path in _pathList)
+            {
+                Line line = new Line
+                {
+                    X1 = path.FromX,
+                    Y1 = path.FromY,
+                    X2 = path.ToX,
+                    Y2 = path.ToY,
+                    Stroke = Brushes.Blue,
+                    StrokeThickness=4,
+                    Margin = new Thickness(5,5,0,0)
+                };
+                Map.Children.Add(line);
+            //    Canvas.SetTop(line, 0);
+            //    Canvas.SetLeft(line, i);
+            }
         }
 
         private void GenerateWeb()
         {
-            for (int i = 0; i < 800; i += 20)
+            for (int i = 5; i < 780; i += 20)
             {
                 Rectangle rect = new Rectangle
                 {
                     Width = 1,
-                    Height = 800,
+                    Height = 700,
                     Fill = Brushes.Red
                 };
 
@@ -49,11 +75,11 @@ namespace PaperRace
                 Canvas.SetLeft(rect, i);
             }
 
-            for (int i = 0; i < 800; i += 20)
+            for (int i = 5; i < 760; i += 20)
             {
                 Rectangle rect = new Rectangle
                 {
-                    Width = 800,
+                    Width = 760,
                     Height = 1,
                     Fill = Brushes.Red
                 };
@@ -63,24 +89,26 @@ namespace PaperRace
                 Canvas.SetLeft(rect, 0);
             }
 
-            for (int i = 0; i < 800; i += 20)
+            for (int i = 0; i < 780; i += 20)
             {
-                for (int j = 0; j < 800; j += 20)
+                for (int j = 0; j < 780; j += 20)
                 {
                     var button = new Button
                     {
                         Width = 10,
                         Height = 10,
-                        
+
                     };
 
-                    if (Math.Abs(i - _currentX) <= (_currentSpeed + 1) * 20 && Math.Abs(j - _currentY) <= (_currentSpeed + 1) * 20)
+                    if (Math.Abs(_currentX + _currentSpeedX * 20 - i) <= 20 && Math.Abs(_currentY + _currentSpeedY * 20 - j) <= 20)
                     {
                         button.Background = Brushes.LightGreen;
                         button.IsEnabled = true;
+                        button.Click += DoStep;
                     }
                     else
                     {
+                        button.Background = Brushes.White;
                         button.IsEnabled = false;
                     }
 
@@ -92,10 +120,51 @@ namespace PaperRace
 
                     Panel.SetZIndex(button, 10);
                     Map.Children.Add(button);
-                    Canvas.SetTop(button, j - button.Height / 2);
-                    Canvas.SetLeft(button, i - button.Width / 2);
+                    Canvas.SetTop(button, j);
+                    Canvas.SetLeft(button, i);
                 }
             }
+        }
+
+        private int CurrentSpeed
+        {
+            get
+            {
+                var speedX = Math.Abs(_currentSpeedX);
+                var speedY = Math.Abs(_currentSpeedY);
+
+                if (speedX > speedY) return speedX;
+                return speedY;
+            }
+        }
+
+        private void DoStep(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var x = Convert.ToInt32(Canvas.GetLeft(button));
+            var y = Convert.ToInt32(Canvas.GetTop(button));
+
+            _currentSpeedX = Convert.ToInt32((x - _currentX) / 20);
+            _currentSpeedY = Convert.ToInt32((y - _currentY) / 20);
+
+
+
+            var path = new PathElement
+            {
+                FromX = _currentX,
+                FromY = _currentY,
+                ToX = x,
+                ToY = y
+            };
+            _pathList.Add(path);
+
+            _currentX += _currentSpeedX * 20;
+            _currentY += _currentSpeedY * 20;
+
+            SpeedTb.Text = CurrentSpeed.ToString();
+
+            ShowPaths();
+            GenerateWeb();
         }
 
         private void GenerateMapMenuItem_Click(object sender, RoutedEventArgs e)
@@ -113,13 +182,13 @@ namespace PaperRace
                 Height = random.Next(200, 1000),
                 Stroke = Brushes.Gray,
                 StrokeThickness = 20
-             //   StrokeDashArray = new DoubleCollection() { 20, 0, 20, 0 }
+                //   StrokeDashArray = new DoubleCollection() { 20, 0, 20, 0 }
                 //   Fill = Brushes.Gray
             };
 
             Map.Children.Add(rect);
-            Canvas.SetTop(rect, _currentY - rect.Height + 40);
-            Canvas.SetLeft(rect, _currentX - _roadWidth / 2);
+            Canvas.SetTop(rect, _currentY - rect.Height + 45);
+            Canvas.SetLeft(rect, _currentX - _roadWidth / 2 + 5);
         }
     }
 }
