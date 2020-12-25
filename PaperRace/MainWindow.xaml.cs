@@ -23,12 +23,13 @@ namespace PaperRace
     {
         int _currentX = 400;
         int _currentY = 660;
-        int _roadWidth = 300;
+        int _roadWidth = 200;
         int _currentSpeedX = 0;
         int _currentSpeedY = 0;
 
         List<PathElement> _pathList = new List<PathElement>();
         List<Button> _mapPoints = new List<Button>();
+        List<RoadElement> _roadElements = new List<RoadElement>();
 
         public MainWindow()
         {
@@ -51,12 +52,12 @@ namespace PaperRace
                     X2 = path.ToX,
                     Y2 = path.ToY,
                     Stroke = Brushes.Blue,
-                    StrokeThickness=4,
-                    Margin = new Thickness(5,5,0,0)
+                    StrokeThickness = 4,
+                    Margin = new Thickness(5, 5, 0, 0)
                 };
                 Map.Children.Add(line);
-            //    Canvas.SetTop(line, 0);
-            //    Canvas.SetLeft(line, i);
+                //    Canvas.SetTop(line, 0);
+                //    Canvas.SetLeft(line, i);
             }
         }
 
@@ -202,28 +203,82 @@ namespace PaperRace
 
         private void Test()
         {
-            var rect = GetRoadElement();
+            double x = _currentX;
+            double y = _currentY;
 
-            Map.Children.Add(rect);
-            Canvas.SetTop(rect, _currentY - rect.Height + 45);
-            Canvas.SetLeft(rect, _currentX - _roadWidth / 2 + 5);
+            for (int i = 0; i < 5; i++)
+            {
+                var roadElement = GetRoadElement(new Point(x, y));
+                _roadElements.Add(roadElement);
+
+                //Map.Children.Add(roadElement.Rectangle);
+                //Canvas.SetTop(roadElement.Rectangle, y - roadElement.Height + 45);
+                //Canvas.SetLeft(roadElement.Rectangle, x - _roadWidth / 2 + 5);
+
+                x = roadElement.EndPoint.X;
+                y = roadElement.EndPoint.Y;
+            }
+
+
+            for (int i = 0; i < _roadElements.Count; i++)
+            {
+                var currElement = _roadElements[i];
+
+                Line line = new Line
+                {
+                    X1 = currElement.StartPoint.X,
+                    Y1 = currElement.StartPoint.Y,
+                    X2 = currElement.EndPoint.X,
+                    Y2 = currElement.EndPoint.Y,
+                    Stroke = Brushes.Gray,
+                    StrokeThickness = 200,
+                    Margin = new Thickness(0, 0, 0, 0)
+                };
+                Map.Children.Add(line);
+
+                double left = currElement.EndPoint.Y - _roadWidth / 2;
+                double top = currElement.EndPoint.X - _roadWidth / 2;
+                var ellipse = new Ellipse
+                {
+                    Width = _roadWidth,
+                    Height = _roadWidth,
+                    Fill = Brushes.Red,
+              //      Margin = new Thickness(left, top, 0, 0)
+                };
+                Map.Children.Add(ellipse);
+                Canvas.SetTop(ellipse, left);
+                Canvas.SetLeft(ellipse, top);
+            }
+
         }
 
-        private Rectangle GetRoadElement()
+        private RoadElement GetRoadElement(Point start)
         {
+            var roadElement = new RoadElement();
+
             var random = new Random();
+            var angle = random.Next(1, 45);
 
             Rectangle rect = new Rectangle
             {
                 Width = _roadWidth,
-                Height = random.Next(200, 1000),
+                Height = random.Next(100, 200),
                 Stroke = Brushes.Gray,
-                StrokeThickness = 20
+                StrokeThickness = 20,
+
                 //   StrokeDashArray = new DoubleCollection() { 20, 0, 20, 0 }
                 //   Fill = Brushes.Gray
             };
+            RotateTransform rotateTransform = new RotateTransform(angle, rect.Width / 2, rect.Height);
+            rect.RenderTransform = rotateTransform;
 
-            return rect;
+            roadElement.Angle = angle;
+            roadElement.Width = rect.Width;
+            roadElement.Height = rect.Height;
+            roadElement.Rectangle = rect;
+            roadElement.StartPoint = new Point(start.X, start.Y);
+
+            return roadElement;
         }
 
     }
