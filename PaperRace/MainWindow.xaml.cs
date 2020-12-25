@@ -201,6 +201,15 @@ namespace PaperRace
             Test();
         }
 
+        private double CurrentAngle
+        {
+            get
+            {
+                if (_roadElements.Count == 0) return 0;
+                return _roadElements.Last().Angle;
+            }
+        }
+
         private void Test()
         {
             double x = _currentX;
@@ -208,7 +217,7 @@ namespace PaperRace
 
             for (int i = 0; i < 5; i++)
             {
-                var roadElement = GetRoadElement(new Point(x, y));
+                var roadElement = GetRoadElement(new Point(x, y), CurrentAngle);
                 _roadElements.Add(roadElement);
 
                 //Map.Children.Add(roadElement.Rectangle);
@@ -252,30 +261,16 @@ namespace PaperRace
 
         }
 
-        private RoadElement GetRoadElement(Point start)
+        private RoadElement GetRoadElement(Point start, double currentAngle)
         {
             var roadElement = new RoadElement();
 
             var random = new Random();
-            var angle = random.Next(1, 45);
+            var angle = random.Next(-45, 45);
 
-            Rectangle rect = new Rectangle
-            {
-                Width = _roadWidth,
-                Height = random.Next(100, 200),
-                Stroke = Brushes.Gray,
-                StrokeThickness = 20,
-
-                //   StrokeDashArray = new DoubleCollection() { 20, 0, 20, 0 }
-                //   Fill = Brushes.Gray
-            };
-            RotateTransform rotateTransform = new RotateTransform(angle, rect.Width / 2, rect.Height);
-            rect.RenderTransform = rotateTransform;
-
-            roadElement.Angle = angle;
-            roadElement.Width = rect.Width;
-            roadElement.Height = rect.Height;
-            roadElement.Rectangle = rect;
+            roadElement.Angle = angle + currentAngle;
+            roadElement.Width = _roadWidth;
+            roadElement.Height = random.Next(100, 200);
             roadElement.StartPoint = new Point(start.X, start.Y);
 
             return roadElement;

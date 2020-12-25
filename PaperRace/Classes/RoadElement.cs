@@ -8,8 +8,9 @@ namespace PaperRace.Classes
 {
     public class RoadElement
     {
-        public Rectangle Rectangle { get; set; }
-        public int Angle { get; set; }
+        //   public Rectangle Rectangle { get; set; }
+        public int CurrentAngle { get; set; }
+        public double Angle { get; set; }
         public double Width { get; set; }
         public double Height { get; set; }
         public Point StartPoint { get; set; }
@@ -17,14 +18,19 @@ namespace PaperRace.Classes
         {
             get
             {
-                var angle = (90 - Angle) * 0.0175;
+                var angle = (CurrentAngle + Angle) * 180 / Math.PI;
+                var katetA = Math.Abs(Height * Math.Sin(angle));
+                var katetB = Math.Abs(Height * Math.Cos(angle));
 
-                var katet1 = Math.Abs(Height * Math.Sin(angle));
-                var katet2 = Math.Abs(Height * Math.Cos(angle));
-
-                return new Point(StartPoint.X + katet2, StartPoint.Y - katet1);
+                if (angle >= 0)
+                {
+                    return new Point(StartPoint.X + katetA, StartPoint.Y - katetB);
+                }
+                else
+                {
+                    return new Point(StartPoint.X - katetA, StartPoint.Y - katetB);
+                }
             }
-
         }
     }
 }
