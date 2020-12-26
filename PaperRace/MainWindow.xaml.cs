@@ -50,17 +50,17 @@ namespace PaperRace
             {
                 Line line = new Line
                 {
-                    X1 = path.FromX,
-                    Y1 = path.FromY,
-                    X2 = path.ToX,
-                    Y2 = path.ToY,
+                    X1 = path.FromX + (_deltaX - path.DeltaX),
+                    Y1 = path.FromY + (_deltaY - path.DeltaY),
+                    X2 = path.ToX + (_deltaX - path.DeltaX),
+                    Y2 = path.ToY + (_deltaY - path.DeltaY),
                     Stroke = Brushes.Blue,
                     StrokeThickness = 4,
                     Margin = new Thickness(5, 5, 0, 0)
                 };
+                Panel.SetZIndex(line, 10);
                 Map.Children.Add(line);
-                //    Canvas.SetTop(line, 0);
-                //    Canvas.SetLeft(line, i);
+                _roadObjects.Add(line);
             }
         }
 
@@ -196,12 +196,16 @@ namespace PaperRace
             _currentSpeedX = Convert.ToInt32((x - _currentX) / 20);
             _currentSpeedY = Convert.ToInt32((y - _currentY) / 20);
 
+
+
             var path = new PathElement
             {
                 FromX = _currentX,
                 FromY = _currentY,
                 ToX = x,
-                ToY = y
+                ToY = y,
+                DeltaX = _deltaX,
+                DeltaY = _deltaY
             };
             _pathList.Add(path);
 
@@ -210,9 +214,10 @@ namespace PaperRace
 
             SpeedTb.Text = CurrentSpeed.ToString();
 
-            ShowPaths();
+            
             GenerateWeb();
             ShowRoad();
+            ShowPaths();
         }
 
         private void GenerateMapMenuItem_Click(object sender, RoutedEventArgs e)
@@ -281,6 +286,7 @@ namespace PaperRace
                     StrokeThickness = _roadWidth,
                     Margin = new Thickness(0, 0, 0, 0)
                 };
+                Panel.SetZIndex(line, 0);
                 Map.Children.Add(line);
                 _roadObjects.Add(line);
 
@@ -292,6 +298,7 @@ namespace PaperRace
                     Height = _roadWidth,
                     Fill = Brushes.Gray,
                 };
+                Panel.SetZIndex(ellipse, 0);
                 Map.Children.Add(ellipse);
                 Canvas.SetTop(ellipse, top);
                 Canvas.SetLeft(ellipse, left);
