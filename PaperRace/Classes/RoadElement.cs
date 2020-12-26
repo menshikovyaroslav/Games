@@ -6,13 +6,34 @@ using System.Windows.Shapes;
 
 namespace PaperRace.Classes
 {
+    /// <summary>
+    /// Фрагмент дороги
+    /// </summary>
     public class RoadElement
     {
-        //   public Rectangle Rectangle { get; set; }
+        /// <summary>
+        /// Угол наклона
+        /// </summary>
         public double Angle { get; set; }
+
+        /// <summary>
+        /// Ширина фрагмента
+        /// </summary>
         public double Width { get; set; }
+
+        /// <summary>
+        /// Длина фрагмента
+        /// </summary>
         public double Height { get; set; }
+
+        /// <summary>
+        /// Начальная точка фрагмента
+        /// </summary>
         public Point StartPoint { get; set; }
+
+        /// <summary>
+        /// Конечная точка фрагмента
+        /// </summary>
         public Point EndPoint
         {
             get

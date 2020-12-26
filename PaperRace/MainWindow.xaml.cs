@@ -41,6 +41,9 @@ namespace PaperRace
             NewGameStart();
         }
 
+        /// <summary>
+        /// Нарисовать пройденный путь
+        /// </summary>
         private void ShowPaths()
         {
             foreach (var path in _pathList)
@@ -61,6 +64,9 @@ namespace PaperRace
             }
         }
 
+        /// <summary>
+        /// Генерация сетки на карте
+        /// </summary>
         private void GenerateWeb()
         {
             if (_mapPoints.Count == 0)
@@ -166,6 +172,9 @@ namespace PaperRace
             }
         }
 
+        /// <summary>
+        /// Текущая линейная скорость
+        /// </summary>
         private int CurrentSpeed
         {
             get
@@ -178,6 +187,11 @@ namespace PaperRace
             }
         }
 
+        /// <summary>
+        /// Выполнить действие на карте. Обычно - новый ход.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DoStep(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
@@ -217,22 +231,18 @@ namespace PaperRace
             ShowPaths();
         }
 
+        /// <summary>
+        /// Клик в меню создание новой игры
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NewGame_Click(object sender, RoutedEventArgs e)
         {
             NewGameStart();
         }
 
-        private double CurrentAngle
-        {
-            get
-            {
-                if (_roadElements.Count == 0) return 0;
-                return _roadElements.Last().Angle;
-            }
-        }
-
         /// <summary>
-        /// Сбросить настройки дял начала новой игры
+        /// Сбросить настройки для начала новой игры
         /// </summary>
         private void ResetGameProcess()
         {
@@ -243,11 +253,6 @@ namespace PaperRace
             _roadObjects.Clear();
 
             Map.Children.RemoveRange(0, Map.Children.Count);
-
-            //foreach (Shape item in Map.Children)
-            //{
-
-            //}
         }
 
         /// <summary>
@@ -261,9 +266,11 @@ namespace PaperRace
             double x = _currentX;
             double y = _currentY;
 
+            double angle = _roadElements.Count == 0 ? 0 : _roadElements.Last().Angle;
+
             for (int i = 0; i < 25; i++)
             {
-                var roadElement = GetRoadElement(new Point(x, y));
+                var roadElement = GetRoadElement(new Point(x, y), angle);
                 _roadElements.Add(roadElement);
 
                 x = roadElement.EndPoint.X;
@@ -273,6 +280,9 @@ namespace PaperRace
             ShowRoad();
         }
 
+        /// <summary>
+        /// Перерисовать дорогу
+        /// </summary>
         private void ShowRoad()
         {
             if (_roadObjects != null)
@@ -321,14 +331,19 @@ namespace PaperRace
             }
         }
 
-        private RoadElement GetRoadElement(Point start)
+        /// <summary>
+        /// Генерация нового элемента дороги
+        /// </summary>
+        /// <param name="start"></param>
+        /// <returns></returns>
+        private RoadElement GetRoadElement(Point start, double currentAngle)
         {
             var roadElement = new RoadElement();
 
             var random = new Random();
-            var angle = _roadElements.Count == 0 ? 0 : random.Next(-90, 90);
+            var newAngle = _roadElements.Count == 0 ? 0 : random.Next(-90, 90);
 
-            roadElement.Angle = angle + CurrentAngle;
+            roadElement.Angle = newAngle + currentAngle;
             roadElement.Width = _roadWidth;
             roadElement.Height = random.Next(100, 200);
             roadElement.StartPoint = new Point(start.X, start.Y);
