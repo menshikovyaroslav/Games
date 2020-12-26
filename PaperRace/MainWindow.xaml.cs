@@ -22,7 +22,7 @@ namespace PaperRace
     public partial class MainWindow : Window
     {
         int _currentX = 400;
-        int _currentY = 660;
+        int _currentY = 400;
 
         int _deltaX, _deltaY = 0;
 
@@ -239,9 +239,9 @@ namespace PaperRace
             double x = _currentX;
             double y = _currentY;
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 25; i++)
             {
-                var roadElement = GetRoadElement(new Point(x, y), CurrentAngle);
+                var roadElement = GetRoadElement(new Point(x, y));
                 _roadElements.Add(roadElement);
 
                 //Map.Children.Add(roadElement.Rectangle);
@@ -307,14 +307,14 @@ namespace PaperRace
             }
         }
 
-        private RoadElement GetRoadElement(Point start, double currentAngle)
+        private RoadElement GetRoadElement(Point start)
         {
             var roadElement = new RoadElement();
 
             var random = new Random();
-            var angle = random.Next(-90, 90);
+            var angle = _roadElements.Count == 0 ? 0 : random.Next(-90, 90);
 
-            roadElement.Angle = angle + currentAngle;
+            roadElement.Angle = angle + CurrentAngle;
             roadElement.Width = _roadWidth;
             roadElement.Height = random.Next(100, 200);
             roadElement.StartPoint = new Point(start.X, start.Y);
