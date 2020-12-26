@@ -27,21 +27,18 @@ namespace PaperRace
         int _deltaX, _deltaY = 0;
 
         int _roadWidth = 100;
-        int _currentSpeedX = 0;
-        int _currentSpeedY = 0;
+        int _currentSpeedX, _currentSpeedY = 0;
 
         List<PathElement> _pathList = new List<PathElement>();
         List<Button> _mapPoints = new List<Button>();
         List<RoadElement> _roadElements = new List<RoadElement>();
+        List<Shape> _roadObjects = new List<Shape>();
 
         public MainWindow()
         {
             InitializeComponent();
 
-            GenerateWeb();
-            Test();
-
-
+            NewGameStart();
         }
 
         private void ShowPaths()
@@ -220,9 +217,9 @@ namespace PaperRace
             ShowPaths();
         }
 
-        private void GenerateMapMenuItem_Click(object sender, RoutedEventArgs e)
+        private void NewGame_Click(object sender, RoutedEventArgs e)
         {
-            Test();
+            NewGameStart();
         }
 
         private double CurrentAngle
@@ -234,8 +231,33 @@ namespace PaperRace
             }
         }
 
-        private void Test()
+        /// <summary>
+        /// Сбросить настройки дял начала новой игры
+        /// </summary>
+        private void ResetGameProcess()
         {
+            _currentSpeedX = _currentSpeedY = _deltaX = _deltaY = 0;
+            _pathList.Clear();
+            _mapPoints.Clear();
+            _roadElements.Clear();
+            _roadObjects.Clear();
+
+            Map.Children.RemoveRange(0, Map.Children.Count);
+
+            //foreach (Shape item in Map.Children)
+            //{
+
+            //}
+        }
+
+        /// <summary>
+        /// Начало новой игры
+        /// </summary>
+        private void NewGameStart()
+        {
+            ResetGameProcess();
+            GenerateWeb();
+
             double x = _currentX;
             double y = _currentY;
 
@@ -244,20 +266,12 @@ namespace PaperRace
                 var roadElement = GetRoadElement(new Point(x, y));
                 _roadElements.Add(roadElement);
 
-                //Map.Children.Add(roadElement.Rectangle);
-                //Canvas.SetTop(roadElement.Rectangle, y - roadElement.Height + 45);
-                //Canvas.SetLeft(roadElement.Rectangle, x - _roadWidth / 2 + 5);
-
                 x = roadElement.EndPoint.X;
                 y = roadElement.EndPoint.Y;
             }
 
-
             ShowRoad();
-
         }
-
-        private List<Shape> _roadObjects;
 
         private void ShowRoad()
         {
