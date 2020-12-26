@@ -266,7 +266,7 @@ namespace PaperRace
             var roadElement = new RoadElement();
 
             var random = new Random();
-            var angle = random.Next(-45, 45);
+            var angle = random.Next(-45, 0);
 
             roadElement.Angle = angle + currentAngle;
             roadElement.Width = _roadWidth;
