@@ -23,7 +23,10 @@ namespace PaperRace
     {
         int _currentX = 400;
         int _currentY = 660;
-        int _roadWidth = 200;
+
+        int _deltaX, _deltaY = 0;
+
+        int _roadWidth = 100;
         int _currentSpeedX = 0;
         int _currentSpeedY = 0;
 
@@ -106,8 +109,17 @@ namespace PaperRace
 
                         if (Math.Abs(_currentX + _currentSpeedX * 20 - i) <= 20 && Math.Abs(_currentY + _currentSpeedY * 20 - j) <= 20)
                         {
-                            button.Background = Brushes.LightGreen;
-                            button.IsEnabled = true;
+                            if (_currentX == i && _currentY == j)
+                            {
+                                button.Background = Brushes.Black;
+                                button.IsEnabled = true;
+                            }
+                            else
+                            {
+                                button.Background = Brushes.LightGreen;
+                                button.IsEnabled = true;
+                            }
+
                         }
                         else
                         {
@@ -115,11 +127,11 @@ namespace PaperRace
                             button.IsEnabled = false;
                         }
 
-                        if (i == _currentX && j == _currentY)
-                        {
-                            button.Background = Brushes.Black;
-                            button.IsEnabled = false;
-                        }
+                     //   if (i == _currentX && j == _currentY)
+                     //   {
+                     //       button.Background = Brushes.Black;
+                        //    button.IsEnabled = false;
+                     //   }
 
                         _mapPoints.Add(button);
 
@@ -151,7 +163,7 @@ namespace PaperRace
                     if (x == _currentX && y == _currentY)
                     {
                         button.Background = Brushes.Black;
-                        button.IsEnabled = false;
+                        button.IsEnabled = true;
                     }
                 }
             }
@@ -175,6 +187,12 @@ namespace PaperRace
             var x = Convert.ToInt32(Canvas.GetLeft(button));
             var y = Convert.ToInt32(Canvas.GetTop(button));
 
+            if (x == _currentX && y == _currentY)
+            {
+                MessageBox.Show("Car options !");
+                return;
+            }
+
             _currentSpeedX = Convert.ToInt32((x - _currentX) / 20);
             _currentSpeedY = Convert.ToInt32((y - _currentY) / 20);
 
@@ -187,13 +205,14 @@ namespace PaperRace
             };
             _pathList.Add(path);
 
-            _currentX += _currentSpeedX * 20;
-            _currentY += _currentSpeedY * 20;
+            _deltaX -= (x - _currentX);
+            _deltaY -= (y - _currentY);
 
             SpeedTb.Text = CurrentSpeed.ToString();
 
             ShowPaths();
             GenerateWeb();
+            ShowRoad();
         }
 
         private void GenerateMapMenuItem_Click(object sender, RoutedEventArgs e)
@@ -229,36 +248,56 @@ namespace PaperRace
             }
 
 
+            ShowRoad();
+
+        }
+
+        private List<Shape> _roadObjects;
+
+        private void ShowRoad()
+        {
+            if (_roadObjects != null)
+            {
+                foreach (var roadObject in _roadObjects)
+                {
+                    //   var currShape = (Shape)roadObject;
+                    Map.Children.Remove(roadObject);
+                }
+            }
+
+            _roadObjects = new List<Shape>();
+
             for (int i = 0; i < _roadElements.Count; i++)
             {
                 var currElement = _roadElements[i];
 
                 Line line = new Line
                 {
-                    X1 = currElement.StartPoint.X,
-                    Y1 = currElement.StartPoint.Y,
-                    X2 = currElement.EndPoint.X,
-                    Y2 = currElement.EndPoint.Y,
+                    X1 = currElement.StartPoint.X + _deltaX,
+                    Y1 = currElement.StartPoint.Y + _deltaY,
+                    X2 = currElement.EndPoint.X + _deltaX,
+                    Y2 = currElement.EndPoint.Y + _deltaY,
                     Stroke = Brushes.Gray,
-                    StrokeThickness = 200,
+                    StrokeThickness = _roadWidth,
                     Margin = new Thickness(0, 0, 0, 0)
                 };
                 Map.Children.Add(line);
+                _roadObjects.Add(line);
 
-                double left = currElement.EndPoint.Y - _roadWidth / 2;
-                double top = currElement.EndPoint.X - _roadWidth / 2;
+                double top = currElement.EndPoint.Y - _roadWidth / 2 + _deltaY;
+                double left = currElement.EndPoint.X - _roadWidth / 2 + _deltaX;
                 var ellipse = new Ellipse
                 {
                     Width = _roadWidth,
                     Height = _roadWidth,
-                    Fill = Brushes.Red,
-              //      Margin = new Thickness(left, top, 0, 0)
+                    Fill = Brushes.Gray,
                 };
                 Map.Children.Add(ellipse);
-                Canvas.SetTop(ellipse, left);
-                Canvas.SetLeft(ellipse, top);
-            }
+                Canvas.SetTop(ellipse, top);
+                Canvas.SetLeft(ellipse, left);
+                _roadObjects.Add(ellipse);
 
+            }
         }
 
         private RoadElement GetRoadElement(Point start, double currentAngle)
@@ -266,7 +305,7 @@ namespace PaperRace
             var roadElement = new RoadElement();
 
             var random = new Random();
-            var angle = random.Next(-45, 0);
+            var angle = random.Next(-90, 90);
 
             roadElement.Angle = angle + currentAngle;
             roadElement.Width = _roadWidth;
