@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mines", "Mines\Mines.csproj", "{3FB9CAF9-A596-4B7C-AA21-A85569194F75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperRace", "PaperRace\PaperRace.csproj", "{6C972D9B-2FBF-4E45-AD80-3D01FB2441E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaperRace", "PaperRace\PaperRace.csproj", "{6C972D9B-2FBF-4E45-AD80-3D01FB2441E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dll", "Dll", "{97666C6F-7D27-405E-8E75-9507FB4D755F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensionMethods", "Dll\ExtensionMethods\ExtensionMethods.csproj", "{BFD9407B-78BF-4063-8476-950F47925689}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +25,16 @@ Global
 		{6C972D9B-2FBF-4E45-AD80-3D01FB2441E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C972D9B-2FBF-4E45-AD80-3D01FB2441E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C972D9B-2FBF-4E45-AD80-3D01FB2441E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFD9407B-78BF-4063-8476-950F47925689}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFD9407B-78BF-4063-8476-950F47925689}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFD9407B-78BF-4063-8476-950F47925689}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFD9407B-78BF-4063-8476-950F47925689}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BFD9407B-78BF-4063-8476-950F47925689} = {97666C6F-7D27-405E-8E75-9507FB4D755F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {88BF4FD9-AF0A-435B-B737-9615ABA7E769}

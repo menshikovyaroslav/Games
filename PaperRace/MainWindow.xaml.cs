@@ -21,17 +21,34 @@ namespace PaperRace
     /// </summary>
     public partial class MainWindow : Window
     {
-        int _currentX = 400;
-        int _currentY = 400;
-
+        /// <summary>
+        /// Текущий сдвиг карты по осям
+        /// </summary>
         int _deltaX, _deltaY = 0;
 
-        int _roadWidth = 100;
+        /// <summary>
+        /// Текущая скорость машины по осям
+        /// </summary>
         int _currentSpeedX, _currentSpeedY = 0;
 
+        /// <summary>
+        /// Список отрезков пройденного пути
+        /// </summary>
         List<PathElement> _pathList = new List<PathElement>();
+
+        /// <summary>
+        /// Точки на карте
+        /// </summary>
         List<Button> _mapPoints = new List<Button>();
+
+        /// <summary>
+        /// Список фрагментов дороги
+        /// </summary>
         List<RoadElement> _roadElements = new List<RoadElement>();
+
+        /// <summary>
+        /// Список нарисованных на карте объектов
+        /// </summary>
         List<Shape> _roadObjects = new List<Shape>();
 
         public MainWindow()
@@ -110,9 +127,9 @@ namespace PaperRace
                         };
                         button.Click += DoStep;
 
-                        if (Math.Abs(_currentX + _currentSpeedX * 20 - i) <= 20 && Math.Abs(_currentY + _currentSpeedY * 20 - j) <= 20)
+                        if (Math.Abs(GameSettings.UserPositionX + _currentSpeedX * 20 - i) <= 20 && Math.Abs(GameSettings.UserPositionY + _currentSpeedY * 20 - j) <= 20)
                         {
-                            if (_currentX == i && _currentY == j)
+                            if (GameSettings.UserPositionX == i && GameSettings.UserPositionY == j)
                             {
                                 button.Background = Brushes.Black;
                                 button.IsEnabled = true;
@@ -130,12 +147,6 @@ namespace PaperRace
                             button.IsEnabled = false;
                         }
 
-                     //   if (i == _currentX && j == _currentY)
-                     //   {
-                     //       button.Background = Brushes.Black;
-                        //    button.IsEnabled = false;
-                     //   }
-
                         _mapPoints.Add(button);
 
                         Panel.SetZIndex(button, 10);
@@ -152,7 +163,7 @@ namespace PaperRace
                     var x = Canvas.GetLeft(button);
                     var y = Canvas.GetTop(button);
 
-                    if (Math.Abs(_currentX + _currentSpeedX * 20 - x) <= 20 && Math.Abs(_currentY + _currentSpeedY * 20 - y) <= 20)
+                    if (Math.Abs(GameSettings.UserPositionX + _currentSpeedX * 20 - x) <= 20 && Math.Abs(GameSettings.UserPositionY + _currentSpeedY * 20 - y) <= 20)
                     {
                         button.Background = Brushes.LightGreen;
                         button.IsEnabled = true;
@@ -163,7 +174,7 @@ namespace PaperRace
                         button.IsEnabled = false;
                     }
 
-                    if (x == _currentX && y == _currentY)
+                    if (x == GameSettings.UserPositionX && y == GameSettings.UserPositionY)
                     {
                         button.Background = Brushes.Black;
                         button.IsEnabled = true;
@@ -198,21 +209,21 @@ namespace PaperRace
             var x = Convert.ToInt32(Canvas.GetLeft(button));
             var y = Convert.ToInt32(Canvas.GetTop(button));
 
-            if (x == _currentX && y == _currentY)
+            if (x == GameSettings.UserPositionX && y == GameSettings.UserPositionY)
             {
                 MessageBox.Show("Car options !");
                 return;
             }
 
-            _currentSpeedX = Convert.ToInt32((x - _currentX) / 20);
-            _currentSpeedY = Convert.ToInt32((y - _currentY) / 20);
+            _currentSpeedX = Convert.ToInt32((x - GameSettings.UserPositionX) / 20);
+            _currentSpeedY = Convert.ToInt32((y - GameSettings.UserPositionY) / 20);
 
 
 
             var path = new PathElement
             {
-                FromX = _currentX,
-                FromY = _currentY,
+                FromX = GameSettings.UserPositionX,
+                FromY = GameSettings.UserPositionY,
                 ToX = x,
                 ToY = y,
                 DeltaX = _deltaX,
@@ -220,8 +231,8 @@ namespace PaperRace
             };
             _pathList.Add(path);
 
-            _deltaX -= (x - _currentX);
-            _deltaY -= (y - _currentY);
+            _deltaX -= (x - GameSettings.UserPositionX);
+            _deltaY -= (y - GameSettings.UserPositionY);
 
             SpeedTb.Text = CurrentSpeed.ToString();
 
@@ -263,12 +274,12 @@ namespace PaperRace
             ResetGameProcess();
             GenerateWeb();
 
-            double x = _currentX;
-            double y = _currentY;
+            double x = GameSettings.UserPositionX;
+            double y = GameSettings.UserPositionY;
 
             double angle = _roadElements.Count == 0 ? 0 : _roadElements.Last().Angle;
 
-            for (int i = 0; i < 25; i++)
+            for (int i = 0; i < GameSettings.RoadElementsCount; i++)
             {
                 var roadElement = GetRoadElement(new Point(x, y), angle);
                 _roadElements.Add(roadElement);
@@ -307,19 +318,19 @@ namespace PaperRace
                     X2 = currElement.EndPoint.X + _deltaX,
                     Y2 = currElement.EndPoint.Y + _deltaY,
                     Stroke = Brushes.Gray,
-                    StrokeThickness = _roadWidth,
+                    StrokeThickness = GameSettings.RoadWidth,
                     Margin = new Thickness(0, 0, 0, 0)
                 };
                 Panel.SetZIndex(line, 0);
                 Map.Children.Add(line);
                 _roadObjects.Add(line);
 
-                double top = currElement.EndPoint.Y - _roadWidth / 2 + _deltaY;
-                double left = currElement.EndPoint.X - _roadWidth / 2 + _deltaX;
+                double top = currElement.EndPoint.Y - GameSettings.RoadWidth / 2 + _deltaY;
+                double left = currElement.EndPoint.X - GameSettings.RoadWidth / 2 + _deltaX;
                 var ellipse = new Ellipse
                 {
-                    Width = _roadWidth,
-                    Height = _roadWidth,
+                    Width = GameSettings.RoadWidth,
+                    Height = GameSettings.RoadWidth,
                     Fill = Brushes.Gray,
                 };
                 Panel.SetZIndex(ellipse, 0);
@@ -341,11 +352,11 @@ namespace PaperRace
             var roadElement = new RoadElement();
 
             var random = new Random();
-            var newAngle = _roadElements.Count == 0 ? 0 : random.Next(-90, 90);
+            var newAngle = _roadElements.Count == 0 ? 0 : random.Next(GameSettings.MinAngle, GameSettings.MaxAngle);
 
             roadElement.Angle = newAngle + currentAngle;
-            roadElement.Width = _roadWidth;
-            roadElement.Height = random.Next(100, 200);
+            roadElement.Width = GameSettings.RoadWidth;
+            roadElement.Height = random.Next(GameSettings.MinRoadLength, GameSettings.MaxRoadLength);
             roadElement.StartPoint = new Point(start.X, start.Y);
 
             return roadElement;
