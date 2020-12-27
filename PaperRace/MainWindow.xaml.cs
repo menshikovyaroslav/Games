@@ -237,6 +237,9 @@ namespace PaperRace
             };
             _pathList.Add(path);
 
+            var isNewPointOnRoad = IsNewPointOnRoad(new Point(x, y));
+            if (!isNewPointOnRoad) MessageBox.Show("Конец игры !");
+
             _deltaX -= (x - GameSettings.UserPositionX);
             _deltaY -= (y - GameSettings.UserPositionY);
 
@@ -249,12 +252,14 @@ namespace PaperRace
             ShowPaths();
             SetCarAttitude();
 
-            var isNewPointOnRoad = IsNewPointOnRoad(new Point(x, y));
-            if (!isNewPointOnRoad) MessageBox.Show("Конец игры !");
+
         }
 
         private bool IsNewPointOnRoad(Point p)
         {
+            p.X -= _deltaX;
+            p.Y -= _deltaY;
+
             foreach (var roadElement in _roadElements)
             {
                 // Площадь треугольника
