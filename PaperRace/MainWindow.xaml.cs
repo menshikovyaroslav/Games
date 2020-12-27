@@ -170,7 +170,12 @@ namespace PaperRace
 
                     if (Math.Abs(GameSettings.UserPositionX + _currentSpeedX * 20 - x) <= 20 && Math.Abs(GameSettings.UserPositionY + _currentSpeedY * 20 - y) <= 20)
                     {
-                        button.Background = Brushes.LightGreen;
+                        // Проверим будет ли данная точка вне дороги и пометим другим цветом
+                        var isNewPointOnRoad = IsPointOnRoad(new Point(x, y));
+
+                        if (isNewPointOnRoad) button.Background = Brushes.LightGreen;
+                        else button.Background = Brushes.Red;
+
                         Panel.SetZIndex(button, 10);
                         button.IsEnabled = true;
                     }
@@ -237,7 +242,8 @@ namespace PaperRace
             };
             _pathList.Add(path);
 
-            var isNewPointOnRoad = IsNewPointOnRoad(new Point(x, y));
+            // Проверка хода: не вышли ли с дороги
+            var isNewPointOnRoad = IsPointOnRoad(new Point(x, y));
             if (!isNewPointOnRoad) MessageBox.Show("Конец игры !");
 
             _deltaX -= (x - GameSettings.UserPositionX);
@@ -255,13 +261,17 @@ namespace PaperRace
 
         }
 
-        private bool IsNewPointOnRoad(Point p)
+        private bool IsPointOnRoad(Point p)
         {
             p.X -= _deltaX;
             p.Y -= _deltaY;
 
             foreach (var roadElement in _roadElements)
             {
+                // Сначала проверим, не лежит ли точка в круге с центром в конце фрагмента дороги 
+
+                if (Math.Pow(p.X - roadElement.EndPoint.X, 2) + Math.Pow(p.Y - roadElement.EndPoint.Y, 2) <= Math.Pow(GameSettings.RoadWidth / 2, 2)) return true;
+
                 // Площадь треугольника
                 var Sabc = 0.5 * Math.Abs((roadElement.StartPoint.X - p.X) * (roadElement.EndPoint.Y - p.Y) - (roadElement.EndPoint.X - p.X) * (roadElement.StartPoint.Y - p.Y));
                 // Длина стороны AC
@@ -384,7 +394,7 @@ namespace PaperRace
                     Y2 = currElement.EndPoint.Y + _deltaY,
                     Stroke = Brushes.Gray,
                     StrokeThickness = GameSettings.RoadWidth,
-                    Margin = new Thickness(0, 0, 0, 0)
+                    Margin = new Thickness(5, 0, 0, 0)
                 };
                 Panel.SetZIndex(line, 0);
                 Map.Children.Add(line);
@@ -397,6 +407,7 @@ namespace PaperRace
                     Width = GameSettings.RoadWidth,
                     Height = GameSettings.RoadWidth,
                     Fill = Brushes.Gray,
+                    Margin = new Thickness(5, 0, 0, 0)
                 };
                 Panel.SetZIndex(ellipse, 0);
                 Map.Children.Add(ellipse);
