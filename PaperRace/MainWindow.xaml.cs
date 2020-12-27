@@ -238,7 +238,7 @@ namespace PaperRace
             _deltaY -= (y - GameSettings.UserPositionY);
 
             SpeedTb.Text = CurrentSpeed.ToString();
-            
+
             GenerateWeb();
             ShowRoad();
             ShowPaths();
@@ -253,17 +253,13 @@ namespace PaperRace
             var lastPath = _pathList.Last();
             var newAngle = lastPath.Angle;
 
-            RotateTransform rotation = _carImage.RenderTransform as RotateTransform;
-            if (rotation == null)
+            RotateTransform rotate = _carImage.RenderTransform as RotateTransform;
+            if (rotate == null)
             {
-                rotation = new RotateTransform(newAngle);
+                rotate = new RotateTransform(0, 22, 22);
+                _carImage.RenderTransform = rotate;
             }
-            else
-            {
-                rotation.Angle = newAngle;
-            }
-         
-            _carImage.RenderTransform = rotation;
+            rotate.Angle = newAngle;
         }
 
         /// <summary>
@@ -374,14 +370,14 @@ namespace PaperRace
         {
             _carImage = new Image
             {
-                Width = 40,
-                Height = 40,
+                Width = 44,
+                Height = 44,
                 Source = new BitmapImage(new Uri("/Images/car.png", UriKind.Relative))
             };
             Panel.SetZIndex(_carImage, 8);
             Map.Children.Add(_carImage);
-            Canvas.SetTop(_carImage, GameSettings.UserPositionY - _carImage.Height / 2);
-            Canvas.SetLeft(_carImage, GameSettings.UserPositionX - _carImage.Width / 2 + 5);
+            Canvas.SetTop(_carImage, GameSettings.UserPositionY - 15);
+            Canvas.SetLeft(_carImage, GameSettings.UserPositionX - 17);
         }
 
         /// <summary>
