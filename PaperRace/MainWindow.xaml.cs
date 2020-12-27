@@ -80,7 +80,7 @@ namespace PaperRace
                     StrokeThickness = 4,
                     Margin = new Thickness(5, 5, 0, 0)
                 };
-                Panel.SetZIndex(line, 10);
+                Panel.SetZIndex(line, 7);
                 Map.Children.Add(line);
                 _roadObjects.Add(line);
             }
@@ -171,17 +171,20 @@ namespace PaperRace
                     if (Math.Abs(GameSettings.UserPositionX + _currentSpeedX * 20 - x) <= 20 && Math.Abs(GameSettings.UserPositionY + _currentSpeedY * 20 - y) <= 20)
                     {
                         button.Background = Brushes.LightGreen;
+                        Panel.SetZIndex(button, 10);
                         button.IsEnabled = true;
                     }
                     else
                     {
                         button.Background = Brushes.White;
+                        Panel.SetZIndex(button, 1);
                         button.IsEnabled = false;
                     }
 
                     if (x == GameSettings.UserPositionX && y == GameSettings.UserPositionY)
                     {
                         button.Background = Brushes.Black;
+                        Panel.SetZIndex(button, 10);
                         button.IsEnabled = true;
                     }
                 }
