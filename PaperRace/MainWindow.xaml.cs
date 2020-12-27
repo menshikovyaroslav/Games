@@ -289,6 +289,7 @@ namespace PaperRace
             }
 
             ShowRoad();
+            ShowCar();
         }
 
         /// <summary>
@@ -340,6 +341,24 @@ namespace PaperRace
                 _roadObjects.Add(ellipse);
 
             }
+        }
+
+        /// <summary>
+        /// Показать машину на карте
+        /// </summary>
+        private void ShowCar()
+        {
+
+            var image = new Image
+            {
+                Width = 40,
+                Height = 40,
+                Source = new BitmapImage(new Uri("/Images/car.png", UriKind.Relative))
+            };
+            Panel.SetZIndex(image, 8);
+            Map.Children.Add(image);
+            Canvas.SetTop(image, GameSettings.UserPositionY - image.Height / 2);
+            Canvas.SetLeft(image, GameSettings.UserPositionX - image.Width / 2 + 5);
         }
 
         /// <summary>

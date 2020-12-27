@@ -19,7 +19,7 @@
             </StackPanel>
         </StatusBar>
         <Canvas Name="Map" DockPanel.Dock="Top" ClipToBounds="True">
-            
+            <Image Source="Images\car.png" Width="20" Height="20" Panel.ZIndex="10" />
         </Canvas>
     </DockPanel>
 </Window>
