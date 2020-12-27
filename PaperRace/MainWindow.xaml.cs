@@ -242,10 +242,46 @@ namespace PaperRace
 
             SpeedTb.Text = CurrentSpeed.ToString();
 
+
+
             GenerateWeb();
             ShowRoad();
             ShowPaths();
             SetCarAttitude();
+
+            var isNewPointOnRoad = IsNewPointOnRoad(new Point(x, y));
+            if (!isNewPointOnRoad) MessageBox.Show("Конец игры !");
+        }
+
+        private bool IsNewPointOnRoad(Point p)
+        {
+            foreach (var roadElement in _roadElements)
+            {
+                // Площадь треугольника
+                var Sabc = 0.5 * Math.Abs((roadElement.StartPoint.X - p.X) * (roadElement.EndPoint.Y - p.Y) - (roadElement.EndPoint.X - p.X) * (roadElement.StartPoint.Y - p.Y));
+                // Длина стороны AC
+                var AC = Math.Sqrt(Math.Pow((roadElement.StartPoint.X - roadElement.EndPoint.X), 2) + Math.Pow((roadElement.StartPoint.Y - roadElement.EndPoint.Y), 2));
+                // Длина стороны AB
+                var AB = Math.Sqrt(Math.Pow((roadElement.StartPoint.X - p.X), 2) + Math.Pow((roadElement.StartPoint.Y - p.Y), 2));
+                // Длина стороны BC
+                var BC = Math.Sqrt(Math.Pow((p.X - roadElement.EndPoint.X), 2) + Math.Pow((p.Y - roadElement.EndPoint.Y), 2));
+                // Длина Высоты, опущенной на сторону AC
+                var h = 2 * Sabc / AC;
+
+                // если высота больше чем ширина фрагмента дороги, то точно установлено: точка не лежит на прямоугольнике
+                if (h > GameSettings.RoadWidth / 2) continue;
+
+                // остается случай когда Высота не падает на сторону AC, а падает на продолжение стороны AC
+                var angleBAC = Math.Acos((Math.Pow(AC, 2) + Math.Pow(AB, 2) - Math.Pow(BC, 2)) / (2 * AC * AB)) * 180 / Math.PI;
+                var angleBCA = Math.Acos((Math.Pow(AC, 2) + Math.Pow(BC, 2) - Math.Pow(AB, 2)) / (2 * AC * BC)) * 180 / Math.PI;
+
+                if (angleBAC > 90 || angleBCA > 90) continue;
+
+                return true;
+            }
+
+
+            return false;
         }
 
         /// <summary>
