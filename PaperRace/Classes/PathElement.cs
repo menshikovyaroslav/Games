@@ -12,31 +12,53 @@ namespace PaperRace.Classes
         /// <summary>
         /// Точка начала отрезка по оси X
         /// </summary>
-        public int FromX { get; set; }
+        public double FromX { get; set; }
 
         /// <summary>
         /// Точка начала отрезка по оси Y
         /// </summary>
-        public int FromY { get; set; }
+        public double FromY { get; set; }
 
         /// <summary>
         /// Точка конца отрезка по оси X
         /// </summary>
-        public int ToX { get; set; }
+        public double ToX { get; set; }
 
         /// <summary>
         /// Точка конца отрезка по оси Y
         /// </summary>
-        public int ToY { get; set; }
+        public double ToY { get; set; }
 
         /// <summary>
         /// Отклонение карты по оси X
         /// </summary>
-        public int DeltaX { get; set; }
+        public double DeltaX { get; set; }
 
         /// <summary>
         /// Отклонение карты по оси Y
         /// </summary>
-        public int DeltaY { get; set; }
+        public double DeltaY { get; set; }
+
+        /// <summary>
+        /// Текущий угол наклона пути
+        /// </summary>
+        public double Angle
+        {
+            get
+            {
+                if (ToY == FromY && ToX > FromX) return 90;
+                if (ToY == FromY && ToX < FromX) return -90;
+                if (ToX == FromX && ToY > FromY) return 180;
+                if (ToX == FromX && ToY < FromY) return 0;
+
+                if (ToY <= FromY && ToX >= FromX) return -Math.Atan((ToX - FromX) / (ToY - FromY)) * 180 / Math.PI;
+                if (ToY <= FromY && ToX <= FromX) return - Math.Atan((ToX - FromX) / (ToY - FromY)) * 180 / Math.PI;
+
+                if (ToY >= FromY && ToX <= FromX) return Math.Atan((ToY - FromY) / (ToX - FromX)) * 180 / Math.PI - 90;
+                if (ToY >= FromY && ToX >= FromX) return Math.Atan((ToY - FromY) / (ToX - FromX)) * 180 / Math.PI + 90;
+
+                return 0;
+            }
+        }
     }
 }

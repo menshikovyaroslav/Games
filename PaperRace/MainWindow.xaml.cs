@@ -32,6 +32,11 @@ namespace PaperRace
         int _currentSpeedX, _currentSpeedY = 0;
 
         /// <summary>
+        /// Ототбражение машины на карте
+        /// </summary>
+        Image _carImage { get; set; }
+
+        /// <summary>
         /// Список отрезков пройденного пути
         /// </summary>
         List<PathElement> _pathList = new List<PathElement>();
@@ -218,8 +223,6 @@ namespace PaperRace
             _currentSpeedX = Convert.ToInt32((x - GameSettings.UserPositionX) / 20);
             _currentSpeedY = Convert.ToInt32((y - GameSettings.UserPositionY) / 20);
 
-
-
             var path = new PathElement
             {
                 FromX = GameSettings.UserPositionX,
@@ -235,11 +238,33 @@ namespace PaperRace
             _deltaY -= (y - GameSettings.UserPositionY);
 
             SpeedTb.Text = CurrentSpeed.ToString();
-
             
             GenerateWeb();
             ShowRoad();
             ShowPaths();
+            SetCarAttitude();
+        }
+
+        /// <summary>
+        /// Установить правильный поворот изображения машины на карте
+        /// </summary>
+        private void SetCarAttitude()
+        {
+            var lastPath = _pathList.Last();
+            var newAngle = lastPath.Angle;
+
+            RotateTransform rotation = _carImage.RenderTransform as RotateTransform;
+            if (rotation == null)
+            {
+                rotation = new RotateTransform(newAngle);
+            }
+            else
+            {
+                rotation.Angle = newAngle;
+            }
+
+            
+            _carImage.RenderTransform = rotation;
         }
 
         /// <summary>
@@ -348,17 +373,16 @@ namespace PaperRace
         /// </summary>
         private void ShowCar()
         {
-
-            var image = new Image
+            _carImage = new Image
             {
                 Width = 40,
                 Height = 40,
                 Source = new BitmapImage(new Uri("/Images/car.png", UriKind.Relative))
             };
-            Panel.SetZIndex(image, 8);
-            Map.Children.Add(image);
-            Canvas.SetTop(image, GameSettings.UserPositionY - image.Height / 2);
-            Canvas.SetLeft(image, GameSettings.UserPositionX - image.Width / 2 + 5);
+            Panel.SetZIndex(_carImage, 8);
+            Map.Children.Add(_carImage);
+            Canvas.SetTop(_carImage, GameSettings.UserPositionY - _carImage.Height / 2);
+            Canvas.SetLeft(_carImage, GameSettings.UserPositionX - _carImage.Width / 2 + 5);
         }
 
         /// <summary>
