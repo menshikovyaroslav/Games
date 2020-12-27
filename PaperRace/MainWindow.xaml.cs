@@ -262,8 +262,7 @@ namespace PaperRace
             {
                 rotation.Angle = newAngle;
             }
-
-            
+         
             _carImage.RenderTransform = rotation;
         }
 

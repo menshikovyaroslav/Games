@@ -45,11 +45,7 @@ namespace PaperRace.Classes
                 var katetA = Math.Abs(Height * Math.Sin(angle));
                 var katetB = Math.Abs(Height * Math.Cos(angle));
 
-                // TODO : сделай если углы > 90 и < - 90
-
                 double deltaX, deltaY = 0;
-
-
 
                 if (Angle >= 0 && Angle <= 90)
                 {
@@ -73,7 +69,6 @@ namespace PaperRace.Classes
                 }
 
                 return new Point(StartPoint.X + deltaX, StartPoint.Y + deltaY);
-
             }
         }
     }
