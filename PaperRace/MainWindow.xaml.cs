@@ -134,22 +134,37 @@ namespace PaperRace
 
                         if (Math.Abs(GameSettings.UserPositionX + _currentSpeedX * 20 - i) <= 20 && Math.Abs(GameSettings.UserPositionY + _currentSpeedY * 20 - j) <= 20)
                         {
+                            // Проверим будет ли данная точка вне дороги и пометим другим цветом
+                            var isNewPointOnRoad = IsPointOnRoad(new Point(i, j));
+
+                            if (isNewPointOnRoad) button.Background = Brushes.LightGreen;
+                            else button.Background = Brushes.Red;
+
                             if (GameSettings.UserPositionX == i && GameSettings.UserPositionY == j)
                             {
                                 button.Background = Brushes.Black;
-                                button.IsEnabled = true;
                             }
                             else
                             {
                                 button.Background = Brushes.LightGreen;
-                                button.IsEnabled = true;
                             }
-
+                            button.IsEnabled = true;
                         }
                         else
                         {
-                            button.Background = Brushes.White;
-                            button.IsEnabled = false;
+                            // Проверим будет ли данная точка вне дороги и пометим другим цветом
+                            var isNewPointOnRoad = IsPointOnRoad(new Point(i, j));
+
+                            if (isNewPointOnRoad)
+                            {
+                                button.Background = Brushes.MediumAquamarine;
+                                button.IsEnabled = true;
+                            }
+                            else
+                            {
+                                button.Background = Brushes.White;
+                                button.IsEnabled = false;
+                            }
                         }
 
                         _mapPoints.Add(button);
@@ -181,9 +196,21 @@ namespace PaperRace
                     }
                     else
                     {
-                        button.Background = Brushes.White;
+                        // Проверим будет ли данная точка вне дороги и пометим другим цветом
+                        var isNewPointOnRoad = IsPointOnRoad(new Point(x, y));
+
+                        if (isNewPointOnRoad)
+                        {
+                            button.Background = Brushes.MediumAquamarine;
+                            button.IsEnabled = true;
+                        }
+                        else
+                        {
+                            button.Background = Brushes.White;
+                            button.IsEnabled = false;
+                        }
+
                         Panel.SetZIndex(button, 1);
-                        button.IsEnabled = false;
                     }
 
                     if (x == GameSettings.UserPositionX && y == GameSettings.UserPositionY)
@@ -253,8 +280,9 @@ namespace PaperRace
 
 
 
-            GenerateWeb();
+
             ShowRoad();
+            GenerateWeb();
             ShowPaths();
             SetCarAttitude();
 
@@ -346,7 +374,6 @@ namespace PaperRace
         private void NewGameStart()
         {
             ResetGameProcess();
-            GenerateWeb();
 
             double x = GameSettings.UserPositionX;
             double y = GameSettings.UserPositionY;
@@ -362,6 +389,7 @@ namespace PaperRace
                 y = roadElement.EndPoint.Y;
             }
 
+            GenerateWeb();
             ShowRoad();
             ShowCar();
         }
@@ -394,7 +422,7 @@ namespace PaperRace
                     Y2 = currElement.EndPoint.Y + _deltaY,
                     Stroke = Brushes.Gray,
                     StrokeThickness = GameSettings.RoadWidth,
-                    Margin = new Thickness(5, 0, 0, 0)
+                    Margin = new Thickness(5, 5, 0, 0)
                 };
                 Panel.SetZIndex(line, 0);
                 Map.Children.Add(line);
@@ -407,7 +435,7 @@ namespace PaperRace
                     Width = GameSettings.RoadWidth,
                     Height = GameSettings.RoadWidth,
                     Fill = Brushes.Gray,
-                    Margin = new Thickness(5, 0, 0, 0)
+                    Margin = new Thickness(5, 5, 0, 0)
                 };
                 Panel.SetZIndex(ellipse, 0);
                 Map.Children.Add(ellipse);
