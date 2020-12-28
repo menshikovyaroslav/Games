@@ -486,10 +486,11 @@ namespace PaperRace
                     Y1 = currElement.StartPoint.Y + _deltaY,
                     X2 = currElement.EndPoint.X + _deltaX,
                     Y2 = currElement.EndPoint.Y + _deltaY,
-                    Stroke = Brushes.Gray,
+                    Stroke = GameBrushes.RoadBrush,
                     StrokeThickness = GameSettings.RoadWidth,
                     Margin = new Thickness(5, 5, 0, 0)
                 };
+
                 Panel.SetZIndex(line, 0);
                 Map.Children.Add(line);
                 _roadObjects.Add(line);
@@ -500,7 +501,7 @@ namespace PaperRace
                 {
                     Width = GameSettings.RoadWidth,
                     Height = GameSettings.RoadWidth,
-                    Fill = Brushes.Gray,
+                    Fill = GameBrushes.RoadBrush,
                     Margin = new Thickness(5, 5, 0, 0)
                 };
                 Panel.SetZIndex(ellipse, 0);
