@@ -309,15 +309,22 @@ namespace PaperRace
                 _deltaX -= (x - GameSettings.UserPositionX);
                 _deltaY -= (y - GameSettings.UserPositionY);
 
-                SpeedTb.Text = CurrentSpeed.ToString();
-
-
+                
                 ShowRoad();
                 GenerateWeb();
                 ShowPaths();
                 SetCarAttitude();
                 ShowCarMoveArea();
+                RefreshInfo();
             }
+        }
+
+        /// <summary>
+        /// Обновление информации на карте
+        /// </summary>
+        private void RefreshInfo()
+        {
+            SpeedTb.Text = CurrentSpeed.ToString();
         }
 
         private bool IsPointOnRoad(Point p)
@@ -397,6 +404,8 @@ namespace PaperRace
             _roadObjects.Clear();
 
             Map.Children.RemoveRange(0, Map.Children.Count);
+
+            RefreshInfo();
         }
 
         /// <summary>
