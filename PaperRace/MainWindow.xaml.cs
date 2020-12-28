@@ -56,6 +56,10 @@ namespace PaperRace
         /// </summary>
         List<Shape> _roadObjects = new List<Shape>();
 
+        /// <summary>
+        /// Словарь сопоставления полей карты и типа данного поля
+        /// </summary>
+        Dictionary<Button, FieldTypeEnum> _fieldsDictionary = new Dictionary<Button, FieldTypeEnum>();
         public MainWindow()
         {
             InitializeComponent();
@@ -132,22 +136,33 @@ namespace PaperRace
                         };
                         button.Click += DoStep;
 
+                        _fieldsDictionary[button] = FieldTypeEnum.OffRoadField;
+
                         if (Math.Abs(GameSettings.UserPositionX + _currentSpeedX * 20 - i) <= 20 && Math.Abs(GameSettings.UserPositionY + _currentSpeedY * 20 - j) <= 20)
                         {
                             // Проверим будет ли данная точка вне дороги и пометим другим цветом
                             var isNewPointOnRoad = IsPointOnRoad(new Point(i, j));
 
-                            if (isNewPointOnRoad) button.Background = Brushes.LightGreen;
-                            else button.Background = Brushes.Red;
+                            if (isNewPointOnRoad)
+                            {
+                                button.Background = Brushes.LightGreen;
+                                _fieldsDictionary[button] = FieldTypeEnum.SafeStep;
+                            }
+                            else
+                            {
+                                button.Background = Brushes.Red;
+                                _fieldsDictionary[button] = FieldTypeEnum.OffRoadStep;
+                            }
 
                             if (GameSettings.UserPositionX == i && GameSettings.UserPositionY == j)
                             {
                                 button.Background = Brushes.Black;
+                                _fieldsDictionary[button] = FieldTypeEnum.UserPosition;
                             }
-                            else
-                            {
-                                button.Background = Brushes.LightGreen;
-                            }
+                            //else
+                            //{
+                            //    button.Background = Brushes.LightGreen;
+                            //}
                             button.IsEnabled = true;
                         }
                         else
@@ -157,11 +172,13 @@ namespace PaperRace
 
                             if (isNewPointOnRoad)
                             {
+                                _fieldsDictionary[button] = FieldTypeEnum.RoadField;
                                 button.Background = Brushes.MediumAquamarine;
                                 button.IsEnabled = true;
                             }
                             else
                             {
+                                _fieldsDictionary[button] = FieldTypeEnum.OffRoadField;
                                 button.Background = Brushes.White;
                                 button.IsEnabled = false;
                             }
@@ -188,8 +205,16 @@ namespace PaperRace
                         // Проверим будет ли данная точка вне дороги и пометим другим цветом
                         var isNewPointOnRoad = IsPointOnRoad(new Point(x, y));
 
-                        if (isNewPointOnRoad) button.Background = Brushes.LightGreen;
-                        else button.Background = Brushes.Red;
+                        if (isNewPointOnRoad)
+                        {
+                            button.Background = Brushes.LightGreen;
+                            _fieldsDictionary[button] = FieldTypeEnum.SafeStep;
+                        }
+                        else
+                        {
+                            button.Background = Brushes.Red;
+                            _fieldsDictionary[button] = FieldTypeEnum.OffRoadStep;
+                        }
 
                         Panel.SetZIndex(button, 10);
                         button.IsEnabled = true;
@@ -201,11 +226,13 @@ namespace PaperRace
 
                         if (isNewPointOnRoad)
                         {
+                            _fieldsDictionary[button] = FieldTypeEnum.RoadField;
                             button.Background = Brushes.MediumAquamarine;
                             button.IsEnabled = true;
                         }
                         else
                         {
+                            _fieldsDictionary[button] = FieldTypeEnum.OffRoadField;
                             button.Background = Brushes.White;
                             button.IsEnabled = false;
                         }
@@ -215,6 +242,7 @@ namespace PaperRace
 
                     if (x == GameSettings.UserPositionX && y == GameSettings.UserPositionY)
                     {
+                        _fieldsDictionary[button] = FieldTypeEnum.UserPosition;
                         button.Background = Brushes.Black;
                         Panel.SetZIndex(button, 10);
                         button.IsEnabled = true;
@@ -249,44 +277,47 @@ namespace PaperRace
             var x = Convert.ToInt32(Canvas.GetLeft(button));
             var y = Convert.ToInt32(Canvas.GetTop(button));
 
-            if (x == GameSettings.UserPositionX && y == GameSettings.UserPositionY)
+            if (_fieldsDictionary[button] == FieldTypeEnum.UserPosition)
             {
                 MessageBox.Show("Car options !");
                 return;
             }
-
-            _currentSpeedX = Convert.ToInt32((x - GameSettings.UserPositionX) / 20);
-            _currentSpeedY = Convert.ToInt32((y - GameSettings.UserPositionY) / 20);
-
-            var path = new PathElement
+            else if (_fieldsDictionary[button] == FieldTypeEnum.RoadField || _fieldsDictionary[button] == FieldTypeEnum.OffRoadField)
             {
-                FromX = GameSettings.UserPositionX,
-                FromY = GameSettings.UserPositionY,
-                ToX = x,
-                ToY = y,
-                DeltaX = _deltaX,
-                DeltaY = _deltaY
-            };
-            _pathList.Add(path);
 
-            // Проверка хода: не вышли ли с дороги
-            var isNewPointOnRoad = IsPointOnRoad(new Point(x, y));
-            if (!isNewPointOnRoad) MessageBox.Show("Конец игры !");
+            }
+            else
+            {
+                _currentSpeedX = Convert.ToInt32((x - GameSettings.UserPositionX) / 20);
+                _currentSpeedY = Convert.ToInt32((y - GameSettings.UserPositionY) / 20);
 
-            _deltaX -= (x - GameSettings.UserPositionX);
-            _deltaY -= (y - GameSettings.UserPositionY);
+                var path = new PathElement
+                {
+                    FromX = GameSettings.UserPositionX,
+                    FromY = GameSettings.UserPositionY,
+                    ToX = x,
+                    ToY = y,
+                    DeltaX = _deltaX,
+                    DeltaY = _deltaY
+                };
+                _pathList.Add(path);
 
-            SpeedTb.Text = CurrentSpeed.ToString();
+                // Проверка хода: не вышли ли с дороги
+                var isNewPointOnRoad = IsPointOnRoad(new Point(x, y));
+                if (!isNewPointOnRoad) MessageBox.Show("Конец игры !");
+
+                _deltaX -= (x - GameSettings.UserPositionX);
+                _deltaY -= (y - GameSettings.UserPositionY);
+
+                SpeedTb.Text = CurrentSpeed.ToString();
 
 
-
-
-            ShowRoad();
-            GenerateWeb();
-            ShowPaths();
-            SetCarAttitude();
-            ShowCarMoveArea();
-
+                ShowRoad();
+                GenerateWeb();
+                ShowPaths();
+                SetCarAttitude();
+                ShowCarMoveArea();
+            }
         }
 
         private bool IsPointOnRoad(Point p)
@@ -405,7 +436,7 @@ namespace PaperRace
                 Width = 60,
                 Height = 60,
                 StrokeThickness = 1,
-                StrokeDashArray = new DoubleCollection() {4, 2 },
+                StrokeDashArray = new DoubleCollection() { 4, 2 },
                 Stroke = Brushes.Black
             };
             Panel.SetZIndex(square, 10);
