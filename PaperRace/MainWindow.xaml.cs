@@ -304,7 +304,12 @@ namespace PaperRace
 
                 // Проверка хода: не вышли ли с дороги
                 var isNewPointOnRoad = IsPointOnRoad(new Point(x, y));
-                if (!isNewPointOnRoad) MessageBox.Show("Конец игры !");
+                if (!isNewPointOnRoad)
+                {
+                    MessageBox.Show("Конец игры !");
+                    NewGameStart();
+                    return;
+                }
 
                 _deltaX -= (x - GameSettings.UserPositionX);
                 _deltaY -= (y - GameSettings.UserPositionY);
