@@ -314,7 +314,7 @@ namespace PaperRace
                 _deltaX -= (x - GameSettings.UserPositionX);
                 _deltaY -= (y - GameSettings.UserPositionY);
 
-                
+
                 ShowRoad();
                 GenerateWeb();
                 ShowPaths();
@@ -487,6 +487,7 @@ namespace PaperRace
                     X2 = currElement.EndPoint.X + _deltaX,
                     Y2 = currElement.EndPoint.Y + _deltaY,
                     Stroke = GameBrushes.RoadBrush,
+                    StrokeDashArray = new DoubleCollection() { 4, 2 },
                     StrokeThickness = GameSettings.RoadWidth,
                     Margin = new Thickness(5, 5, 0, 0)
                 };
@@ -511,6 +512,24 @@ namespace PaperRace
                 _roadObjects.Add(ellipse);
 
             }
+
+            var polyLinePointCollection = new PointCollection();
+            foreach (var roadElement in _roadElements)
+            {
+                if (polyLinePointCollection.Count == 0) polyLinePointCollection.Add(new Point(roadElement.StartPoint.X + 5 + _deltaX, roadElement.StartPoint.Y + _deltaY));
+                polyLinePointCollection.Add(new Point(roadElement.EndPoint.X + 5 + _deltaX, roadElement.EndPoint.Y + _deltaY));
+            }
+
+            var polyLine = new Polyline()
+            {
+                Points = polyLinePointCollection,
+                Stroke = Brushes.White,
+                StrokeDashArray = new DoubleCollection() { 6, 4 },
+                StrokeThickness = 2
+            };
+            Panel.SetZIndex(polyLine, 12);
+            Map.Children.Add(polyLine);
+            _roadObjects.Add(polyLine);
         }
 
         /// <summary>
