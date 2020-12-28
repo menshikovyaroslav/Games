@@ -100,6 +100,17 @@ namespace PaperRace
         /// </summary>
         private void GenerateWeb()
         {
+            // Земля на карте = слой 0
+            var earth = new Image()
+            {
+                Width = 800,
+                Height = 800,
+                Source = new BitmapImage(new Uri("/Images/earth.jpg", UriKind.Relative))
+            };
+            Panel.SetZIndex(earth, 0);
+            Map.Children.Add(earth);
+
+
             foreach (var item in _offRoadObjects)
             {
                 Map.Children.Remove(item);
@@ -290,7 +301,7 @@ namespace PaperRace
                             }
                         }
 
-                        Panel.SetZIndex(button, 1);
+                        Panel.SetZIndex(button, 2);
                     }
 
                     if (x == GameSettings.UserPositionX && y == GameSettings.UserPositionY)
@@ -545,7 +556,7 @@ namespace PaperRace
                     Margin = new Thickness(5, 5, 0, 0)
                 };
 
-                Panel.SetZIndex(line, 0);
+                Panel.SetZIndex(line, 1);
                 Map.Children.Add(line);
                 _roadObjects.Add(line);
 
@@ -558,7 +569,7 @@ namespace PaperRace
                     Fill = GameBrushes.RoadBrush,
                     Margin = new Thickness(5, 5, 0, 0)
                 };
-                Panel.SetZIndex(ellipse, 0);
+                Panel.SetZIndex(ellipse, 1);
                 Map.Children.Add(ellipse);
                 Canvas.SetTop(ellipse, top);
                 Canvas.SetLeft(ellipse, left);
