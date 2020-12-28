@@ -285,7 +285,7 @@ namespace PaperRace
             GenerateWeb();
             ShowPaths();
             SetCarAttitude();
-
+            ShowCarMoveArea();
 
         }
 
@@ -392,6 +392,27 @@ namespace PaperRace
             GenerateWeb();
             ShowRoad();
             ShowCar();
+            ShowCarMoveArea();
+        }
+
+        /// <summary>
+        /// Эта область выделяет текущие возможные для хода поля
+        /// </summary>
+        private void ShowCarMoveArea()
+        {
+            var square = new Rectangle()
+            {
+                Width = 60,
+                Height = 60,
+                StrokeThickness = 1,
+                StrokeDashArray = new DoubleCollection() {4, 2 },
+                Stroke = Brushes.Black
+            };
+            Panel.SetZIndex(square, 10);
+            Map.Children.Add(square);
+            _roadObjects.Add(square);
+            Canvas.SetTop(square, GameSettings.UserPositionY + _currentSpeedY * 20 - 25);
+            Canvas.SetLeft(square, GameSettings.UserPositionX + _currentSpeedX * 20 - 25);
         }
 
         /// <summary>
