@@ -57,6 +57,11 @@ namespace PaperRace
         List<Shape> _roadObjects = new List<Shape>();
 
         /// <summary>
+        /// Список объектов для красоты снаружи дороги
+        /// </summary>
+        List<Image> _offRoadObjects = new List<Image>();
+
+        /// <summary>
         /// Словарь сопоставления полей карты и типа данного поля
         /// </summary>
         Dictionary<Button, FieldTypeEnum> _fieldsDictionary = new Dictionary<Button, FieldTypeEnum>();
@@ -95,6 +100,12 @@ namespace PaperRace
         /// </summary>
         private void GenerateWeb()
         {
+            foreach (var item in _offRoadObjects)
+            {
+                Map.Children.Remove(item);
+            }
+            _offRoadObjects.Clear();
+
             if (_mapPoints.Count == 0)
             {
                 for (int i = 5; i < 780; i += 20)
@@ -185,6 +196,23 @@ namespace PaperRace
                                 _fieldsDictionary[button] = FieldTypeEnum.OffRoadField;
                                 button.Background = Brushes.White;
                                 button.IsEnabled = false;
+
+                                var random = new Random();
+                                var elkaChance = random.Next(0, 101);
+                                if (elkaChance < 20)
+                                {
+                                    var elka = new Image()
+                                    {
+                                        Width = 40,
+                                        Height = 40,
+                                        Source = new BitmapImage(new Uri("/Images/elka.png", UriKind.Relative))
+                                    };
+                                    Panel.SetZIndex(elka, 8);
+                                    Map.Children.Add(elka);
+                                    _offRoadObjects.Add(elka);
+                                    Canvas.SetTop(elka, j - 15);
+                                    Canvas.SetLeft(elka, i - 15);
+                                }
                             }
                         }
 
@@ -243,6 +271,23 @@ namespace PaperRace
                             _fieldsDictionary[button] = FieldTypeEnum.OffRoadField;
                             button.Background = Brushes.White;
                             button.IsEnabled = false;
+
+                            var random = new Random();
+                            var elkaChance = random.Next(0, 101);
+                            if (elkaChance < 20)
+                            {
+                                var elka = new Image()
+                                {
+                                    Width = 40,
+                                    Height = 40,
+                                    Source = new BitmapImage(new Uri("/Images/elka.png", UriKind.Relative))
+                                };
+                                Panel.SetZIndex(elka, 8);
+                                Map.Children.Add(elka);
+                                _offRoadObjects.Add(elka);
+                                Canvas.SetTop(elka, y - 15);
+                                Canvas.SetLeft(elka, x - 15);
+                            }
                         }
 
                         Panel.SetZIndex(button, 1);

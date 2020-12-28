@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="Images\car.png" />
+    <None Remove="Images\elka.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +22,7 @@
 
   <ItemGroup>
     <Resource Include="Images\car.png" />
+    <Resource Include="Images\elka.png" />
   </ItemGroup>
 
   <ItemGroup>
