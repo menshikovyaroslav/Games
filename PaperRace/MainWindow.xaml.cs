@@ -125,7 +125,8 @@ namespace PaperRace
                     {
                         Width = 1,
                         Height = 700,
-                        Fill = Brushes.Red
+                        Fill = Brushes.Red,
+                        Opacity = 0.3
                     };
 
                     Map.Children.Add(rect);
@@ -139,7 +140,8 @@ namespace PaperRace
                     {
                         Width = 760,
                         Height = 1,
-                        Fill = Brushes.Red
+                        Fill = Brushes.Red,
+                        Opacity = 0.3
                     };
 
                     Map.Children.Add(rect);
@@ -218,7 +220,7 @@ namespace PaperRace
                                         Height = 40,
                                         Source = new BitmapImage(new Uri("/Images/elka.png", UriKind.Relative))
                                     };
-                                    Panel.SetZIndex(elka, 8);
+                                    Panel.SetZIndex(elka, 100);
                                     Map.Children.Add(elka);
                                     _offRoadObjects.Add(elka);
                                     Canvas.SetTop(elka, j - 15);
@@ -261,7 +263,7 @@ namespace PaperRace
                             _fieldsDictionary[button] = FieldTypeEnum.OffRoadStep;
                         }
 
-                        Panel.SetZIndex(button, 10);
+                        Panel.SetZIndex(button, 100);
                         button.IsEnabled = true;
                     }
                     else
@@ -379,8 +381,9 @@ namespace PaperRace
                 _deltaY -= (y - GameSettings.UserPositionY);
 
 
-                ShowRoad();
+                
                 GenerateWeb();
+                ShowRoad();
                 ShowPaths();
                 SetCarAttitude();
                 ShowCarMoveArea();
@@ -540,6 +543,8 @@ namespace PaperRace
 
             _roadObjects = new List<Shape>();
 
+            #region Фрагменты дороги
+
             for (int i = 0; i < _roadElements.Count; i++)
             {
                 var currElement = _roadElements[i];
@@ -577,6 +582,10 @@ namespace PaperRace
 
             }
 
+            #endregion
+
+            #region Дорожная разметка
+
             var polyLinePointCollection = new PointCollection();
             foreach (var roadElement in _roadElements)
             {
@@ -594,6 +603,34 @@ namespace PaperRace
             Panel.SetZIndex(polyLine, 12);
             Map.Children.Add(polyLine);
             _roadObjects.Add(polyLine);
+
+            #endregion
+
+            #region Дорожные знаки
+
+            for (int i = 1; i < _roadElements.Count; i++)
+            {
+                var prevElement = _roadElements[i - 1];
+                var currElement = _roadElements[i];
+
+                // Опасный поворот
+                if (Math.Abs(currElement.Angle - prevElement.Angle) > 70)
+                {
+                    var sign = new Image()
+                    {
+                        Width = 40,
+                        Height = 40,
+                        Source = new BitmapImage(new Uri("/Images/danger.png", UriKind.Relative))
+                    };
+                    Panel.SetZIndex(sign, 20);
+                    Map.Children.Add(sign);
+                    _offRoadObjects.Add(sign);
+                    Canvas.SetTop(sign, currElement.StartPoint.Y + _deltaY);
+                    Canvas.SetLeft(sign, currElement.StartPoint.X + _deltaX);
+                }
+            }
+
+            #endregion
         }
 
         /// <summary>
