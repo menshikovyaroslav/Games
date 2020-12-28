@@ -143,6 +143,8 @@ namespace PaperRace
                             // Проверим будет ли данная точка вне дороги и пометим другим цветом
                             var isNewPointOnRoad = IsPointOnRoad(new Point(i, j));
 
+                            button.Opacity = 1.0;
+
                             if (isNewPointOnRoad)
                             {
                                 button.Background = Brushes.LightGreen;
@@ -173,11 +175,13 @@ namespace PaperRace
                             if (isNewPointOnRoad)
                             {
                                 _fieldsDictionary[button] = FieldTypeEnum.RoadField;
+                                button.Opacity = 0.3;
                                 button.Background = Brushes.MediumAquamarine;
                                 button.IsEnabled = true;
                             }
                             else
                             {
+                                button.Opacity = 0.3;
                                 _fieldsDictionary[button] = FieldTypeEnum.OffRoadField;
                                 button.Background = Brushes.White;
                                 button.IsEnabled = false;
@@ -205,6 +209,8 @@ namespace PaperRace
                         // Проверим будет ли данная точка вне дороги и пометим другим цветом
                         var isNewPointOnRoad = IsPointOnRoad(new Point(x, y));
 
+                        button.Opacity = 1.0;
+
                         if (isNewPointOnRoad)
                         {
                             button.Background = Brushes.LightGreen;
@@ -226,12 +232,14 @@ namespace PaperRace
 
                         if (isNewPointOnRoad)
                         {
+                            button.Opacity = 0.3;
                             _fieldsDictionary[button] = FieldTypeEnum.RoadField;
                             button.Background = Brushes.MediumAquamarine;
                             button.IsEnabled = true;
                         }
                         else
                         {
+                            button.Opacity = 0.3;
                             _fieldsDictionary[button] = FieldTypeEnum.OffRoadField;
                             button.Background = Brushes.White;
                             button.IsEnabled = false;
