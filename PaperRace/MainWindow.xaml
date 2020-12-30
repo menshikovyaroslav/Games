@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PaperRace"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="800" Width="790" ResizeMode="NoResize">
+        Title="Paper Race" Height="800" Width="790" ResizeMode="NoResize">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Name="GenerateMapMenuItem" Header="Новая игра" Click="NewGame_Click"></MenuItem>
