@@ -490,10 +490,10 @@ namespace PaperRace
             double x = GameSettings.UserPositionX;
             double y = GameSettings.UserPositionY;
 
-            double angle = _roadElements.Count == 0 ? 0 : _roadElements.Last().Angle;
-
             for (int i = 0; i < GameSettings.RoadElementsCount; i++)
             {
+                double angle = _roadElements.Count == 0 ? 0 : _roadElements.Last().Angle;
+
                 var roadElement = GetRoadElement(new Point(x, y), angle);
                 _roadElements.Add(roadElement);
 
@@ -613,8 +613,12 @@ namespace PaperRace
                 var prevElement = _roadElements[i - 1];
                 var currElement = _roadElements[i];
 
+                // Для корректного сравнения углов нужно сравнивать их записи в положительном выражении
+                var aCurr = currElement.Angle >= 0 ? currElement.Angle : currElement.Angle + 360;
+                var aPrev = prevElement.Angle >= 0 ? prevElement.Angle : prevElement.Angle + 360;
+
                 // Опасный поворот
-                if (Math.Abs(currElement.Angle - prevElement.Angle) > 70)
+                if (Math.Abs(aCurr - aPrev) > 70 && Math.Abs(aCurr - aPrev) < 290)
                 {
                     var sign = new Image()
                     {
