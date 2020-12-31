@@ -613,12 +613,8 @@ namespace PaperRace
                 var prevElement = _roadElements[i - 1];
                 var currElement = _roadElements[i];
 
-                // Для корректного сравнения углов нужно сравнивать их записи в положительном выражении
-                var aCurr = currElement.Angle >= 0 ? currElement.Angle : currElement.Angle + 360;
-                var aPrev = prevElement.Angle >= 0 ? prevElement.Angle : prevElement.Angle + 360;
-
                 // Опасный поворот
-                if (Math.Abs(aCurr - aPrev) > 70 && Math.Abs(aCurr - aPrev) < 290)
+                if (Math.Abs(currElement.Angle - prevElement.Angle) > 70 && Math.Abs(currElement.Angle - prevElement.Angle) < 290)
                 {
                     var sign = new Image()
                     {
