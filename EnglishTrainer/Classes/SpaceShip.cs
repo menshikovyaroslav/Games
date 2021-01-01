@@ -19,17 +19,26 @@ namespace EnglishTrainer.Classes
         /// <summary>
         /// Слово-подсказка
         /// </summary>
-        public double HelpWord { get; set; }
+        public string HelpWord { get; set; }
 
         /// <summary>
         /// Слово-ответ
         /// </summary>
-        public double AnswerWord { get; set; }
+        public string AnswerWord { get; set; }
 
         /// <summary>
         /// Тип космического корабля
         /// </summary>
         public ShipType ShipType { get; set; }
+
+        public SpaceShip()
+        {
+            var random = new Random();
+            Angle = random.Next(1, 361);
+
+            HelpWord = "Тест";
+            AnswerWord = "Test";
+        }
     }
 
     /// <summary>
