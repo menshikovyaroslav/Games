@@ -24,5 +24,15 @@ namespace EnglishTrainer
         {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            StartNewGame();
+        }
+
+        private void StartNewGame()
+        {
+
+        }
     }
 }
