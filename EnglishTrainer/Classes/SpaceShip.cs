@@ -25,5 +25,36 @@ namespace EnglishTrainer.Classes
         /// Слово-ответ
         /// </summary>
         public double AnswerWord { get; set; }
+
+        /// <summary>
+        /// Тип космического корабля
+        /// </summary>
+        public ShipType ShipType { get; set; }
+    }
+
+    /// <summary>
+    /// Тип космического корабля
+    /// </summary>
+    public enum ShipType
+    {
+        /// <summary>
+        /// Перехватчик
+        /// </summary>
+        Interceptor = 1,
+
+        /// <summary>
+        /// Легкий крейсер
+        /// </summary>
+        LightCruiser = 2,
+
+        /// <summary>
+        /// Тяжелый крейсер
+        /// </summary>
+        HeavyCruiser = 3,
+
+        /// <summary>
+        /// Звезда смерти
+        /// </summary>
+        DeathStar = 4
     }
 }

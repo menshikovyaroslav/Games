@@ -32,7 +32,6 @@ namespace EnglishTrainer
 
         private void StartNewGame()
         {
-
         }
     }
 }
