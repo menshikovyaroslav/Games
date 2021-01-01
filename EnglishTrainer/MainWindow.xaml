@@ -4,10 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EnglishTrainer"
-        mc:Ignorable="d" WindowState="Maximized"
+        mc:Ignorable="d"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
-        Title="EnglishTrainer" Height="450" Width="800" Loaded="Window_Loaded">
-    <Grid Background="Black">
+        Title="EnglishTrainer" Loaded="Window_Loaded" WindowState="Maximized">
+    <Grid Background="White">
+        <Canvas Name="Map" ClipToBounds="True" Background="AliceBlue">
+            
+        </Canvas>
         <Image gif:ImageBehavior.AnimatedSource="Images/earthInSpace.gif" Width="100" Height="100" gif:ImageBehavior.RepeatBehavior="Forever" />
     </Grid>
 </Window>
