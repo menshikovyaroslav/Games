@@ -27,6 +27,7 @@ namespace EnglishTrainer
         private Dictionary<SpaceShip, ShipControl> _shipObjects = new Dictionary<SpaceShip, ShipControl>();
 
         private double _gameTime = 0;
+        private int _speed = 10;
 
         public MainWindow()
         {
@@ -80,15 +81,18 @@ namespace EnglishTrainer
                     Canvas.SetLeft(shipPair.Value, shipPair.Key.CurrentPosition.X);
                 }
 
+                if (currShips.Count == 0)
+                {
+                    CreateNewShip();
+                }
+
                 await Task.Delay(2000);
             }
         }
 
-        private void StartNewGame()
+        private void CreateNewShip()
         {
-            GameProcess();
-
-            var newShip = new SpaceShip(MapCenter, MapWidth, 10);
+            var newShip = new SpaceShip(MapCenter, MapWidth, _speed);
 
             var newShipObject = new ShipControl(newShip);
 
@@ -97,10 +101,12 @@ namespace EnglishTrainer
             Panel.SetZIndex(newShipObject, 10);
             Map.Children.Add(newShipObject);
 
-         //   _spaceShips.Add(newShip);
             _shipObjects[newShip] = newShipObject;
+        }
 
-            //      var x = newShipObject.
+        private void StartNewGame()
+        {
+            GameProcess();
         }
 
         private void WordTb_KeyDown(object sender, KeyEventArgs e)
