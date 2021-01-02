@@ -23,7 +23,7 @@ namespace EnglishTrainer
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<SpaceShip> _spaceShips = new List<SpaceShip>();
+     //   private List<SpaceShip> _spaceShips = new List<SpaceShip>();
         private Dictionary<SpaceShip, ShipControl> _shipObjects = new Dictionary<SpaceShip, ShipControl>();
 
         private double _gameTime = 0;
@@ -67,7 +67,7 @@ namespace EnglishTrainer
         {
             while (true)
             {
-                var currShips = _spaceShips.Where(s => s.IsEnabled).ToList();
+                var currShips = _shipObjects.Keys.Where(s => s.IsEnabled).ToList();
 
                 foreach (var ship in currShips)
                 {
@@ -97,10 +97,29 @@ namespace EnglishTrainer
             Panel.SetZIndex(newShipObject, 10);
             Map.Children.Add(newShipObject);
 
-            _spaceShips.Add(newShip);
+         //   _spaceShips.Add(newShip);
             _shipObjects[newShip] = newShipObject;
 
             //      var x = newShipObject.
+        }
+
+        private void WordTb_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                var entered = WordTb.Text;
+                var goalShips = _shipObjects.Keys.Where(s=>s.IsEnabled && s.Word.Answer.ToLower() == entered.ToLower()).ToList();
+                foreach (var ship in goalShips)
+                {
+                    ship.IsEnabled = false;
+
+                    if (Map.Children.Contains(_shipObjects[ship]))
+                    {
+                        Map.Children.Remove(_shipObjects[ship]);
+                    }
+
+                }
+            }
         }
     }
 }

@@ -12,7 +12,7 @@
             
         </Canvas>
         <Image gif:ImageBehavior.AnimatedSource="Images/earthInSpace.gif" Width="100" Height="100" gif:ImageBehavior.RepeatBehavior="Forever" />
-        <TextBox Name="WordTb" Height="30" Width="160" Opacity="0.9" FontFamily="Verdana" FontSize="20" VerticalContentAlignment="Center" FontWeight="Bold">
+        <TextBox Name="WordTb" Height="30" Width="160" Opacity="0.9" FontFamily="Verdana" FontSize="20" VerticalContentAlignment="Center" FontWeight="Bold" KeyDown="WordTb_KeyDown">
         </TextBox>
     </Grid>
 </Window>
