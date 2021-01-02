@@ -23,11 +23,11 @@ namespace EnglishTrainer
     /// </summary>
     public partial class MainWindow : Window
     {
-     //   private List<SpaceShip> _spaceShips = new List<SpaceShip>();
         private Dictionary<SpaceShip, ShipControl> _shipObjects = new Dictionary<SpaceShip, ShipControl>();
 
         private int _speed = 10;
-        private int _endGameDistance = 60;
+        private int _endGameDistance = 80;
+        private bool _gameEnded = true;
 
         public MainWindow()
         {
@@ -39,7 +39,6 @@ namespace EnglishTrainer
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            StartNewGame();
         }
 
         private Point MapCenter
@@ -64,10 +63,16 @@ namespace EnglishTrainer
             }
         }
 
+        private void ClearMap()
+        {
+            _shipObjects.Clear();
+            Map.Children.Clear();
+        }
+
         private async void GameProcess()
         {
-            bool gameEnded = false;
-            while (!gameEnded)
+            _gameEnded = false;
+            while (!_gameEnded)
             {
                 var currShips = _shipObjects.Keys.Where(s => s.IsEnabled).ToList();
 
@@ -78,7 +83,7 @@ namespace EnglishTrainer
                     if (ship.Distance <= _endGameDistance)
                     {
                         MessageBox.Show("End game !");
-                        gameEnded = true;
+                        _gameEnded = true;
                         break;
                     }
                 }
@@ -101,11 +106,8 @@ namespace EnglishTrainer
         private void CreateNewShip()
         {
             var newShip = new SpaceShip(MapCenter, MapWidth, _speed);
-
             var newShipObject = new ShipControl(newShip);
 
-      //      Canvas.SetTop(newShipObject, newShip.CurrentPosition.Y - 50);
-      //      Canvas.SetLeft(newShipObject, newShip.CurrentPosition.X - 30);
             Panel.SetZIndex(newShipObject, 11);
             Map.Children.Add(newShipObject);
 
@@ -135,6 +137,15 @@ namespace EnglishTrainer
 
                 WordTb.Clear();
             }
+        }
+
+        private async void NewGameLevel1(object sender, RoutedEventArgs e)
+        {
+            _gameEnded = true;
+            await Task.Delay(500);
+
+            ClearMap();
+            StartNewGame();
         }
     }
 }
