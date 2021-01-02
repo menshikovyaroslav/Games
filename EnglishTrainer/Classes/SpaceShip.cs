@@ -22,6 +22,14 @@ namespace EnglishTrainer.Classes
         /// </summary>
         public double Angle { get; set; }
 
+        public double TransformAngle
+        {
+            get
+            {
+                return Angle + 180;
+            }
+        }
+
         /// <summary>
         /// Слово из словаря
         /// </summary>

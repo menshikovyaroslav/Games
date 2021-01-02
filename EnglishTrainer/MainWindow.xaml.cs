@@ -33,6 +33,7 @@ namespace EnglishTrainer
             InitializeComponent();
 
             Map.Width = Map.Height = MapWidth;
+            WordTb.Focus();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
