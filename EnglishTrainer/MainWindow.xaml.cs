@@ -74,14 +74,8 @@ namespace EnglishTrainer
 
                 foreach (var shipPair in _shipObjects)
                 {
-                    TranslateTransform translate = shipPair.Value.RenderTransform as TranslateTransform;
-                    if (translate == null)
-                    {
-                        translate = new TranslateTransform(shipPair.Key.CurrentPosition.X, shipPair.Key.CurrentPosition.Y);
-                        shipPair.Value.RenderTransform = translate;
-                    }
-                    translate.X = shipPair.Key.CurrentPosition.X;
-                    translate.Y = shipPair.Key.CurrentPosition.Y;
+                    Canvas.SetTop(shipPair.Value, shipPair.Key.CurrentPosition.Y);
+                    Canvas.SetLeft(shipPair.Value, shipPair.Key.CurrentPosition.X);
                 }
 
                 await Task.Delay(2000);

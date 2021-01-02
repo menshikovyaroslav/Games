@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,7 +56,7 @@ namespace EnglishTrainer.Classes
             Speed = speed;
 
             var random = new Random();
-            Angle = random.Next(180, 360);
+            Angle = random.Next(1, 361);
 
             HelpWord = "Тест";
             AnswerWord = "Test";
@@ -67,6 +68,10 @@ namespace EnglishTrainer.Classes
         public void DoStep()
         {
             Distance -= Speed;
+
+#if DEBUG
+            Debug.WriteLine($"Angle={Angle}, x={CurrentPosition.X}, y={CurrentPosition.Y}");
+#endif
         }
     }
 
