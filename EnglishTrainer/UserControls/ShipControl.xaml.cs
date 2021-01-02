@@ -21,10 +21,11 @@ namespace EnglishTrainer.UserControls
     /// </summary>
     public partial class ShipControl : UserControl
     {
-        private SpaceShip Ship;
+        public SpaceShip Ship { get; set; }
         public ShipControl(SpaceShip ship)
         {
             InitializeComponent();
+            DataContext = this;
 
             Ship = ship;
 
