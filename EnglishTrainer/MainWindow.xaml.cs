@@ -25,7 +25,7 @@ namespace EnglishTrainer
     {
         private Dictionary<SpaceShip, ShipControl> _shipObjects = new Dictionary<SpaceShip, ShipControl>();
 
-        private int _speed = 10;
+        private int _speed = 1;
         private int _endGameDistance = 80;
         private bool _gameEnded = true;
 
@@ -34,7 +34,6 @@ namespace EnglishTrainer
             InitializeComponent();
 
             Map.Width = Map.Height = MapWidth;
-            WordTb.Focus();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -99,7 +98,7 @@ namespace EnglishTrainer
                     CreateNewShip();
                 }
 
-                await Task.Delay(100);
+                await Task.Delay(10);
             }
         }
 
@@ -111,11 +110,15 @@ namespace EnglishTrainer
             Panel.SetZIndex(newShipObject, 11);
             Map.Children.Add(newShipObject);
 
+            Canvas.SetTop(newShipObject, -1000);
+            Canvas.SetLeft(newShipObject, -1000);
+
             _shipObjects[newShip] = newShipObject;
         }
 
         private void StartNewGame()
         {
+            WordTb.Focus();
             GameProcess();
         }
 

@@ -49,7 +49,7 @@
 
         </Canvas>
         <Image gif:ImageBehavior.AnimatedSource="Images/earthInSpace.gif" Width="100" Height="100" gif:ImageBehavior.RepeatBehavior="Forever" Panel.ZIndex="9" />
-        <TextBox Name="WordTb" Height="30" Width="160" Opacity="0.9" FontFamily="Verdana" FontSize="20" VerticalContentAlignment="Center" FontWeight="Bold" KeyDown="WordTb_KeyDown" Panel.ZIndex="10" />
+        <TextBox Name="WordTb" Height="30" Width="160" Opacity="0.9" HorizontalContentAlignment="Center" FontFamily="Verdana" FontSize="20" VerticalContentAlignment="Center" FontWeight="Bold" KeyDown="WordTb_KeyDown" Panel.ZIndex="10" />
         <ListView Background="Black" BorderThickness="0" Margin="20" Panel.ZIndex="9" Width="212" Height="220" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Button Click="NewGameLevel1">
                 <Button.Content>
