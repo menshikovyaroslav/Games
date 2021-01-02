@@ -117,8 +117,9 @@ namespace EnglishTrainer
                     {
                         Map.Children.Remove(_shipObjects[ship]);
                     }
-
                 }
+
+                WordTb.Clear();
             }
         }
     }
