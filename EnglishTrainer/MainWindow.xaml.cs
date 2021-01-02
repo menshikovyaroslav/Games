@@ -26,8 +26,8 @@ namespace EnglishTrainer
      //   private List<SpaceShip> _spaceShips = new List<SpaceShip>();
         private Dictionary<SpaceShip, ShipControl> _shipObjects = new Dictionary<SpaceShip, ShipControl>();
 
-        private double _gameTime = 0;
         private int _speed = 10;
+        private int _endGameDistance = 60;
 
         public MainWindow()
         {
@@ -66,19 +66,27 @@ namespace EnglishTrainer
 
         private async void GameProcess()
         {
-            while (true)
+            bool gameEnded = false;
+            while (!gameEnded)
             {
                 var currShips = _shipObjects.Keys.Where(s => s.IsEnabled).ToList();
 
                 foreach (var ship in currShips)
                 {
                     ship.DoStep();
+
+                    if (ship.Distance <= _endGameDistance)
+                    {
+                        MessageBox.Show("End game !");
+                        gameEnded = true;
+                        break;
+                    }
                 }
 
                 foreach (var shipPair in _shipObjects)
                 {
-                    Canvas.SetTop(shipPair.Value, shipPair.Key.CurrentPosition.Y);
-                    Canvas.SetLeft(shipPair.Value, shipPair.Key.CurrentPosition.X);
+                    Canvas.SetTop(shipPair.Value, shipPair.Key.CurrentPosition.Y - 50);
+                    Canvas.SetLeft(shipPair.Value, shipPair.Key.CurrentPosition.X - 30);
                 }
 
                 if (currShips.Count == 0)
@@ -86,7 +94,7 @@ namespace EnglishTrainer
                     CreateNewShip();
                 }
 
-                await Task.Delay(2000);
+                await Task.Delay(100);
             }
         }
 
@@ -96,9 +104,9 @@ namespace EnglishTrainer
 
             var newShipObject = new ShipControl(newShip);
 
-            Canvas.SetTop(newShipObject, newShip.CurrentPosition.Y);
-            Canvas.SetLeft(newShipObject, newShip.CurrentPosition.X);
-            Panel.SetZIndex(newShipObject, 10);
+      //      Canvas.SetTop(newShipObject, newShip.CurrentPosition.Y - 50);
+      //      Canvas.SetLeft(newShipObject, newShip.CurrentPosition.X - 30);
+            Panel.SetZIndex(newShipObject, 11);
             Map.Children.Add(newShipObject);
 
             _shipObjects[newShip] = newShipObject;

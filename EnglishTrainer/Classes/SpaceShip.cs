@@ -41,7 +41,7 @@ namespace EnglishTrainer.Classes
         public ShipType ShipType { get; set; }
 
         private Point CenterPoint { get; set; }
-        private double Distance { get; set; }
+        public double Distance { get; private set; }
         public Point CurrentPosition
         {
             get

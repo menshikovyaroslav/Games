@@ -27,7 +27,7 @@ namespace EnglishTrainer.Classes.Dictionaries
         public static Word GetWord()
         {
             var random = new Random();
-            var i = random.Next(1, _words.Count + 1);
+            var i = random.Next(1, _words.Count);
             return _words[i];
         }
 
