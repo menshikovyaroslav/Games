@@ -8,7 +8,7 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         Title="EnglishTrainer" Loaded="Window_Loaded" WindowState="Maximized">
     <Grid Background="White">
-        <Canvas Name="Map" ClipToBounds="True" Background="AliceBlue">
+        <Canvas Name="Map" ClipToBounds="True" Background="Black">
             
         </Canvas>
         <Image gif:ImageBehavior.AnimatedSource="Images/earthInSpace.gif" Width="100" Height="100" gif:ImageBehavior.RepeatBehavior="Forever" />

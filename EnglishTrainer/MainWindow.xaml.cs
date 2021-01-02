@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,6 +22,11 @@ namespace EnglishTrainer
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<SpaceShip> _spaceShips = new List<SpaceShip>();
+        private Dictionary<SpaceShip, Image> _shipObjects = new Dictionary<SpaceShip, Image>();
+
+        private double _gameTime = 0;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -55,21 +61,38 @@ namespace EnglishTrainer
             }
         }
 
+        private async void GameProcess()
+        {
+            while (true)
+            {
+                var currShips = _spaceShips.Where(s => s.IsEnabled).ToList();
+
+                foreach (var ship in currShips)
+                {
+                    ship.DoStep();
+                }
+
+                foreach (var shipPair in _shipObjects)
+                {
+                    TranslateTransform translate = shipPair.Value.RenderTransform as TranslateTransform;
+                    if (translate == null)
+                    {
+                        translate = new TranslateTransform(shipPair.Key.CurrentPosition.X, shipPair.Key.CurrentPosition.Y);
+                        shipPair.Value.RenderTransform = translate;
+                    }
+                    translate.X = shipPair.Key.CurrentPosition.X;
+                    translate.Y = shipPair.Key.CurrentPosition.Y;
+                }
+
+                await Task.Delay(2000);
+            }
+        }
+
         private void StartNewGame()
         {
-            var newShip = new SpaceShip(MapCenter, MapWidth);
+            GameProcess();
 
-            var circle = new Ellipse()
-            {
-                Width = MapWidth,
-                Height = MapWidth,
-                Stroke = Brushes.Black,
-                StrokeThickness = 2
-            };
-            Canvas.SetTop(circle, 0);
-            Canvas.SetLeft(circle, 0);
-            Panel.SetZIndex(circle, 1);
-            Map.Children.Add(circle);
+            var newShip = new SpaceShip(MapCenter, MapWidth, 10);
 
             var newShipObject = new Image()
             {
@@ -81,6 +104,9 @@ namespace EnglishTrainer
             Canvas.SetLeft(newShipObject, newShip.CurrentPosition.X);
             Panel.SetZIndex(newShipObject, 10);
             Map.Children.Add(newShipObject);
+
+            _spaceShips.Add(newShip);
+            _shipObjects[newShip] = newShipObject;
 
             //      var x = newShipObject.
         }

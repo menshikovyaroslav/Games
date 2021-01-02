@@ -12,6 +12,9 @@ namespace EnglishTrainer.Classes
     /// </summary>
     public class SpaceShip
     {
+        public double Speed { get; set; }
+        public bool IsEnabled { get; set; }
+
         /// <summary>
         /// Угол появления космического корабля относительно Земли. от 1 до 360
         /// </summary>
@@ -45,10 +48,11 @@ namespace EnglishTrainer.Classes
             }
         }
 
-        public SpaceShip(Point point, double distance)
+        public SpaceShip(Point point, double distance, double speed)
         {
             CenterPoint = point;
             Distance = distance;
+            Speed = speed;
 
             var random = new Random();
             Angle = random.Next(180, 360);
@@ -57,6 +61,12 @@ namespace EnglishTrainer.Classes
             AnswerWord = "Test";
 
             ShipType = ShipType.Interceptor;
+            IsEnabled = true;
+        }
+
+        public void DoStep()
+        {
+            Distance -= Speed;
         }
     }
 
