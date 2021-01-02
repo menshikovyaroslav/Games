@@ -1,4 +1,5 @@
 ﻿using EnglishTrainer.Classes;
+using EnglishTrainer.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace EnglishTrainer
     public partial class MainWindow : Window
     {
         private List<SpaceShip> _spaceShips = new List<SpaceShip>();
-        private Dictionary<SpaceShip, Image> _shipObjects = new Dictionary<SpaceShip, Image>();
+        private Dictionary<SpaceShip, ShipControl> _shipObjects = new Dictionary<SpaceShip, ShipControl>();
 
         private double _gameTime = 0;
 
@@ -88,12 +89,8 @@ namespace EnglishTrainer
 
             var newShip = new SpaceShip(MapCenter, MapWidth, 10);
 
-            var newShipObject = new Image()
-            {
-                Width = 50,
-                Height = 50,
-                Source = new BitmapImage(new Uri("/Images/interceptor.png", UriKind.Relative))
-            };
+            var newShipObject = new ShipControl(newShip);
+
             Canvas.SetTop(newShipObject, newShip.CurrentPosition.Y);
             Canvas.SetLeft(newShipObject, newShip.CurrentPosition.X);
             Panel.SetZIndex(newShipObject, 10);

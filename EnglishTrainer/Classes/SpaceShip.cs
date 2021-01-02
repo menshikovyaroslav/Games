@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EnglishTrainer.Classes.Dictionaries;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -22,14 +23,9 @@ namespace EnglishTrainer.Classes
         public double Angle { get; set; }
 
         /// <summary>
-        /// Слово-подсказка
+        /// Слово из словаря
         /// </summary>
-        public string HelpWord { get; set; }
-
-        /// <summary>
-        /// Слово-ответ
-        /// </summary>
-        public string AnswerWord { get; set; }
+        public Word Word { get; set; }
 
         /// <summary>
         /// Тип космического корабля
@@ -58,8 +54,8 @@ namespace EnglishTrainer.Classes
             var random = new Random();
             Angle = random.Next(1, 361);
 
-            HelpWord = "Тест";
-            AnswerWord = "Test";
+            Word = EnglishLevel1.GetWord();
+
 
             ShipType = ShipType.Interceptor;
             IsEnabled = true;
