@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EnglishTrainer.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,13 +20,22 @@ namespace EnglishTrainer
     /// </summary>
     public partial class EnterNameWindow : Window
     {
-        public EnterNameWindow()
+        public Level Level { get; set; }
+        private int _score;
+
+        public EnterNameWindow(Level level, int score)
         {
             InitializeComponent();
+            DataContext = this;
+
+            Level = level;
+            _score = score;
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            TopScore.SetTopScore(new TopScoreResult(GamerName.Text, _score, Level));
+
             Close();
         }
     }

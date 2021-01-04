@@ -59,7 +59,7 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
-            <Button>
+            <Button Click="NewGameLevel2">
                 <Button.Content>
                     <StackPanel>
                         <TextBlock Text="Новая игра" FontSize="20" />

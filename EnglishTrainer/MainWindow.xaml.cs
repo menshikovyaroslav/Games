@@ -28,6 +28,8 @@ namespace EnglishTrainer
         private int _speed = 1;
         private int _endGameDistance = 80;
         private bool _gameEnded = true;
+        private Level _level;
+        private int _score;
 
         public List<TopScoreResult> BeginnerResults
         {
@@ -95,7 +97,7 @@ namespace EnglishTrainer
         private void EndGame()
         {
             _gameEnded = true;
-            var enterNameWindow = new EnterNameWindow();
+            var enterNameWindow = new EnterNameWindow(_level, _score);
             enterNameWindow.ShowDialog();
 
         }
@@ -147,8 +149,9 @@ namespace EnglishTrainer
             _shipObjects[newShip] = newShipObject;
         }
 
-        private void StartNewGame()
+        private void StartNewGame(Level level)
         {
+            _level = level;
             WordTb.Focus();
             GameProcess();
         }
@@ -179,7 +182,16 @@ namespace EnglishTrainer
             await Task.Delay(500);
 
             ClearMap();
-            StartNewGame();
+            StartNewGame(Level.Beginner);
+        }
+
+        private async void NewGameLevel2(object sender, RoutedEventArgs e)
+        {
+            _gameEnded = true;
+            await Task.Delay(500);
+
+            ClearMap();
+            StartNewGame(Level.Standard);
         }
     }
 }

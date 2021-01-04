@@ -24,7 +24,7 @@ namespace EnglishTrainer.Classes
             var result = new string[3];
             result[0] = Name;
             result[1] = Score.ToString();
-            result[2] = Level.ToString();
+            result[2] = ((int)Level).ToString();
 
             return result;
         }
@@ -37,9 +37,9 @@ namespace EnglishTrainer.Classes
                 var score = 0;
                 Int32.TryParse(topScoreResult[1], out score);
                 Score = score;
-                var level = 0;
-                Int32.TryParse(topScoreResult[2], out level);
-                Level = (Level)level;
+                Level level;
+                Enum.TryParse(topScoreResult[2], out level);
+                Level = level;
             }
         }
     }
