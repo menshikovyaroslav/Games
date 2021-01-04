@@ -29,9 +29,33 @@ namespace EnglishTrainer
         private int _endGameDistance = 80;
         private bool _gameEnded = true;
 
+        public List<TopScoreResult> BeginnerResults
+        {
+            get
+            {
+                return TopScore.GetTopScores().Where(s => s.Level == Level.Beginner).ToList();
+            }
+        }
+        public List<TopScoreResult> StandardResults
+        {
+            get
+            {
+                return TopScore.GetTopScores().Where(s => s.Level == Level.Standard).ToList();
+            }
+        }
+        public List<TopScoreResult> AdvancedResults
+        {
+            get
+            {
+                return TopScore.GetTopScores().Where(s => s.Level == Level.Advanced).ToList();
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+
+            DataContext = this;
 
             Map.Width = Map.Height = MapWidth;
         }
@@ -68,6 +92,14 @@ namespace EnglishTrainer
             Map.Children.Clear();
         }
 
+        private void EndGame()
+        {
+            _gameEnded = true;
+            var enterNameWindow = new EnterNameWindow();
+            enterNameWindow.ShowDialog();
+
+        }
+
         private async void GameProcess()
         {
             _gameEnded = false;
@@ -81,8 +113,7 @@ namespace EnglishTrainer
 
                     if (ship.Distance <= _endGameDistance)
                     {
-                        MessageBox.Show("End game !");
-                        _gameEnded = true;
+                        EndGame();
                         break;
                     }
                 }

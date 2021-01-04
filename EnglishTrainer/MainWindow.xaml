@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EnglishTrainer"
-        mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300"
+        mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="600"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         Title="EnglishTrainer" Loaded="Window_Loaded" WindowState="Maximized">
 
@@ -49,7 +49,7 @@
 
         </Canvas>
         <Image gif:ImageBehavior.AnimatedSource="Images/earthInSpace.gif" Width="100" Height="100" gif:ImageBehavior.RepeatBehavior="Forever" Panel.ZIndex="9" />
-        <TextBox Name="WordTb" Height="30" Width="160" Opacity="0.9" HorizontalContentAlignment="Center" FontFamily="Verdana" FontSize="20" VerticalContentAlignment="Center" FontWeight="Bold" KeyDown="WordTb_KeyDown" Panel.ZIndex="10" />
+        <TextBox Name="WordTb" Height="30" Width="160" Opacity="0.9" HorizontalContentAlignment="Center" FontFamily="Verdana" FontSize="20" VerticalContentAlignment="Center" FontWeight="Bold" KeyDown="WordTb_KeyDown" Panel.ZIndex="10" MaxLength="30" />
         <ListView Background="Black" BorderThickness="0" Margin="20" Panel.ZIndex="9" Width="212" Height="220" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Button Click="NewGameLevel1">
                 <Button.Content>
@@ -68,5 +68,66 @@
                 </Button.Content>
             </Button>
         </ListView>
+
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Panel.ZIndex="9">
+            <StackPanel.Resources>
+                <Style TargetType="GroupBox">
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="Background" Value="#373737" />
+                </Style>
+            </StackPanel.Resources>
+            <GroupBox Header="Начинающий" Margin="20">
+                <ListView ItemsSource="{Binding BeginnerResults}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="140"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="{Binding Path=Name}" HorizontalAlignment="Stretch" TextWrapping="Wrap"></TextBlock>
+                                <TextBlock Grid.Column="1" Text="{Binding Path=Score}" HorizontalAlignment="Stretch" TextWrapping="Wrap"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListView>
+            </GroupBox>
+            <GroupBox Header="Опытный" Margin="20">
+                <ListView ItemsSource="{Binding StandardResults}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="140"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="{Binding Path=Name}" HorizontalAlignment="Stretch" TextWrapping="Wrap"></TextBlock>
+                                <TextBlock Grid.Column="1" Text="{Binding Path=Score}" HorizontalAlignment="Stretch" TextWrapping="Wrap"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListView>
+            </GroupBox>
+            <GroupBox Header="Продвинутый" Margin="20">
+                <ListView ItemsSource="{Binding AdvancedResults}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="140"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="{Binding Path=Name}" HorizontalAlignment="Stretch" TextWrapping="Wrap"></TextBlock>
+                                <TextBlock Grid.Column="1" Text="{Binding Path=Score}" HorizontalAlignment="Stretch" TextWrapping="Wrap"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListView>
+            </GroupBox>
+        </StackPanel>
+        
     </Grid>
 </Window>
