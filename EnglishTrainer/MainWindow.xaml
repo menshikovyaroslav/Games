@@ -128,6 +128,10 @@
                 </ListView>
             </GroupBox>
         </StackPanel>
-        
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20" Panel.ZIndex="9">
+            <TextBlock Text="Очков: " Foreground="Green" FontSize="40" />
+            <TextBlock Name="ScoresTb" Text="{Binding Score}" Foreground="Green" FontSize="40" />
+        </StackPanel>
     </Grid>
 </Window>

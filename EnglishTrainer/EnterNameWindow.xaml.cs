@@ -30,6 +30,8 @@ namespace EnglishTrainer
 
             Level = level;
             _score = score;
+
+            GamerName.Focus();
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)

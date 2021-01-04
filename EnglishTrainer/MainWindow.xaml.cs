@@ -2,7 +2,9 @@
 using EnglishTrainer.UserControls;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,15 +23,35 @@ namespace EnglishTrainer
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         private Dictionary<SpaceShip, ShipControl> _shipObjects = new Dictionary<SpaceShip, ShipControl>();
 
         private int _speed = 1;
         private int _endGameDistance = 80;
         private bool _gameEnded = true;
         private Level _level;
+
         private int _score;
+        public int Score
+        {
+            get
+            {
+                return _score;
+            }
+            set
+            {
+                _score = value;
+                OnPropertyChanged();
+            }
+        }
 
         public List<TopScoreResult> BeginnerResults
         {
@@ -97,7 +119,7 @@ namespace EnglishTrainer
         private void EndGame()
         {
             _gameEnded = true;
-            var enterNameWindow = new EnterNameWindow(_level, _score);
+            var enterNameWindow = new EnterNameWindow(_level, Score);
             enterNameWindow.ShowDialog();
 
         }
@@ -151,6 +173,7 @@ namespace EnglishTrainer
 
         private void StartNewGame(Level level)
         {
+            Score = 0;
             _level = level;
             WordTb.Focus();
             GameProcess();
@@ -169,6 +192,7 @@ namespace EnglishTrainer
                     if (Map.Children.Contains(_shipObjects[ship]))
                     {
                         Map.Children.Remove(_shipObjects[ship]);
+                        Score++;
                     }
                 }
 
