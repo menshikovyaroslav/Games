@@ -35,21 +35,21 @@ namespace EnglishTrainer
         {
             get
             {
-                return TopScore.GetTopScores().Where(s => s.Level == Level.Beginner).ToList();
+                return TopScore.GetTopScores().Where(s => s.Level == Level.Beginner).OrderByDescending(s => s.Score).Take(10).ToList();
             }
         }
         public List<TopScoreResult> StandardResults
         {
             get
             {
-                return TopScore.GetTopScores().Where(s => s.Level == Level.Standard).ToList();
+                return TopScore.GetTopScores().Where(s => s.Level == Level.Standard).OrderByDescending(s => s.Score).Take(10).ToList();
             }
         }
         public List<TopScoreResult> AdvancedResults
         {
             get
             {
-                return TopScore.GetTopScores().Where(s => s.Level == Level.Advanced).ToList();
+                return TopScore.GetTopScores().Where(s => s.Level == Level.Advanced).OrderByDescending(s => s.Score).Take(10).ToList();
             }
         }
 
