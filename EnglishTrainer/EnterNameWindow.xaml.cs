@@ -48,6 +48,9 @@ namespace EnglishTrainer
         /// <param name="e"></param>
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            var gamerName = GamerName.Text;
+            if (string.IsNullOrEmpty(gamerName)) return;
+
             TopScore.SetTopScore(new TopScoreResult(GamerName.Text, _score, Level));
 
             Close();
