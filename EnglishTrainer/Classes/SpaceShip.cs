@@ -89,7 +89,7 @@ namespace EnglishTrainer.Classes
             var random = new Random();
             Angle = random.Next(1, 361);
 
-            Word = EnglishLevel1.GetWord();
+            Word = Vocabulary.GetBeginnerWord();
 
             ShipType = ShipType.Interceptor;
             IsEnabled = true;

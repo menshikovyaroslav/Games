@@ -117,6 +117,8 @@ namespace EnglishTrainer
 
         public MainWindow()
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             InitializeComponent();
 
             DataContext = this;
