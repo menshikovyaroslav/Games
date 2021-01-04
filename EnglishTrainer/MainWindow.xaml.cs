@@ -25,6 +25,8 @@ namespace EnglishTrainer
     /// </summary>
     public partial class MainWindow : INotifyPropertyChanged
     {
+        #region PropertyChanged
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -32,14 +34,41 @@ namespace EnglishTrainer
             if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #endregion
+
+        /// <summary>
+        /// Словарь сопоставления класса корабля и визуальным представлением корабля
+        /// </summary>
         private Dictionary<SpaceShip, ShipControl> _shipObjects = new Dictionary<SpaceShip, ShipControl>();
 
+        /// <summary>
+        /// Текущая скорость передвижения кораблей
+        /// </summary>
         private int _speed = 1;
+
+        /// <summary>
+        /// Расстояние от Земли при котором Земле конец
+        /// </summary>
         private int _endGameDistance = 80;
+
+        /// <summary>
+        /// Окончена ли игра
+        /// </summary>
         private bool _gameEnded = true;
+
+        /// <summary>
+        /// Уровень текущей игры
+        /// </summary>
         private Level _level;
 
+        /// <summary>
+        /// Количество набранных очков, private
+        /// </summary>
         private int _score;
+
+        /// <summary>
+        /// Количество набранных очков, public
+        /// </summary>
         public int Score
         {
             get
@@ -53,6 +82,9 @@ namespace EnglishTrainer
             }
         }
 
+        /// <summary>
+        /// Таблица рекордов для уровня Beginner
+        /// </summary>
         public List<TopScoreResult> BeginnerResults
         {
             get
@@ -60,6 +92,10 @@ namespace EnglishTrainer
                 return TopScore.GetTopScores().Where(s => s.Level == Level.Beginner).OrderByDescending(s => s.Score).Take(10).ToList();
             }
         }
+
+        /// <summary>
+        /// Таблица рекордов для уровня Standard
+        /// </summary>
         public List<TopScoreResult> StandardResults
         {
             get
@@ -67,6 +103,10 @@ namespace EnglishTrainer
                 return TopScore.GetTopScores().Where(s => s.Level == Level.Standard).OrderByDescending(s => s.Score).Take(10).ToList();
             }
         }
+
+        /// <summary>
+        /// Таблица рекордов для уровня Advanced
+        /// </summary>
         public List<TopScoreResult> AdvancedResults
         {
             get
@@ -84,10 +124,18 @@ namespace EnglishTrainer
             Map.Width = Map.Height = MapWidth;
         }
 
+        /// <summary>
+        /// Метод после загрузки визуальной части окна
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
         }
 
+        /// <summary>
+        /// Точка центра карты
+        /// </summary>
         private Point MapCenter
         {
             get
@@ -98,6 +146,9 @@ namespace EnglishTrainer
             }
         }
 
+        /// <summary>
+        /// Ширина карты
+        /// </summary>
         private double MapWidth
         {
             get
@@ -110,12 +161,18 @@ namespace EnglishTrainer
             }
         }
 
+        /// <summary>
+        /// Метод очистки карты - подготовка к новой игре
+        /// </summary>
         private void ClearMap()
         {
             _shipObjects.Clear();
             Map.Children.Clear();
         }
 
+        /// <summary>
+        /// Метод при наступлении конца текущей игры
+        /// </summary>
         private void EndGame()
         {
             _gameEnded = true;
@@ -124,6 +181,9 @@ namespace EnglishTrainer
 
         }
 
+        /// <summary>
+        /// Функционал игрового процесса
+        /// </summary>
         private async void GameProcess()
         {
             _gameEnded = false;
@@ -157,6 +217,9 @@ namespace EnglishTrainer
             }
         }
 
+        /// <summary>
+        /// Создание нового корабля
+        /// </summary>
         private void CreateNewShip()
         {
             var newShip = new SpaceShip(MapCenter, MapWidth, _speed);
@@ -171,6 +234,10 @@ namespace EnglishTrainer
             _shipObjects[newShip] = newShipObject;
         }
 
+        /// <summary>
+        /// Начало новой игры
+        /// </summary>
+        /// <param name="level">Уровень игры</param>
         private void StartNewGame(Level level)
         {
             Score = 0;
@@ -179,6 +246,11 @@ namespace EnglishTrainer
             GameProcess();
         }
 
+        /// <summary>
+        /// Метод обработки ввода слов
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WordTb_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
@@ -200,6 +272,11 @@ namespace EnglishTrainer
             }
         }
 
+        /// <summary>
+        /// Старт новой игры уровня Beginner
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void NewGameLevel1(object sender, RoutedEventArgs e)
         {
             _gameEnded = true;
@@ -209,6 +286,11 @@ namespace EnglishTrainer
             StartNewGame(Level.Beginner);
         }
 
+        /// <summary>
+        /// Старт новой игры уровня Standard
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void NewGameLevel2(object sender, RoutedEventArgs e)
         {
             _gameEnded = true;

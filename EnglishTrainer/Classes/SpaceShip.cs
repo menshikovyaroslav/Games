@@ -14,7 +14,14 @@ namespace EnglishTrainer.Classes
     /// </summary>
     public class SpaceShip
     {
+        /// <summary>
+        /// Скорость корабля
+        /// </summary>
         public double Speed { get; set; }
+
+        /// <summary>
+        /// Корабль на карте или нет
+        /// </summary>
         public bool IsEnabled { get; set; }
 
         /// <summary>
@@ -22,6 +29,9 @@ namespace EnglishTrainer.Classes
         /// </summary>
         public double Angle { get; set; }
 
+        /// <summary>
+        /// Угол поворота корабля. Отличается от Angle на 180 градусов
+        /// </summary>
         public double TransformAngle
         {
             get
@@ -40,8 +50,19 @@ namespace EnglishTrainer.Classes
         /// </summary>
         public ShipType ShipType { get; set; }
 
+        /// <summary>
+        /// Центр карты - цель корабля
+        /// </summary>
         private Point CenterPoint { get; set; }
+
+        /// <summary>
+        /// Расстояние от корабля до Земли
+        /// </summary>
         public double Distance { get; private set; }
+
+        /// <summary>
+        /// Расчет координат точки на окружности с известным радиусом и углом появления
+        /// </summary>
         public Point CurrentPosition
         {
             get
@@ -53,6 +74,12 @@ namespace EnglishTrainer.Classes
             }
         }
 
+        /// <summary>
+        /// Конструктор класса космического корабля
+        /// </summary>
+        /// <param name="point">Точка-цель</param>
+        /// <param name="distance">Расстояние от корабля до цели</param>
+        /// <param name="speed">Скорость корабля</param>
         public SpaceShip(Point point, double distance, double speed)
         {
             CenterPoint = point;
@@ -64,11 +91,13 @@ namespace EnglishTrainer.Classes
 
             Word = EnglishLevel1.GetWord();
 
-
             ShipType = ShipType.Interceptor;
             IsEnabled = true;
         }
 
+        /// <summary>
+        /// Метод выполнения хода
+        /// </summary>
         public void DoStep()
         {
             Distance -= Speed;

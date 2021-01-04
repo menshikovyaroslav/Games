@@ -7,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace EnglishTrainer.Classes
 {
+    /// <summary>
+    /// Класс работы с таблицей рекордов
+    /// </summary>
     public static class TopScore
     {
+        /// <summary>
+        /// Запись нового значения
+        /// </summary>
+        /// <param name="scoreResult"></param>
         public static void SetTopScore(TopScoreResult scoreResult)
         {
             try
@@ -43,6 +50,10 @@ namespace EnglishTrainer.Classes
 
         }
 
+        /// <summary>
+        /// Получение таблицы рекордов
+        /// </summary>
+        /// <returns></returns>
         public static List<TopScoreResult> GetTopScores()
         {
             List<TopScoreResult> result = new List<TopScoreResult>();

@@ -20,7 +20,14 @@ namespace EnglishTrainer
     /// </summary>
     public partial class EnterNameWindow : Window
     {
+        /// <summary>
+        /// Уровень законченной игры
+        /// </summary>
         public Level Level { get; set; }
+
+        /// <summary>
+        /// Количество набранных очков
+        /// </summary>
         private int _score;
 
         public EnterNameWindow(Level level, int score)
@@ -34,6 +41,11 @@ namespace EnglishTrainer
             GamerName.Focus();
         }
 
+        /// <summary>
+        /// Нажатие на кнопку сохранить
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             TopScore.SetTopScore(new TopScoreResult(GamerName.Text, _score, Level));
