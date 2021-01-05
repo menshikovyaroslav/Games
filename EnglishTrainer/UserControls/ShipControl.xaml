@@ -5,13 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EnglishTrainer.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="100">
+             d:DesignHeight="140" d:DesignWidth="100">
     <StackPanel Orientation="Vertical">
+        <TextBlock Text="{Binding Ship.Word.Help}" FontSize="20" FontFamily="Verdana" Background="Black" Foreground="White" Height="40" HorizontalAlignment="Center"></TextBlock>
         <Image Name="ShipImage" Width="60" Height="60" RenderTransformOrigin="0.5, 0.5">
             <Image.RenderTransform>
                 <RotateTransform Angle="{Binding Ship.TransformAngle}"></RotateTransform>
             </Image.RenderTransform>
         </Image>
-        <TextBlock Text="{Binding Ship.Word.Help}" FontSize="20" FontFamily="Verdana" Background="Black" Foreground="White" Height="40"></TextBlock>
+        <TextBlock Text="{Binding Ship.Word.Question}" FontSize="20" FontFamily="Verdana" Background="Black" Foreground="White" Height="40"></TextBlock>
     </StackPanel>
 </UserControl>

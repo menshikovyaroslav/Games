@@ -8,7 +8,25 @@ namespace EnglishTrainer.Classes.Dictionaries
 {
     public class Word
     {
+        /// <summary>
+        /// Слово-ответ
+        /// </summary>
         public string Answer { get; set; }
-        public string Help { get; set; }
+
+        /// <summary>
+        /// Фраза-вопрос
+        /// </summary>
+        public string Question { get; set; }
+
+        /// <summary>
+        /// Подсказка игроку
+        /// </summary>
+        public string Help
+        {
+            get
+            {
+                return "".PadRight(Answer.Length, '-');
+            }
+        }
     }
 }

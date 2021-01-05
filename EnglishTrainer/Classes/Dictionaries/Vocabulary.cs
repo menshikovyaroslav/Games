@@ -35,7 +35,7 @@ namespace EnglishTrainer.Classes.Dictionaries
                 var splitted = line.Split(';');
                 if (splitted.Length != 2) continue;
 
-                _beginnerDictionary.Add(new Word() {Answer = splitted[0], Help = splitted[1] });
+                _beginnerDictionary.Add(new Word() {Answer = splitted[0], Question = splitted[1] });
             }
 
             var standardLines = File.ReadAllLines("standard.csv", Encoding.GetEncoding("windows-1251"));
@@ -46,7 +46,7 @@ namespace EnglishTrainer.Classes.Dictionaries
                 var splitted = line.Split(';');
                 if (splitted.Length != 2) continue;
 
-                _standardDictionary.Add(new Word() { Answer = splitted[0], Help = splitted[1] });
+                _standardDictionary.Add(new Word() { Answer = splitted[0], Question = splitted[1] });
             }
 
             var advancedLines = File.ReadAllLines("advanced.csv", Encoding.GetEncoding("windows-1251"));
@@ -57,7 +57,7 @@ namespace EnglishTrainer.Classes.Dictionaries
                 var splitted = line.Split(';');
                 if (splitted.Length != 2) continue;
 
-                _advancedDictionary.Add(new Word() { Answer = splitted[0], Help = splitted[1] });
+                _advancedDictionary.Add(new Word() { Answer = splitted[0], Question = splitted[1] });
             }
 
             #endregion
