@@ -20,6 +20,12 @@ namespace EnglishTrainer.Classes
         {
             try
             {
+                var currentResult = GetTopScores().Where(s => s.Level == scoreResult.Level && s.Name.ToLower() == scoreResult.Name.ToLower()).FirstOrDefault();
+                if (currentResult != null)
+                {
+                    if (scoreResult.Score < currentResult.Score) return;
+                }
+
                 var hkcu = Registry.CurrentUser;
                 RegistryKey scoresBranch = hkcu.CreateSubKey("Software\\EnglishTrainer");
                 switch (scoreResult.Level)
