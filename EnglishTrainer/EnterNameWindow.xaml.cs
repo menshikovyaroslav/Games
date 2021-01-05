@@ -55,5 +55,15 @@ namespace EnglishTrainer
 
             Close();
         }
+
+        /// <summary>
+        /// Отмена сохранения результата
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

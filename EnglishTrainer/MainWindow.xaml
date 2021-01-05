@@ -8,42 +8,6 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         Title="EnglishTrainer" Loaded="Window_Loaded" WindowState="Maximized">
 
-    <Window.Resources>
-        <Style TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="#373737" />
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="Width" Value="200" />
-            <Setter Property="SnapsToDevicePixels" Value="True" />
-
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border CornerRadius="4" Background="{TemplateBinding Background}">
-                            <Grid>
-                                <Path x:Name="PathIcon" Width="10" Height="15" Stretch="Fill" Fill="#4C87B3" HorizontalAlignment="Left" Margin="17,0,0,0" Data="F1 M 30.0833,22.1667L 50.6665,37.6043L 50.6665,38.7918L 30.0833,53.8333L 30.0833,22.1667 Z "/>
-                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2" />
-                            </Grid>
-                        </Border>
-
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#E59400" />
-                                <Setter Property="Foreground" Value="White" />
-                                <Setter TargetName="PathIcon" Property="Fill" Value="Black" />
-                            </Trigger>
-
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="Green" />
-                                <Setter Property="Foreground" Value="White" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-    
     <Grid Background="Black">
         <Canvas Name="Map" ClipToBounds="True" Background="Black" Panel.ZIndex="9">
 
@@ -51,7 +15,7 @@
         <Image gif:ImageBehavior.AnimatedSource="Images/earthInSpace.gif" Width="100" Height="100" gif:ImageBehavior.RepeatBehavior="Forever" Panel.ZIndex="9" />
         <TextBox Name="WordTb" Height="30" Width="160" Opacity="0.9" HorizontalContentAlignment="Center" FontFamily="Verdana" FontSize="20" VerticalContentAlignment="Center" FontWeight="Bold" KeyDown="WordTb_KeyDown" Panel.ZIndex="10" MaxLength="30" />
         <ListView Background="Black" BorderThickness="0" Margin="20" Panel.ZIndex="9" Width="212" Height="220" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <Button Click="NewGameLevel1">
+            <Button Style="{StaticResource ActionButtonStyle}" Click="NewGameLevel1">
                 <Button.Content>
                     <StackPanel>
                         <TextBlock Text="Новая игра" FontSize="20" />
@@ -59,7 +23,7 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
-            <Button Click="NewGameLevel2">
+            <Button Style="{StaticResource ActionButtonStyle}" Click="NewGameLevel2">
                 <Button.Content>
                     <StackPanel>
                         <TextBlock Text="Новая игра" FontSize="20" />
