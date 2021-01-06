@@ -224,7 +224,7 @@ namespace EnglishTrainer
         /// </summary>
         private void CreateNewShip()
         {
-            var newShip = new SpaceShip(MapCenter, MapWidth, _speed);
+            var newShip = new SpaceShip(MapCenter, MapWidth, _speed, _level);
             var newShipObject = new ShipControl(newShip);
 
             Panel.SetZIndex(newShipObject, 11);
@@ -279,27 +279,15 @@ namespace EnglishTrainer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void NewGameLevel1(object sender, RoutedEventArgs e)
+        private async void NewGame_Click(object sender, RoutedEventArgs e)
         {
+            var level = (Level)(sender as Button).Tag;
+
             _gameEnded = true;
             await Task.Delay(500);
 
             ClearMap();
-            StartNewGame(Level.Beginner);
-        }
-
-        /// <summary>
-        /// Старт новой игры уровня Standard
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void NewGameLevel2(object sender, RoutedEventArgs e)
-        {
-            _gameEnded = true;
-            await Task.Delay(500);
-
-            ClearMap();
-            StartNewGame(Level.Standard);
+            StartNewGame(level);
         }
     }
 }

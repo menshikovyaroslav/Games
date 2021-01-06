@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:EnglishTrainer"
         mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="600"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        xmlns:classes="clr-namespace:EnglishTrainer.Classes"
         Title="EnglishTrainer" Loaded="Window_Loaded" WindowState="Maximized">
 
     <Grid Background="Black">
@@ -15,21 +16,38 @@
         <Image gif:ImageBehavior.AnimatedSource="Images/earthInSpace.gif" Width="100" Height="100" gif:ImageBehavior.RepeatBehavior="Forever" Panel.ZIndex="9" />
         <TextBox Name="WordTb" Height="30" Width="160" Opacity="0.9" HorizontalContentAlignment="Center" FontFamily="Verdana" FontSize="20" VerticalContentAlignment="Center" FontWeight="Bold" KeyDown="WordTb_KeyDown" Panel.ZIndex="10" MaxLength="30" />
         <ListView Background="Black" BorderThickness="0" Margin="20" Panel.ZIndex="9" Width="212" Height="220" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <Button Style="{StaticResource ActionButtonStyle}" Click="NewGameLevel1">
+            <Button Style="{StaticResource ActionButtonStyle}" Click="NewGame_Click">
                 <Button.Content>
                     <StackPanel>
                         <TextBlock Text="Новая игра" FontSize="20" />
                         <TextBlock Text="Начинающий" FontSize="12" Foreground="Gainsboro" />
                     </StackPanel>
                 </Button.Content>
+                <Button.Tag>
+                    <x:Static Member="classes:Level.Beginner" />
+                </Button.Tag>
             </Button>
-            <Button Style="{StaticResource ActionButtonStyle}" Click="NewGameLevel2">
+            <Button Style="{StaticResource ActionButtonStyle}" Click="NewGame_Click">
                 <Button.Content>
                     <StackPanel>
                         <TextBlock Text="Новая игра" FontSize="20" />
                         <TextBlock Text="Опытный" FontSize="12" Foreground="Gainsboro" />
                     </StackPanel>
                 </Button.Content>
+                <Button.Tag>
+                    <x:Static Member="classes:Level.Standard" />
+                </Button.Tag>
+            </Button>
+            <Button Style="{StaticResource ActionButtonStyle}" Click="NewGame_Click">
+                <Button.Content>
+                    <StackPanel>
+                        <TextBlock Text="Новая игра" FontSize="20" />
+                        <TextBlock Text="Продвинутый" FontSize="12" Foreground="Gainsboro" />
+                    </StackPanel>
+                </Button.Content>
+                <Button.Tag>
+                    <x:Static Member="classes:Level.Advanced" />
+                </Button.Tag>
             </Button>
         </ListView>
 

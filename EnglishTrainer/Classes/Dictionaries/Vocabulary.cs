@@ -67,33 +67,25 @@ namespace EnglishTrainer.Classes.Dictionaries
         /// Получить слово из словаря Начинающего уровня
         /// </summary>
         /// <returns></returns>
-        public static Word GetBeginnerWord()
+        public static Word GetWord(Level level)
         {
             var random = new Random();
-            var i = random.Next(1, _beginnerDictionary.Count + 1);
-            return _beginnerDictionary[i - 1];
-        }
 
-        /// <summary>
-        /// Получить слово из словаря Опытного уровня
-        /// </summary>
-        /// <returns></returns>
-        public static Word GetStandardWord()
-        {
-            var random = new Random();
-            var i = random.Next(1, _standardDictionary.Count + 1);
-            return _standardDictionary[i - 1];
-        }
-
-        /// <summary>
-        /// Получить слово из словаря Продвинутого уровня
-        /// </summary>
-        /// <returns></returns>
-        public static Word GetAdvancedWord()
-        {
-            var random = new Random();
-            var i = random.Next(1, _advancedDictionary.Count + 1);
-            return _advancedDictionary[i - 1];
+            switch (level)
+            {
+                case Level.Beginner:
+                    var i1 = random.Next(1, _beginnerDictionary.Count + 1);
+                    return _beginnerDictionary[i1 - 1];
+                case Level.Standard:
+                    var i2 = random.Next(1, _standardDictionary.Count + 1);
+                    return _standardDictionary[i2 - 1];
+                case Level.Advanced:
+                    var i3 = random.Next(1, _advancedDictionary.Count + 1);
+                    return _advancedDictionary[i3 - 1];
+                default:
+                    var iDefault = random.Next(1, _beginnerDictionary.Count + 1);
+                    return _beginnerDictionary[iDefault - 1];
+            }
         }
     }
 }

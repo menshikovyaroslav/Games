@@ -85,7 +85,7 @@ namespace EnglishTrainer.Classes
         /// <param name="point">Точка-цель</param>
         /// <param name="distance">Расстояние от корабля до цели</param>
         /// <param name="speed">Скорость корабля</param>
-        public SpaceShip(Point point, double distance, double speed)
+        public SpaceShip(Point point, double distance, double speed, Level level)
         {
             CenterPoint = point;
             Distance = distance;
@@ -96,7 +96,7 @@ namespace EnglishTrainer.Classes
             var random = new Random();
             Angle = random.Next(1, 361);
 
-            Word = Vocabulary.GetBeginnerWord();
+            Word = Vocabulary.GetWord(level);
 
             ShipType = ShipType.Interceptor;
             IsEnabled = true;
