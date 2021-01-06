@@ -61,6 +61,11 @@ namespace EnglishTrainer.Classes
         public double Distance { get; private set; }
 
         /// <summary>
+        /// Начальное расстояние от корабля до Земли
+        /// </summary>
+        public double InitialDistance { get; private set; }
+
+        /// <summary>
         /// Расчет координат точки на окружности с известным радиусом и углом появления
         /// </summary>
         public Point CurrentPosition
@@ -84,6 +89,8 @@ namespace EnglishTrainer.Classes
         {
             CenterPoint = point;
             Distance = distance;
+            InitialDistance = distance;
+
             Speed = speed;
 
             var random = new Random();
@@ -100,7 +107,12 @@ namespace EnglishTrainer.Classes
         /// </summary>
         public void DoStep()
         {
+            // Уменьшение дистанции до цели
             Distance -= Speed;
+
+            // Указываем процент дистанции до цели для расчета подсказки
+            Word.DistancePercent = (int)(Distance / InitialDistance * 100);
+            
 
 #if DEBUG
             Debug.WriteLine($"Angle={Angle}, x={CurrentPosition.X}, y={CurrentPosition.Y}");
