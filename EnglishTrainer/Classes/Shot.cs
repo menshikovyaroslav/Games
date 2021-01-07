@@ -19,6 +19,8 @@ namespace EnglishTrainer.Classes
         /// </summary>
         public double Speed { get; set; }
 
+        public SpaceShip Ship { get; set; }
+
         /// <summary>
         /// Угол поворота ракеты. от 1 до 360
         /// </summary>
@@ -56,6 +58,7 @@ namespace EnglishTrainer.Classes
         public Shot(SpaceShip ship, Point point)
         {
             IsEnabled = true;
+            Ship = ship;
             CenterPoint = point;
             Speed = 10;
 

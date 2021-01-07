@@ -224,6 +224,27 @@ namespace EnglishTrainer
                     Canvas.SetLeft(shotPair.Value, shotPair.Key.CurrentPosition.X - shotPair.Value.ActualWidth / 2);
                 }
 
+                var currSureShots = _shotObjects.Keys.Where(s => s.IsEnabled && s.IsSureShot).ToList();
+                foreach (var shot in currSureShots)
+                {
+                    if (shot.Distance >= shot.Ship.Distance)
+                    {
+                        shot.IsEnabled = false;
+                        shot.Ship.IsEnabled = false;
+
+                        if (Map.Children.Contains(_shipObjects[shot.Ship]))
+                        {
+                            Map.Children.Remove(_shipObjects[shot.Ship]);
+                            Score++;
+                        }
+
+                        if (Map.Children.Contains(_shotObjects[shot]))
+                        {
+                            Map.Children.Remove(_shotObjects[shot]);
+                        }
+                    }
+                }
+
                 if (currShips.Count == 0)
                 {
                     CreateNewShip();
@@ -262,7 +283,7 @@ namespace EnglishTrainer
             GameProcess();
         }
 
-        private async void Shoot(SpaceShip ship)
+        private void Shoot(SpaceShip ship)
         {
             var shot = new Shot(ship, MapCenter);
 
@@ -289,20 +310,9 @@ namespace EnglishTrainer
             if (e.Key == Key.Return)
             {
                 var entered = WordTb.Text;
-                var goalShips = _shipObjects.Keys.Where(s=>s.IsEnabled && s.Word.Answer.ToLower() == entered.ToLower()).ToList();
+                var goalShips = _shipObjects.Keys.Where(s => s.IsEnabled && s.Word.Answer.ToLower() == entered.ToLower()).ToList();
 
                 Shoot(goalShips.FirstOrDefault());
-
-                foreach (var ship in goalShips)
-                {
-                    ship.IsEnabled = false;
-
-                    if (Map.Children.Contains(_shipObjects[ship]))
-                    {
-                        Map.Children.Remove(_shipObjects[ship]);
-                        Score++;
-                    }
-                }
 
                 WordTb.Clear();
             }
