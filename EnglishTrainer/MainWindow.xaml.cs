@@ -195,6 +195,7 @@ namespace EnglishTrainer
             {
                 var currShips = _shipObjects.Keys.Where(s => s.IsEnabled).ToList();
 
+                // Движение кораблей
                 foreach (var ship in currShips)
                 {
                     ship.DoStep();
@@ -204,26 +205,26 @@ namespace EnglishTrainer
                         EndGame();
                         break;
                     }
+
+                    var shipObject = _shipObjects[ship];
+
+                    Canvas.SetTop(shipObject, ship.CurrentPosition.Y - shipObject.ActualHeight / 2);
+                    Canvas.SetLeft(shipObject, ship.CurrentPosition.X - shipObject.ActualWidth / 2);
                 }
 
-                foreach (var shipPair in _shipObjects)
-                {
-                    Canvas.SetTop(shipPair.Value, shipPair.Key.CurrentPosition.Y - shipPair.Value.ActualHeight / 2);
-                    Canvas.SetLeft(shipPair.Value, shipPair.Key.CurrentPosition.X - shipPair.Value.ActualWidth / 2);
-                }
-
+                // Движение ракет
                 var currShots = _shotObjects.Keys.Where(s => s.IsEnabled).ToList();
                 foreach (var shot in currShots)
                 {
                     shot.DoStep();
+
+                    var shotObject = _shotObjects[shot];
+
+                    Canvas.SetTop(shotObject, shot.CurrentPosition.Y - shotObject.ActualHeight / 2);
+                    Canvas.SetLeft(shotObject, shot.CurrentPosition.X - shotObject.ActualWidth / 2);
                 }
 
-                foreach (var shotPair in _shotObjects)
-                {
-                    Canvas.SetTop(shotPair.Value, shotPair.Key.CurrentPosition.Y - shotPair.Value.ActualHeight / 2);
-                    Canvas.SetLeft(shotPair.Value, shotPair.Key.CurrentPosition.X - shotPair.Value.ActualWidth / 2);
-                }
-
+                // Обработка логики ракет летящих в цель
                 var currSureShots = _shotObjects.Keys.Where(s => s.IsEnabled && s.IsSureShot).ToList();
                 foreach (var shot in currSureShots)
                 {
