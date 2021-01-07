@@ -250,9 +250,11 @@ namespace EnglishTrainer
             GameProcess();
         }
 
-        private async void Shoot()
+        private async void Shoot(SpaceShip ship)
         {
-            var shot = new Shot();
+            var shot = new Shot(ship);
+
+
             var newShotObject = new ShotControl(shot);
 
             Panel.SetZIndex(newShotObject, 20);
@@ -274,10 +276,11 @@ namespace EnglishTrainer
         {
             if (e.Key == Key.Return)
             {
-                Shoot();
-
                 var entered = WordTb.Text;
                 var goalShips = _shipObjects.Keys.Where(s=>s.IsEnabled && s.Word.Answer.ToLower() == entered.ToLower()).ToList();
+
+                Shoot(goalShips.FirstOrDefault());
+
                 foreach (var ship in goalShips)
                 {
                     ship.IsEnabled = false;

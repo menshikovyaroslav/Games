@@ -25,6 +25,8 @@ namespace EnglishTrainer.UserControls
         public ShotControl(Shot shot)
         {
             InitializeComponent();
+            DataContext = this;
+
             Shot = shot;
         }
     }
