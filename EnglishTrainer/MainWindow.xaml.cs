@@ -212,6 +212,18 @@ namespace EnglishTrainer
                     Canvas.SetLeft(shipPair.Value, shipPair.Key.CurrentPosition.X - shipPair.Value.ActualWidth / 2);
                 }
 
+                var currShots = _shotObjects.Keys.Where(s => s.IsEnabled).ToList();
+                foreach (var shot in currShots)
+                {
+                    shot.DoStep();
+                }
+
+                foreach (var shotPair in _shotObjects)
+                {
+                    Canvas.SetTop(shotPair.Value, shotPair.Key.CurrentPosition.Y - shotPair.Value.ActualHeight / 2);
+                    Canvas.SetLeft(shotPair.Value, shotPair.Key.CurrentPosition.X - shotPair.Value.ActualWidth / 2);
+                }
+
                 if (currShips.Count == 0)
                 {
                     CreateNewShip();
@@ -252,7 +264,7 @@ namespace EnglishTrainer
 
         private async void Shoot(SpaceShip ship)
         {
-            var shot = new Shot(ship);
+            var shot = new Shot(ship, MapCenter);
 
 
             var newShotObject = new ShotControl(shot);
@@ -260,8 +272,8 @@ namespace EnglishTrainer
             Panel.SetZIndex(newShotObject, 20);
             Map.Children.Add(newShotObject);
 
-            Canvas.SetTop(newShotObject, 200);
-            Canvas.SetLeft(newShotObject, 200);
+            Canvas.SetTop(newShotObject, -1000);
+            Canvas.SetLeft(newShotObject, -1000);
 
             _shotObjects[shot] = newShotObject;
 
