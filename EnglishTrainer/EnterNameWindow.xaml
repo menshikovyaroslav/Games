@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EnglishTrainer" WindowStyle="None"
         mc:Ignorable="d" SizeToContent="WidthAndHeight" Background="#272727"
-        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True"
         Title="EnterNameWindow">
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
