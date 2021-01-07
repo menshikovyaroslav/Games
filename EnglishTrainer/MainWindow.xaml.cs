@@ -222,6 +222,16 @@ namespace EnglishTrainer
 
                     Canvas.SetTop(shotObject, shot.CurrentPosition.Y - shotObject.ActualHeight / 2);
                     Canvas.SetLeft(shotObject, shot.CurrentPosition.X - shotObject.ActualWidth / 2);
+
+                    // Если ракета улетела за пределы карты, то ее нужно убрать из логики
+                    if (shot.Distance > MapWidth)
+                    {
+                        shot.IsEnabled = false;
+                        if (Map.Children.Contains(_shotObjects[shot]))
+                        {
+                            Map.Children.Remove(_shotObjects[shot]);
+                        }
+                    }
                 }
 
                 // Обработка логики ракет летящих в цель
