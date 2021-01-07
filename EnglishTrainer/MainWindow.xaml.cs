@@ -41,6 +41,8 @@ namespace EnglishTrainer
         /// </summary>
         private Dictionary<SpaceShip, ShipControl> _shipObjects = new Dictionary<SpaceShip, ShipControl>();
 
+        private Dictionary<Shot, ShotControl> _shotObjects = new Dictionary<Shot, ShotControl>();
+
         /// <summary>
         /// Текущая скорость передвижения кораблей
         /// </summary>
@@ -248,6 +250,21 @@ namespace EnglishTrainer
             GameProcess();
         }
 
+        private async void Shoot()
+        {
+            var shot = new Shot();
+            var newShotObject = new ShotControl(shot);
+
+            Panel.SetZIndex(newShotObject, 20);
+            Map.Children.Add(newShotObject);
+
+            Canvas.SetTop(newShotObject, 200);
+            Canvas.SetLeft(newShotObject, 200);
+
+            _shotObjects[shot] = newShotObject;
+
+        }
+
         /// <summary>
         /// Метод обработки ввода слов
         /// </summary>
@@ -257,6 +274,8 @@ namespace EnglishTrainer
         {
             if (e.Key == Key.Return)
             {
+                Shoot();
+
                 var entered = WordTb.Text;
                 var goalShips = _shipObjects.Keys.Where(s=>s.IsEnabled && s.Word.Answer.ToLower() == entered.ToLower()).ToList();
                 foreach (var ship in goalShips)

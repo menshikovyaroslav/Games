@@ -9,6 +9,7 @@
   <ItemGroup>
     <None Remove="Images\earthInSpace.gif" />
     <None Remove="Images\interceptor.png" />
+    <None Remove="Images\shot.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +20,7 @@
   <ItemGroup>
     <Resource Include="Images\earthInSpace.gif" />
     <Resource Include="Images\interceptor.png" />
+    <Resource Include="Images\shot.png" />
   </ItemGroup>
 
   <ItemGroup>
