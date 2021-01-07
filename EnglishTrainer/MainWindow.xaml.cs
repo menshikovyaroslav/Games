@@ -206,8 +206,8 @@ namespace EnglishTrainer
 
                 foreach (var shipPair in _shipObjects)
                 {
-                    Canvas.SetTop(shipPair.Value, shipPair.Key.CurrentPosition.Y - 50);
-                    Canvas.SetLeft(shipPair.Value, shipPair.Key.CurrentPosition.X - 30);
+                    Canvas.SetTop(shipPair.Value, shipPair.Key.CurrentPosition.Y - shipPair.Value.ActualHeight / 2);
+                    Canvas.SetLeft(shipPair.Value, shipPair.Key.CurrentPosition.X - shipPair.Value.ActualWidth / 2);
                 }
 
                 if (currShips.Count == 0)
