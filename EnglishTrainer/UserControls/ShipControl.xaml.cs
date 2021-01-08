@@ -17,6 +17,9 @@ namespace EnglishTrainer.UserControls
         /// </summary>
         public SpaceShip Ship { get; set; }
 
+        /// <summary>
+        /// Завершено ли событие анимации взрыва
+        /// </summary>
         public bool IsExplosionCompleted { get; set; }
 
         public void Explosion()
@@ -29,10 +32,13 @@ namespace EnglishTrainer.UserControls
             sb.Duration = new Duration(new TimeSpan(0, 0, 0, 0, 600));
             sb.Completed += ExplosionCompleted;
             sb.Begin();
-
-
         }
 
+        /// <summary>
+        /// Событие завершения анимации взрыва
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ExplosionCompleted(object sender, EventArgs e)
         {
             IsExplosionCompleted = true;
