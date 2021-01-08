@@ -1,4 +1,4 @@
-﻿<Window x:Class="EnglishTrainer.MainWindow"
+﻿<Window x:Class="EnglishTrainer.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -13,7 +13,7 @@
         <Canvas Name="Map" ClipToBounds="True" Panel.ZIndex="9">
 
         </Canvas>
-        <Image gif:ImageBehavior.AnimatedSource="Images/earthInSpace.gif" Width="100" Height="100" gif:ImageBehavior.RepeatBehavior="Forever" Panel.ZIndex="8" />
+        <Image gif:ImageBehavior.AnimatedSource="/Images/earthInSpace.gif" Width="100" Height="100" gif:ImageBehavior.RepeatBehavior="Forever" Panel.ZIndex="8" />
         <TextBox Name="WordTb" Height="30" Width="160" Opacity="0.9" HorizontalContentAlignment="Center" FontFamily="Verdana" FontSize="20" VerticalContentAlignment="Center" FontWeight="Bold" KeyDown="WordTb_KeyDown" Panel.ZIndex="10" MaxLength="30" />
         <ListView Background="Black" BorderThickness="0" Margin="20" Panel.ZIndex="9" Width="212" Height="220" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Button Style="{StaticResource ActionButtonStyle}" Click="NewGame_Click">
