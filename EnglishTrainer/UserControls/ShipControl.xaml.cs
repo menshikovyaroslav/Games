@@ -1,6 +1,8 @@
 ﻿using EnglishTrainer.Classes;
 using System;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 
 namespace EnglishTrainer.UserControls
@@ -14,6 +16,25 @@ namespace EnglishTrainer.UserControls
         /// Объект класса корабля
         /// </summary>
         public SpaceShip Ship { get; set; }
+
+        public bool IsExplosionCompleted { get; set; }
+
+        public void Explosion()
+        {
+            QuestionTb.Visibility = HelpTb.Visibility = Visibility.Hidden;
+
+            ShipImage.Source = new BitmapImage(new Uri("/Images/explosion.png", UriKind.Relative));
+
+            Storyboard sb = this.FindResource("ExplosionBoard") as Storyboard;
+            sb.Begin();
+
+            sb.Completed += ExplosionCompleted;
+        }
+
+        private void ExplosionCompleted(object sender, EventArgs e)
+        {
+            IsExplosionCompleted = true;
+        }
 
         /// <summary>
         /// Конструктор визуальной части космического корабля

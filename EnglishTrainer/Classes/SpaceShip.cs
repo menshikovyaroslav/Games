@@ -143,6 +143,11 @@ namespace EnglishTrainer.Classes
         /// <summary>
         /// Звезда смерти
         /// </summary>
-        DeathStar = 4
+        DeathStar = 4,
+
+        /// <summary>
+        /// Анимация взрыва
+        /// </summary>
+        Explosion = 5,
     }
 }

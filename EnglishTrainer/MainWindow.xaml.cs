@@ -238,15 +238,24 @@ namespace EnglishTrainer
                 var currSureShots = _shotObjects.Keys.Where(s => s.IsEnabled && s.IsSureShot).ToList();
                 foreach (var shot in currSureShots)
                 {
+                    // Ракета попала в цель
                     if (shot.Distance >= shot.Ship.Distance)
                     {
-                        shot.IsEnabled = false;
-                        shot.Ship.IsEnabled = false;
+                        _shipObjects[shot.Ship].Explosion();
 
-                        if (Map.Children.Contains(_shipObjects[shot.Ship]))
+                        shot.IsEnabled = false;
+                        // TODO :
+
+                        // Если анимация взрыва завершена
+                        if (_shipObjects[shot.Ship].IsExplosionCompleted)
                         {
-                            Map.Children.Remove(_shipObjects[shot.Ship]);
-                            Score++;
+                            shot.Ship.IsEnabled = false;
+
+                            if (Map.Children.Contains(_shipObjects[shot.Ship]))
+                            {
+                                Map.Children.Remove(_shipObjects[shot.Ship]);
+                                Score++;
+                            }
                         }
 
                         if (Map.Children.Contains(_shotObjects[shot]))
