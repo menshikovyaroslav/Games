@@ -4,11 +4,13 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Images\earthInSpace.gif" />
     <None Remove="Images\explosion.png" />
+    <None Remove="Images\icon.ico" />
     <None Remove="Images\interceptor.png" />
     <None Remove="Images\shot.png" />
   </ItemGroup>
@@ -21,6 +23,7 @@
   <ItemGroup>
     <Resource Include="Images\earthInSpace.gif" />
     <Resource Include="Images\explosion.png" />
+    <Resource Include="icon.ico" />
     <Resource Include="Images\interceptor.png" />
     <Resource Include="Images\shot.png" />
   </ItemGroup>

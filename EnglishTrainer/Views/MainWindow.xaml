@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:EnglishTrainer"
         mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="600"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        Icon="/icon.ico"
         xmlns:classes="clr-namespace:EnglishTrainer.Classes"
         Title="EnglishTrainer" Loaded="Window_Loaded" WindowState="Maximized">
 
