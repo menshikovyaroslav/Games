@@ -244,25 +244,26 @@ namespace EnglishTrainer
                         _shipObjects[shot.Ship].Explosion();
 
                         shot.IsEnabled = false;
-                        // TODO :
-
-                        // Если анимация взрыва завершена
-                        if (_shipObjects[shot.Ship].IsExplosionCompleted)
-                        {
-                            shot.Ship.IsEnabled = false;
-
-                            if (Map.Children.Contains(_shipObjects[shot.Ship]))
-                            {
-                                Map.Children.Remove(_shipObjects[shot.Ship]);
-                                Score++;
-                            }
-                        }
 
                         if (Map.Children.Contains(_shotObjects[shot]))
                         {
                             Map.Children.Remove(_shotObjects[shot]);
                         }
                     }
+                }
+
+                // Если анимация взрыва завершена
+                var shipExplodedObjects = _shipObjects.Values.Where(s => s.IsEnabled && s.IsExplosionCompleted).ToList();
+                foreach (var shipObject in shipExplodedObjects)
+                {
+                    shipObject.Ship.IsEnabled = false;
+
+                    if (Map.Children.Contains(_shipObjects[shipObject.Ship]))
+                    {
+                        Map.Children.Remove(_shipObjects[shipObject.Ship]);
+                        Score++;
+                    }
+
                 }
 
                 if (currShips.Count == 0)

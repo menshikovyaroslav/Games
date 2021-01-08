@@ -10,17 +10,17 @@
         <Storyboard x:Key="ExplosionBoard">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShipImage" Storyboard.TargetProperty="(FrameworkElement.Width)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="20"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="30"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="40"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="50"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="60"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="40"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="60"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="80"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="100"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ShipImage" Storyboard.TargetProperty="(FrameworkElement.Height)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="20"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="30"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="40"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="50"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="60"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="40"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="60"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="80"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="100"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </UserControl.Resources>

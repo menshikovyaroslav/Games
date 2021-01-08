@@ -26,9 +26,11 @@ namespace EnglishTrainer.UserControls
             ShipImage.Source = new BitmapImage(new Uri("/Images/explosion.png", UriKind.Relative));
 
             Storyboard sb = this.FindResource("ExplosionBoard") as Storyboard;
+            sb.Duration = new Duration(new TimeSpan(0, 0, 0, 0, 600));
+            sb.Completed += ExplosionCompleted;
             sb.Begin();
 
-            sb.Completed += ExplosionCompleted;
+
         }
 
         private void ExplosionCompleted(object sender, EventArgs e)
