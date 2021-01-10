@@ -171,5 +171,197 @@ meal;еда
 breakfast;завтрак
 lunch;обед
 dinner;ужин
-
-
+transport;транспорт, перевозить
+bicycle;велосипед
+century;век, столетие
+yesterday;вчера
+tonight;сегодня ночью
+tomorrow;завтра
+morning;утро
+afternoon;день
+evening;вечер
+monday;понедельник
+tuesday;вторник
+wednesday;среда
+thursday;четверг
+friday;пятница
+saturday;суббота
+sunday;воскресенье
+january;январь
+february;февраль
+march;март
+april;апрель
+may;май
+june;июнь
+july;июль
+august;август
+september;сентябрь
+october;октябрь
+november;ноябрь
+december;декабрь
+season;сезон
+spring;весна
+summer;лето
+autumn;осень
+winter;зима
+holiday;праздник, отпуск, каникулы
+birthday;день рождения
+surname;фамилия
+address;адрес
+copybook;тетрадь
+notebook;блокнот
+comb;расческа, расчесывать
+present;подарок
+camera;камера, фотоаппарат
+balloon;воздушный шарик
+ticket;билет
+bucket;ведро
+calendar;календарь
+laptop;ноутбук
+brush;щетка, кисть
+wheel;колесо
+trunk;багажник, ствол, хобот
+purse;дамская сумка, кошелек
+wallet;бумажник
+shovel;лопата, рыть
+machine;машина, механизм, аппарат, станок
+hammer;молоток
+glasses;очки
+package;посылка, упаковка
+stick;палка, втыкать
+towel;полотенце
+wire;проволока, провод
+torch;карманный фонарь, факел
+blanket;одеяло
+sheet;простыня, листок
+pillow;подушка
+clothes;одежда
+shoes;обувь
+boot;ботинок, сапог
+blouse;блузка
+skirt;юбка
+glove;перчатка
+mitten;варежка
+jacket;пиджак, куртка
+scarf;шарф
+trousers;брюки, штаны
+shorts;шорты
+jeans;джинсы
+hood;капюшон, капот
+bra;бюстгалтер
+throat;рот
+tooth;зуб
+teeth;зубы
+chin;подбородок
+neck;шея
+shoulder;плечо
+chest;грудь
+heart;сердце
+stomach;желудок, живот
+wrist;запястье
+finger;палец
+nail;ноготь, гвоздь
+knee;колено
+heel;пятка, каблук
+toe;палец ноги
+beard;борода
+bone;кость
+health;здоровье
+fever;жар, высокая температура
+cough;кашель, кашлять
+pain;боль
+flu;грипп
+event;событие
+birth;рождение
+lesson;урок
+meeting;встреча, собрание
+wedding;свадьба
+death;смерть
+weather;погода
+temperature;температура
+degree;грудус, степень
+literature;литература
+sculpture;скульптура, статуя
+picture;картина, фотография
+photo;фото
+discount;скидка
+account;банковский счет
+bill;счет
+measure;измерение, мера, измерять
+distance;расстояние, дистанция
+length;длина
+height;высота
+depth;глубина
+strength;сила, прочность
+kilometer;километр
+kilogram;килограмм
+pound;фунт
+feeling;чувство
+pleasure;удовольствие
+knowledge;знание
+exercise;упражнение
+problem;проблема
+ability;способность
+beauty;красота
+danger;опасность
+memory;память
+benefit;польза, выгода
+profit;прибыль, польза
+habit;привычка
+reason;причина
+meaning;значение, смысл
+effort;усилие
+success;успех
+goal;цель, гол
+miracle;чудо
+science;наука
+language;язык
+choice;выбор
+permit;разрешение, разрешать
+delivery;доставка
+delay;задержка, промедление
+mistake;ошибка
+decision;решение, принятие решения
+solution;решение проблемы
+advice;совет
+argument;спор, аргумент
+couple;пара
+surface;поверхность
+question;вопрос
+behind;позади
+without;без
+before;до
+after;после
+between;между
+during;во время
+around;вокруг
+because;потому что
+against;против
+among;среди
+through;через
+per;(километров) в (час)
+number;число, номер
+eleven;одннадцать
+twelve;двенадцать
+thirteen;тринадцать
+fourteen;четырнадцать
+fifteen;пятнадцать
+sixteen;шестнадцать
+seventeen;семнадцать
+eighteen;восемнадцать
+nineteen;девятнадцать
+twenty;двадцать
+thirty;тридцать
+forty;сорок
+fifty;пятьдесят
+sixty;шестьдесят
+seventy;семьдесят
+eighty;восемьдесят
+ninety;девяносто
+hundred;сто
+thousand;тысяча
+first;первый
+second;второй, секунда
+third;третий
+fourth;четвертый
+fifth;пятый
