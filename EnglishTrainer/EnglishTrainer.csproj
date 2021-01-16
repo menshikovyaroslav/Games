@@ -16,6 +16,7 @@
     <None Remove="Images\interceptor.png" />
     <None Remove="Images\lightcruiser.png" />
     <None Remove="Images\shot.png" />
+    <None Remove="Images\star.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +33,7 @@
     <Resource Include="Images\interceptor.png" />
     <Resource Include="Images\lightcruiser.png" />
     <Resource Include="Images\shot.png" />
+    <Resource Include="Images\star.png" />
   </ItemGroup>
 
   <ItemGroup>

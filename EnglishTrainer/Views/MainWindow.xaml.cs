@@ -1,5 +1,6 @@
 ﻿using EnglishTrainer.Classes;
 using EnglishTrainer.UserControls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -120,6 +121,8 @@ namespace EnglishTrainer.Views
             Map.Width = Map.Height = MapWidth;
             this.Width = SystemParameters.PrimaryScreenWidth;
             this.Height = SystemParameters.PrimaryScreenHeight;
+
+            StarLogic();
         }
 
         /// <summary>
@@ -156,6 +159,28 @@ namespace EnglishTrainer.Views
 
                 if (w > h) return h;
                 return w;
+            }
+        }
+
+        private StarControl StarControl;
+
+        private async void StarLogic()
+        {
+            var random = new Random();
+
+            while (true)
+            {
+                if (StarControl == null)
+                {
+                    StarControl = new StarControl();
+                    Panel.SetZIndex(StarControl, 11);
+                }
+                if (!Map.Children.Contains(StarControl)) Map.Children.Add(StarControl);
+
+                Canvas.SetTop(StarControl, random.Next(0, (int)MapWidth));
+                Canvas.SetLeft(StarControl, random.Next(0, (int)MapWidth));
+
+                await Task.Delay(2000);
             }
         }
 
