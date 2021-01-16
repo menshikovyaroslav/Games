@@ -8,10 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\deathstar.png" />
     <None Remove="Images\earthInSpace.gif" />
     <None Remove="Images\explosion.png" />
+    <None Remove="Images\heavycruiser.png" />
     <None Remove="Images\icon.ico" />
     <None Remove="Images\interceptor.png" />
+    <None Remove="Images\lightcruiser.png" />
     <None Remove="Images\shot.png" />
   </ItemGroup>
 
@@ -21,10 +24,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\deathstar.png" />
     <Resource Include="Images\earthInSpace.gif" />
     <Resource Include="Images\explosion.png" />
     <Resource Include="icon.ico" />
+    <Resource Include="Images\heavycruiser.png" />
     <Resource Include="Images\interceptor.png" />
+    <Resource Include="Images\lightcruiser.png" />
     <Resource Include="Images\shot.png" />
   </ItemGroup>
 

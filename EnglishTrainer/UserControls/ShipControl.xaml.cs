@@ -61,10 +61,13 @@ namespace EnglishTrainer.UserControls
                     ShipImage.Source = new BitmapImage(new Uri("/Images/interceptor.png", UriKind.Relative));
                     break;
                 case ShipType.LightCruiser:
+                    ShipImage.Source = new BitmapImage(new Uri("/Images/lightcruiser.png", UriKind.Relative));
                     break;
                 case ShipType.HeavyCruiser:
+                    ShipImage.Source = new BitmapImage(new Uri("/Images/heavycruiser.png", UriKind.Relative));
                     break;
                 case ShipType.DeathStar:
+                    ShipImage.Source = new BitmapImage(new Uri("/Images/deathstar.png", UriKind.Relative));
                     break;
                 default:
                     break;

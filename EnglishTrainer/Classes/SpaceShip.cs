@@ -93,7 +93,11 @@ namespace EnglishTrainer.Classes
 
             Word = Vocabulary.GetWord(level);
 
-            ShipType = ShipType.Interceptor;
+            if (Word.Answer.Length <= 3) ShipType = ShipType.Interceptor;
+            if (Word.Answer.Length >= 4 && Word.Answer.Length <= 5) ShipType = ShipType.LightCruiser;
+            if (Word.Answer.Length >= 6 && Word.Answer.Length <= 7) ShipType = ShipType.HeavyCruiser;
+            if (Word.Answer.Length >= 8) ShipType = ShipType.DeathStar;
+
             IsEnabled = true;
         }
 
