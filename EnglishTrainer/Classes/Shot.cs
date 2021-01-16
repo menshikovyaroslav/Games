@@ -19,6 +19,9 @@ namespace EnglishTrainer.Classes
         /// </summary>
         public double Speed { get; set; }
 
+        /// <summary>
+        /// Ссылка на класс корабля по которому идет стрельба
+        /// </summary>
         public SpaceShip Ship { get; set; }
 
         /// <summary>

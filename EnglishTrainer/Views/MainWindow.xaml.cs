@@ -162,8 +162,14 @@ namespace EnglishTrainer.Views
             }
         }
 
+        /// <summary>
+        /// Объект звезды на карте
+        /// </summary>
         private StarControl StarControl;
 
+        /// <summary>
+        /// Изменение положение звезды на карте
+        /// </summary>
         private async void StarLogic()
         {
             var random = new Random();
@@ -201,7 +207,6 @@ namespace EnglishTrainer.Views
             _gameEnded = true;
             var enterNameWindow = new EnterNameWindow(_level, Score);
             enterNameWindow.ShowDialog();
-
         }
 
         /// <summary>
@@ -323,11 +328,13 @@ namespace EnglishTrainer.Views
             GameProcess();
         }
 
+        /// <summary>
+        /// Стрельба по кораблям
+        /// </summary>
+        /// <param name="ship"></param>
         private void Shoot(SpaceShip ship)
         {
             var shot = new Shot(ship, MapCenter);
-
-
             var newShotObject = new ShotControl(shot);
 
             Panel.SetZIndex(newShotObject, 20);
@@ -337,7 +344,6 @@ namespace EnglishTrainer.Views
             Canvas.SetLeft(newShotObject, -1000);
 
             _shotObjects[shot] = newShotObject;
-
         }
 
         /// <summary>
