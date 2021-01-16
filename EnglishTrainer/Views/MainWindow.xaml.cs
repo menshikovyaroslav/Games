@@ -118,6 +118,8 @@ namespace EnglishTrainer.Views
             DataContext = this;
 
             Map.Width = Map.Height = MapWidth;
+            this.Width = SystemParameters.PrimaryScreenWidth;
+            this.Height = SystemParameters.PrimaryScreenHeight;
         }
 
         /// <summary>

@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:EnglishTrainer"
         mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="600"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
-        Icon="/icon.ico"
-        xmlns:classes="clr-namespace:EnglishTrainer.Classes"
+        Icon="/icon.ico" WindowStartupLocation="CenterScreen"
+        xmlns:classes="clr-namespace:EnglishTrainer.Classes" ResizeMode="NoResize"
         Title="EnglishTrainer" Loaded="Window_Loaded" WindowState="Maximized">
 
     <Grid Background="Black">
