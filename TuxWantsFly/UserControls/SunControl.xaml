@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="TuxWantsFly.UserControls.SunControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TuxWantsFly.UserControls"
+             mc:Ignorable="d" DataContext="{Binding Sun, Source={StaticResource Locator}}"
+             d:DesignHeight="360" d:DesignWidth="360">
+    <Grid>
+        <Ellipse Width="200" Height="200" Margin="40" Fill="#FFF0E618" Stroke="#FFF08E18" StrokeThickness="6" RenderTransformOrigin="0.5, 0.5" Panel.ZIndex="10" />
+        <Line X1="{Binding Ray1Point.X}" Y1="{Binding Ray1Point.Y}" X2="{Binding Ray3Point.X}" Y2="{Binding Ray3Point.Y}" Stroke="#FFF08E18" StrokeThickness="6"/>
+        <Line X1="{Binding Ray2Point.X}" Y1="{Binding Ray2Point.Y}" X2="{Binding Ray4Point.X}" Y2="{Binding Ray4Point.Y}" Stroke="#FFF08E18" StrokeThickness="6"/>
+        <Line X1="{Binding Ray5Point.X}" Y1="{Binding Ray5Point.Y}" X2="{Binding Ray6Point.X}" Y2="{Binding Ray6Point.Y}" Stroke="#FFF08E18" StrokeThickness="6"/>
+        <Line X1="{Binding Ray7Point.X}" Y1="{Binding Ray7Point.Y}" X2="{Binding Ray8Point.X}" Y2="{Binding Ray8Point.Y}" Stroke="#FFF08E18" StrokeThickness="6"/>
+    </Grid>
+</UserControl>

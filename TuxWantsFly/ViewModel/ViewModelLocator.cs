@@ -43,6 +43,7 @@ namespace TuxWantsFly.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<SunViewModel>();
         }
 
         public MainViewModel Main
@@ -52,7 +53,15 @@ namespace TuxWantsFly.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
+
+        public SunViewModel Sun
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SunViewModel>();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

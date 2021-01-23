@@ -72,12 +72,20 @@
     </ApplicationDefinition>
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="UserControls\SunControl.xaml.cs">
+      <DependentUpon>SunControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\SunViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="UserControls\WaterControl.xaml.cs">
       <DependentUpon>WaterControl.xaml</DependentUpon>
     </Compile>
     <Page Include="Dictionaries\ImagesDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SunControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
