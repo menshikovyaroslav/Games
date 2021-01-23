@@ -8,6 +8,7 @@
         Title="MainWindow" Width="1024" Height="768">
     <Grid>
         <Canvas ClipToBounds="True">
+            <Image Source="{StaticResource Tux}" Width="100" Height="120" Canvas.Top="400" Canvas.Left="0" Panel.ZIndex="10" />
             <Button Content="Start" Width="100" Canvas.Top="500" Canvas.Left="0" Command="{Binding StartGameCommand}" />
         </Canvas>
     </Grid>
