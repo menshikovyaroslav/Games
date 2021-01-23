@@ -1,4 +1,7 @@
 using GalaSoft.MvvmLight;
+using System.Windows;
+using System.Windows.Input;
+using TuxWantsFly.Commands;
 
 namespace TuxWantsFly.ViewModel
 {
@@ -16,19 +19,27 @@ namespace TuxWantsFly.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
+        #region Commands
+
+        public ICommand StartGameCommand { get; set; }
+
+        public void StartGameCommand_Execute()
+        {
+            MessageBox.Show("ok");
+        }
+
+        public bool StartGameCommand_CanExecute()
+        {
+            return true;
+        }
+
+        #endregion
+
         public MainViewModel()
         {
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
+            StartGameCommand = new Command(StartGameCommand_Execute, StartGameCommand_CanExecute);
+
+            
         }
     }
 }
