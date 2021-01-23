@@ -11,7 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dll", "Dll", "{97666C6F-7D2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtensionMethods", "Dll\ExtensionMethods\ExtensionMethods.csproj", "{BFD9407B-78BF-4063-8476-950F47925689}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnglishTrainer", "EnglishTrainer\EnglishTrainer.csproj", "{922605BB-0CA2-4592-8C44-0B21895EC789}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishTrainer", "EnglishTrainer\EnglishTrainer.csproj", "{922605BB-0CA2-4592-8C44-0B21895EC789}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuxWantsFly", "TuxWantsFly\TuxWantsFly.csproj", "{04171558-F6E2-42BF-9D03-E6D57F6560C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{922605BB-0CA2-4592-8C44-0B21895EC789}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{922605BB-0CA2-4592-8C44-0B21895EC789}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{922605BB-0CA2-4592-8C44-0B21895EC789}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04171558-F6E2-42BF-9D03-E6D57F6560C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04171558-F6E2-42BF-9D03-E6D57F6560C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04171558-F6E2-42BF-9D03-E6D57F6560C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04171558-F6E2-42BF-9D03-E6D57F6560C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
