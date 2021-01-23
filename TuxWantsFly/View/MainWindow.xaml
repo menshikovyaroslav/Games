@@ -9,7 +9,7 @@
         Title="MainWindow" Width="1000" Height="760" WindowStartupLocation="CenterScreen">
     <Grid>
         <Canvas ClipToBounds="True">
-            <Image Source="{StaticResource Tux}" Width="100" Height="120" Canvas.Top="382" Canvas.Left="450" Panel.ZIndex="10" />
+            <controls:TuxControl Canvas.Top="382" Canvas.Left="450" Panel.ZIndex="10" />
             <Button Content="Start" Width="100" Canvas.Top="500" Canvas.Left="450" Command="{Binding StartGameCommand}" />
             <controls:WaterControl Width="1000" Height="500" Canvas.Top="600" Canvas.Left="0" Panel.ZIndex="10" />
             <controls:SunControl Width="360" Height="360" />

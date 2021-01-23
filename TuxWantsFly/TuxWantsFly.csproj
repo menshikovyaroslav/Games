@@ -75,6 +75,9 @@
     <Compile Include="UserControls\SunControl.xaml.cs">
       <DependentUpon>SunControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\TuxControl.xaml.cs">
+      <DependentUpon>TuxControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\SunViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -86,6 +89,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\SunControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\TuxControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
