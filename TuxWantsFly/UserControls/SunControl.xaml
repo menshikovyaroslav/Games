@@ -7,10 +7,14 @@
              mc:Ignorable="d" DataContext="{Binding Sun, Source={StaticResource Locator}}"
              d:DesignHeight="360" d:DesignWidth="360">
     <Grid>
-        <Ellipse Width="200" Height="200" Margin="40" Fill="#FFF0E618" Stroke="#FFF08E18" StrokeThickness="6" RenderTransformOrigin="0.5, 0.5" Panel.ZIndex="10" />
-        <Line X1="{Binding Ray1Point.X}" Y1="{Binding Ray1Point.Y}" X2="{Binding Ray3Point.X}" Y2="{Binding Ray3Point.Y}" Stroke="#FFF08E18" StrokeThickness="6"/>
-        <Line X1="{Binding Ray2Point.X}" Y1="{Binding Ray2Point.Y}" X2="{Binding Ray4Point.X}" Y2="{Binding Ray4Point.Y}" Stroke="#FFF08E18" StrokeThickness="6"/>
-        <Line X1="{Binding Ray5Point.X}" Y1="{Binding Ray5Point.Y}" X2="{Binding Ray6Point.X}" Y2="{Binding Ray6Point.Y}" Stroke="#FFF08E18" StrokeThickness="6"/>
-        <Line X1="{Binding Ray7Point.X}" Y1="{Binding Ray7Point.Y}" X2="{Binding Ray8Point.X}" Y2="{Binding Ray8Point.Y}" Stroke="#FFF08E18" StrokeThickness="6"/>
+        <Ellipse Width="200" Height="200" Margin="40" Fill="#FFF0E618" Stroke="#FFF08E18" StrokeThickness="10" RenderTransformOrigin="0.5, 0.5" Panel.ZIndex="10" />
+        <Polygon Points="30, 30, 180, 130, 130, 180" Fill="#FFF08E18" />
+        <Polygon Points="330, 330, 230, 180, 180, 230" Fill="#FFF08E18" />
+        <Polygon Points="330, 30, 180, 130, 230, 180" Fill="#FFF08E18" />
+        <Polygon Points="30, 330, 130, 180, 180, 230" Fill="#FFF08E18" />
+        <Polygon Points="180, 30, 130, 180, 230, 180" Fill="#FFF08E18" />
+        <Polygon Points="330, 180, 180, 130, 180, 230" Fill="#FFF08E18" />
+        <Polygon Points="180, 330, 130, 180, 230, 180" Fill="#FFF08E18" />
+        <Polygon Points="30,180, 180, 130, 180, 230" Fill="#FFF08E18" />
     </Grid>
 </UserControl>
