@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TuxWantsFly"
         mc:Ignorable="d" DataContext="{Binding Main, Source={StaticResource Locator}}"
-        Title="MainWindow" Width="1024" Height="768">
+        xmlns:controls="clr-namespace:TuxWantsFly.UserControls"
+        Title="MainWindow" Width="1000" Height="760">
     <Grid>
         <Canvas ClipToBounds="True">
-            <Image Source="{StaticResource Tux}" Width="100" Height="120" Canvas.Top="400" Canvas.Left="0" Panel.ZIndex="10" />
-            <Button Content="Start" Width="100" Canvas.Top="500" Canvas.Left="0" Command="{Binding StartGameCommand}" />
+            <Image Source="{StaticResource Tux}" Width="100" Height="120" Canvas.Top="382" Canvas.Left="450" Panel.ZIndex="10" />
+            <Button Content="Start" Width="100" Canvas.Top="500" Canvas.Left="450" Command="{Binding StartGameCommand}" />
+            <controls:WaterControl Width="1000" Height="500" Canvas.Top="600" Canvas.Left="0" Panel.ZIndex="10" />
         </Canvas>
     </Grid>
 </Window>
