@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TuxWantsFly"
         mc:Ignorable="d" DataContext="{Binding Main, Source={StaticResource Locator}}"
-        xmlns:controls="clr-namespace:TuxWantsFly.UserControls"
-        Title="MainWindow" Width="1000" Height="760">
+        xmlns:controls="clr-namespace:TuxWantsFly.UserControls" ResizeMode="CanMinimize"
+        Title="MainWindow" Width="1000" Height="760" WindowStartupLocation="CenterScreen">
     <Grid>
         <Canvas ClipToBounds="True">
             <Image Source="{StaticResource Tux}" Width="100" Height="120" Canvas.Top="382" Canvas.Left="450" Panel.ZIndex="10" />

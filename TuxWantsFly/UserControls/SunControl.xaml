@@ -7,7 +7,8 @@
              mc:Ignorable="d" DataContext="{Binding Sun, Source={StaticResource Locator}}"
              d:DesignHeight="360" d:DesignWidth="360">
     <Grid>
-        <Ellipse Width="200" Height="200" Margin="40" Fill="#FFF0E618" Stroke="#FFF08E18" StrokeThickness="10" RenderTransformOrigin="0.5, 0.5" Panel.ZIndex="10" />
+        <Ellipse Width="210" Height="210" Fill="#FFF0E618" Stroke="#FFF08E18" StrokeThickness="10" RenderTransformOrigin="0.5, 0.5" Panel.ZIndex="10" />
+        <Ellipse Width="220" Height="220" Fill="#FFFFFF" Panel.ZIndex="9" />
         <Polygon Points="30, 30, 180, 130, 130, 180" Fill="#FFF08E18" />
         <Polygon Points="330, 330, 230, 180, 180, 230" Fill="#FFF08E18" />
         <Polygon Points="330, 30, 180, 130, 230, 180" Fill="#FFF08E18" />
