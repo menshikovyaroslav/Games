@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnglishTrainer", "EnglishTr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuxWantsFly", "TuxWantsFly\TuxWantsFly.csproj", "{04171558-F6E2-42BF-9D03-E6D57F6560C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tarakan", "Tarakan\Tarakan.csproj", "{CEE94450-AA9A-4759-9550-AADCADE092DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{04171558-F6E2-42BF-9D03-E6D57F6560C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04171558-F6E2-42BF-9D03-E6D57F6560C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04171558-F6E2-42BF-9D03-E6D57F6560C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEE94450-AA9A-4759-9550-AADCADE092DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEE94450-AA9A-4759-9550-AADCADE092DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEE94450-AA9A-4759-9550-AADCADE092DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEE94450-AA9A-4759-9550-AADCADE092DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
