@@ -64,7 +64,14 @@ namespace Tarakan
                 {
                     beast.Move();
 
-                    
+                    if (!beast.IsOnTheMap())
+                    {
+                        var image = images.Single(i => i.Value == beast).Key;
+                        tarakans.Remove(beast);
+                        images.Remove(image);
+                        Map.Children.Remove(image);
+                        break;
+                    }
                 }
 
                 foreach (Image mapChild in Map.Children)

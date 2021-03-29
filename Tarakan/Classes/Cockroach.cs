@@ -23,13 +23,17 @@ namespace Tarakan.Classes
 
         public void Move()
         {
-
-
             var dY = (int)(Speed * Math.Sin(Angle));
             var dX = (int)(Speed * Math.Cos(Angle));
 
             Y += dY;
             X += dX;
+        }
+
+        public bool IsOnTheMap()
+        {
+            if (X < 0 || X > 800 || Y < 0 || Y > 600) return false;
+            return true;
         }
     }
 }
