@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tarakan.Classes;
 
 namespace Tarakan
 {
@@ -26,6 +27,8 @@ namespace Tarakan
 
         int tarakanMaxCount = 1;
 
+        List<Cockroach> tarakans = new List<Cockroach>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -35,9 +38,10 @@ namespace Tarakan
         {
             while (count < maxCount)
             {
-                if (count == 0)
+                if (tarakans.Count() == 0)
                 {
-                    // создать таракана
+                    var tarakan = Factory.GetBeast();
+                    tarakans.Add(tarakan);
                 }
 
 
