@@ -78,6 +78,7 @@
     <Compile Include="UserControls\TuxControl.xaml.cs">
       <DependentUpon>TuxControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\SunViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
