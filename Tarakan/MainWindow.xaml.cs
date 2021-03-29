@@ -28,13 +28,14 @@ namespace Tarakan
         int tarakanMaxCount = 1;
 
         List<Cockroach> tarakans = new List<Cockroach>();
+        Dictionary<Image, Cockroach> images = new Dictionary<Image, Cockroach>();
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             while (count < maxCount)
             {
@@ -42,13 +43,46 @@ namespace Tarakan
                 {
                     var tarakan = Factory.GetBeast();
                     tarakans.Add(tarakan);
+
+                    var beast = new Image()
+                    {
+                        Width = 40,
+                        Height = 40,
+                        Source = new BitmapImage(new Uri("/Images/tarakan.png", UriKind.Relative))
+                    };
+                    Panel.SetZIndex(beast, 10);
+                    Map.Children.Add(beast);
+
+                    Canvas.SetTop(beast, tarakan.Y);
+                    Canvas.SetLeft(beast, tarakan.X);
+
+                    images[beast] = tarakan;
                 }
 
 
+                foreach (var beast in tarakans)
+                {
+                    beast.Move();
+
+                    
+                }
+
+                foreach (Image mapChild in Map.Children)
+                {
+                    if (images.ContainsKey(mapChild))
+                    {
+                        var beast = images[mapChild];
+
+                        Canvas.SetTop(mapChild, beast.Y);
+                        Canvas.SetLeft(mapChild, beast.X);
+                    }
 
 
+                //    Map.Children.Remove(item);
+                }
 
-                Thread.Sleep(10);
+
+                await Task.Delay(10);
             }
         }
     }

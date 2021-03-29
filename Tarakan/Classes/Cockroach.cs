@@ -20,5 +20,16 @@ namespace Tarakan.Classes
             Y = y;
             Angle = angle;
         }
+
+        public void Move()
+        {
+
+
+            var dY = (int)(Speed * Math.Sin(Angle));
+            var dX = (int)(Speed * Math.Cos(Angle));
+
+            Y += dY;
+            X += dX;
+        }
     }
 }

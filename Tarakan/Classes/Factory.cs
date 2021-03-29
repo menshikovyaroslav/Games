@@ -12,7 +12,7 @@ namespace Tarakan.Classes
         {
             var random = new Random();
             var speed = random.Next(1, 10);
-            int x = 0, y = 0;
+            int x = 380, y = 280;
             int angle = random.Next(0, 360);
 
             var tarakan = new Cockroach(speed, x, y, angle);

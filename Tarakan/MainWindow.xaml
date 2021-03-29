@@ -5,10 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tarakan"
         mc:Ignorable="d" Loaded="Window_Loaded"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Grid>
-        <Border Width="300" Height="200" BorderThickness="1" Background="Aqua" BorderBrush="Black">
-            
-        </Border>
+        <Canvas Name="Map" DockPanel.Dock="Top" ClipToBounds="True">
+        </Canvas>
     </Grid>
 </Window>
