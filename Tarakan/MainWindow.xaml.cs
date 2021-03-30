@@ -102,8 +102,16 @@ namespace Tarakan
 
         private void Window_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isDown) this.Title = "pressed";
-            else this.Title = "not";
+            if (isDown)
+            {
+                this.Cursor = Cursors.Cross;
+                this.Title = "pressed";
+            }
+            else
+            {
+                this.Cursor = Cursors.Arrow;
+                this.Title = "not";
+            }
         }
 
         private void Window_MouseUp(object sender, MouseButtonEventArgs e)
