@@ -27,6 +27,8 @@ namespace Tarakan
 
         int tarakanMaxCount = 1;
 
+        bool isDown = false;
+
         List<Cockroach> tarakans = new List<Cockroach>();
         Dictionary<Image, Cockroach> images = new Dictionary<Image, Cockroach>();
 
@@ -91,6 +93,22 @@ namespace Tarakan
 
                 await Task.Delay(10);
             }
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed) isDown = true;
+        }
+
+        private void Window_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isDown) this.Title = "pressed";
+            else this.Title = "not";
+        }
+
+        private void Window_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Released) isDown = false;
         }
     }
 }

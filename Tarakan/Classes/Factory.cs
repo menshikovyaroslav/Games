@@ -11,7 +11,7 @@ namespace Tarakan.Classes
         public static Cockroach GetBeast()
         {
             var random = new Random();
-            var speed = random.Next(1, 10);
+            var speed = random.Next(2, 10);
             int x = 380, y = 280;
             int angle = random.Next(0, 360);
 
