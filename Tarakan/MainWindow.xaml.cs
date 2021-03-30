@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -52,7 +53,7 @@ namespace Tarakan
                         Height = 40,
                         Source = new BitmapImage(new Uri("/Images/tarakan.png", UriKind.Relative))
                     };
-                    Panel.SetZIndex(beast, 10);
+                    System.Windows.Controls.Panel.SetZIndex(beast, 10);
                     Map.Children.Add(beast);
 
                     Canvas.SetTop(beast, tarakan.Y);
@@ -100,16 +101,32 @@ namespace Tarakan
             if (e.LeftButton == MouseButtonState.Pressed) isDown = true;
         }
 
-        private void Window_MouseMove(object sender, MouseEventArgs e)
+        private void Window_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (isDown)
             {
-                this.Cursor = Cursors.Cross;
+                this.Cursor = System.Windows.Input.Cursors.Cross;
                 this.Title = "pressed";
+
+                var currentPoint = System.Windows.Forms.Control.MousePosition;
+                var x = currentPoint.X;
+                var y = currentPoint.Y;
+
+                var random = new Random();
+                x += random.Next(-2, 2);
+                y += random.Next(-2, 2);
+
+                int w = Screen.PrimaryScreen.WorkingArea.Width;
+                int h = Screen.PrimaryScreen.WorkingArea.Height;
+
+                var xNew = (65535 * x) / w;
+                var yNew = (65535 * y) / h;
+
+                System.Windows.Forms.Cursor.Position = new System.Drawing.Point(x, y);
             }
             else
             {
-                this.Cursor = Cursors.Arrow;
+                this.Cursor = System.Windows.Input.Cursors.Arrow;
                 this.Title = "not";
             }
         }
