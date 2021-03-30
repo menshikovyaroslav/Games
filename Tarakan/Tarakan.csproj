@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="Classes\Factory.cs" />
     <Compile Include="Classes\Cockroach.cs" />
+    <Compile Include="Classes\Log.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

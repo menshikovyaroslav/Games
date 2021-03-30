@@ -54,13 +54,19 @@ namespace Tarakan
                                 var y = Canvas.GetTop(image.Key);
 
                                 var currentPoint = System.Windows.Forms.Control.MousePosition;
-                                var cursorX = currentPoint.X;
-                                var cursorY = currentPoint.Y;
+                                var cursorX = currentPoint.X - this.Left;
+                                var cursorY = currentPoint.Y - this.Top;
 
-                                if (x < cursorX && cursorX < x + 40 && y < cursorY && cursorY < y + 40)
+                           //     int w = Screen.PrimaryScreen.WorkingArea.Width;
+                           //     int h = Screen.PrimaryScreen.WorkingArea.Height;
+
+                          //      var xNew = (65535 * x) / w;
+                          //      var yNew = (65535 * y) / h;
+
+                                Log.Instance.Info($"x={x}, y={y}, cursorX={cursorX}, cursorY={cursorY}, left={Left}, top={Top}", "");
+
+                                if (x < cursorX && cursorX < x + 40 && y < cursorY && cursorY < y + 65)
                                 {
-                                    System.Windows.MessageBox.Show("ok");
-
                                     tarakans.Remove(image.Value);
                                     images.Remove(image.Key);
                                     Map.Children.Remove(image.Key);
@@ -155,8 +161,8 @@ namespace Tarakan
                 var y = currentPoint.Y;
 
                 var random = new Random();
-                x += random.Next(-1, 1);
-                y += random.Next(-1, 1);
+                x += random.Next(-2, 2);
+                y += random.Next(-2, 2);
 
                 int w = Screen.PrimaryScreen.WorkingArea.Width;
                 int h = Screen.PrimaryScreen.WorkingArea.Height;
