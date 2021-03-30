@@ -40,6 +40,48 @@ namespace Tarakan
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            Thread t = new Thread(() =>
+            {
+                while (true)
+                {
+                    if (isDown)
+                    {
+                        foreach (var image in images)
+                        {
+                            Map.Dispatcher.BeginInvoke((Action)(() =>
+                            {
+                                var x = Canvas.GetLeft(image.Key);
+                                var y = Canvas.GetTop(image.Key);
+
+                                var currentPoint = System.Windows.Forms.Control.MousePosition;
+                                var cursorX = currentPoint.X;
+                                var cursorY = currentPoint.Y;
+
+                                if (x < cursorX && cursorX < x + 40 && y < cursorY && cursorY < y + 40)
+                                {
+                                    System.Windows.MessageBox.Show("ok");
+
+                                    tarakans.Remove(image.Value);
+                                    images.Remove(image.Key);
+                                    Map.Children.Remove(image.Key);
+                                }
+                            }));
+
+
+
+
+
+                        }
+                    }
+
+                    Thread.Sleep(10);
+                }
+
+            });
+            t.IsBackground = true;
+            t.Start();
+
+
             while (count < maxCount)
             {
                 if (tarakans.Count() == 0)
@@ -88,7 +130,7 @@ namespace Tarakan
                     }
 
 
-                //    Map.Children.Remove(item);
+                    //    Map.Children.Remove(item);
                 }
 
 
@@ -113,8 +155,8 @@ namespace Tarakan
                 var y = currentPoint.Y;
 
                 var random = new Random();
-                x += random.Next(-2, 2);
-                y += random.Next(-2, 2);
+                x += random.Next(-1, 1);
+                y += random.Next(-1, 1);
 
                 int w = Screen.PrimaryScreen.WorkingArea.Width;
                 int h = Screen.PrimaryScreen.WorkingArea.Height;
