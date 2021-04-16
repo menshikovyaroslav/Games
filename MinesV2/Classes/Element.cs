@@ -15,6 +15,7 @@ namespace MinesV2.Classes
         public int Y { get; set; }
         public bool IsBomb { get; set; }
         public bool IsShow { get; set; }
+        public bool IsMarkedAsBomb { get; set; }
 
         public Element()
         {

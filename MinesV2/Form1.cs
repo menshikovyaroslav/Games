@@ -32,7 +32,7 @@ namespace MinesV2
                     var btn = new Button() { Width = Options.ElementWidth, Height = Options.ElementHeight };
                     btn.Top = Options.ElementHeight * j;
                     btn.Left = Options.ElementWidth * i;
-                    btn.Click += Btn_Click;
+                    btn.MouseDown += Btn_Click;
 
                     var el = new Element() { X = i, Y = j };
                     _elements[btn] = el;
@@ -47,14 +47,29 @@ namespace MinesV2
             this.Controls.Add(panel);
         }
 
-        private void Btn_Click(object sender, EventArgs e)
+        private void Btn_Click(object sender, MouseEventArgs e)
         {
             var btn = (Button)sender;
             var el = _elements[btn];
 
-            Calculate(el);
-
-            el.IsShow = true;
+            if (e.Button == MouseButtons.Left && !el.IsMarkedAsBomb)
+            {
+                Calculate(el);
+                el.IsShow = true;
+            }
+            else if (e.Button == MouseButtons.Right && !el.IsShow)
+            {
+                if (el.IsMarkedAsBomb)
+                {
+                    btn.Image = null;
+                    el.IsMarkedAsBomb = false;
+                }
+                else
+                {
+                    btn.Image = Properties.Resources.bomb;
+                    el.IsMarkedAsBomb = true;
+                }
+            }
         }
 
         private void Calculate(Element el)
@@ -74,6 +89,7 @@ namespace MinesV2
                     if (Math.Abs(currEl.X - el.X) <= 1 && Math.Abs(currEl.Y - el.Y) <= 1 && currEl != el && currEl.IsBomb) count++;
                 }
                 btn.Text = count.ToString();
+                btn.Image = null;
 
                 if (count == 0)
                 {
